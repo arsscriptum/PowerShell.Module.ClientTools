@@ -23,6 +23,17 @@ function Write-ProgressHelper{
     }
 }
 
+function Write-ClientToolsHost{
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true,Position=0)][Alias('m')]
+        [String]$Message
+    ) 
+    Write-Host "[ClientTools Module] " -f DarkRed -n
+    Write-Host "$Message" -f DarkYellow
+}
+
+
 
 function Test-Function{                     ############### NOEXPORT
     [CmdletBinding(SupportsShouldProcess)]

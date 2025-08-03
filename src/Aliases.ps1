@@ -8,4 +8,3 @@
 #╚════════════════════════════════════════════════════════════════════════════════╝
 
 
-#New-Alias -Name askai -Value  Invoke-OpenAiTextCompletion -Scope Global -ErrorAction Ignore -Force
