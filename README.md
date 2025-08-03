@@ -211,10 +211,10 @@ The ClientTools Module contains generic PowerShell functions used in remote clie
  - [Get-DateString](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-DateString.md)
   - [Get-UnixTime](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-UnixTime.md)
   - [Get-DateForFileName](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-DateForFileName.md)
-  - [ConvertTo-UnixTime](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/ConvertTo-UnixTime.md)
-  - [ConvertFrom-Ctime](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/ConvertFrom-Ctime.md)
-  - [ConvertTo-CTime](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/ConvertTo-CTime.md)
   - [ConvertFrom-UnixTime](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/ConvertFrom-UnixTime.md)
+  - [ConvertTo-UnixTime](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/ConvertTo-UnixTime.md)
+  - [ConvertTo-CTime](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/ConvertTo-CTime.md)
+  - [ConvertFrom-Ctime](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/ConvertFrom-Ctime.md)
   - [Write-ClientToolsHost](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Write-ClientToolsHost.md)
   - [Write-ProgressHelper](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Write-ProgressHelper.md)
 
@@ -236,63 +236,63 @@ The ClientTools Module contains generic PowerShell functions used in remote clie
 
 ## Functions - ModulesPathFunctions
  - [Push-ModProfileUtils](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModProfileUtils.md)
-  - [Push-ModReddit](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModReddit.md)
   - [Push-ModShellGPT](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModShellGPT.md)
-  - [Push-ModShim](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModShim.md)
   - [Push-ModTakeOwnership](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModTakeOwnership.md)
+  - [Push-ModTerminal](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModTerminal.md)
   - [Push-Modter2K](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-Modter2K.md)
   - [Push-ModTorrentsManager](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModTorrentsManager.md)
   - [Push-ModWindowsHost](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModWindowsHost.md)
   - [Push-ModWorkflowTools](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModWorkflowTools.md)
   - [Push-ModOpenAI](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModOpenAI.md)
-  - [Push-ModTerminal](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModTerminal.md)
-  - [Push-ModNtRights](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModNtRights.md)
   - [Push-ModTools](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModTools.md)
+  - [Push-ModNtRights](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModNtRights.md)
+  - [Push-ModReddit](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModReddit.md)
   - [Push-ModManageMini](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModManageMini.md)
+  - [Push-ModMiniPc](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModMiniPc.md)
   - [Push-Mod1138](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-Mod1138.md)
   - [Push-Mod1190](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-Mod1190.md)
   - [Push-ModAssert](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModAssert.md)
-  - [Push-ModMiniPc](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModMiniPc.md)
-  - [Push-ModCore](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModCore.md)
   - [Push-ModCompiler](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModCompiler.md)
+  - [Push-ModCore](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModCore.md)
+  - [Push-ModShim](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModShim.md)
   - [Push-ModDocker](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModDocker.md)
+  - [Push-ModCryptography](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModCryptography.md)
   - [Push-ModDownloader](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModDownloader.md)
   - [Push-ModExpressVPN](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModExpressVPN.md)
   - [Push-ModGithub](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModGithub.md)
-  - [Push-ModCryptography](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Push-ModCryptography.md)
 
 
 
 ## Functions - ModuleUpdater
- - [Get-ClientToolsVersionPath](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-ClientToolsVersionPath.md)
+ - [Invoke-ClientToolsAutoUpdate](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-ClientToolsAutoUpdate.md)
   - [New-ClientToolsModuleVersionFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/New-ClientToolsModuleVersionFile.md)
-  - [Invoke-ClientToolsAutoUpdate](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-ClientToolsAutoUpdate.md)
+  - [Get-ClientToolsModuleVersionPath](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-ClientToolsModuleVersionPath.md)
 
 
 
 ## Functions - NamedPipe
- - [Send-NamedPipeData](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Send-NamedPipeData.md)
-  - [Start-NamedPipeServerJob](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Start-NamedPipeServerJob.md)
-  - [New-NamedPipeClient](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/New-NamedPipeClient.md)
-  - [New-NamedPipeServer](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/New-NamedPipeServer.md)
+ - [New-NamedPipeServer](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/New-NamedPipeServer.md)
   - [New-NamedPipeServerAsync](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/New-NamedPipeServerAsync.md)
+  - [New-NamedPipeClient](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/New-NamedPipeClient.md)
+  - [Send-NamedPipeData](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Send-NamedPipeData.md)
+  - [Start-NamedPipeServerJob](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Start-NamedPipeServerJob.md)
 
 
 
 ## Functions - ProcessData
- - [Invoke-EncodeAllNewScripts](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-EncodeAllNewScripts.md)
-  - [Update-VersionNumber](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Update-VersionNumber.md)
-  - [Start-DecodeFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Start-DecodeFiles.md)
-  - [Start-EncodeFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Start-EncodeFiles.md)
+ - [Start-EncodeFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Start-EncodeFiles.md)
   - [Invoke-EncodeFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-EncodeFiles.md)
-  - [Export-DataFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Export-DataFiles.md)
+  - [Update-VersionNumber](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Update-VersionNumber.md)
   - [Invoke-DecodeFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-DecodeFiles.md)
+  - [Invoke-EncodeAllNewScripts](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-EncodeAllNewScripts.md)
+  - [Export-DataFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Export-DataFiles.md)
+  - [Start-DecodeFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Start-DecodeFiles.md)
   - [Merge-DataFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Merge-DataFile.md)
   - [Invoke-CombineSplitFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-CombineSplitFiles.md)
   - [Split-DataFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Split-DataFile.md)
+  - [Import-DataFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Import-DataFiles.md)
   - [Invoke-SplitDataFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-SplitDataFile.md)
   - [Invoke-AutoUpdateProgress](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-AutoUpdateProgress.md)
-  - [Import-DataFiles](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Import-DataFiles.md)
 
 
 
@@ -302,15 +302,15 @@ The ClientTools Module contains generic PowerShell functions used in remote clie
 
 
 ## Functions - Prompt
- - [Set-SmallPrompt](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Set-SmallPrompt.md)
-  - [Start-Explorer](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Start-Explorer.md)
+ - [Start-Explorer](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Start-Explorer.md)
   - [Reset-Prompt](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Reset-Prompt.md)
   - [Show-Prompt](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Show-Prompt.md)
-  - [Show-PromptNoPath](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Show-PromptNoPath.md)
-  - [Invoke-IsAdministrator](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-IsAdministrator.md)
+  - [Show-Header](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Show-Header.md)
+  - [Set-SmallPrompt](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Set-SmallPrompt.md)
   - [Show-SystemInfo](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Show-SystemInfo.md)
   - [Invoke-IsAdministrator](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-IsAdministrator.md)
-  - [Show-Header](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Show-Header.md)
+  - [Show-PromptNoPath](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Show-PromptNoPath.md)
+  - [Invoke-IsAdministrator](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-IsAdministrator.md)
 
 
 
@@ -325,17 +325,17 @@ The ClientTools Module contains generic PowerShell functions used in remote clie
 
 
 ## Functions - Registry
- - [Set-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Set-RegistryValue.md)
-  - [Set-RegistryValue2](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Set-RegistryValue2.md)
+ - [New-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/New-RegistryValue.md)
+  - [Set-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Set-RegistryValue.md)
   - [Get-UserConfirmationRegDel](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-UserConfirmationRegDel.md)
   - [Delete-RegistryKeyTree](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Delete-RegistryKeyTree.md)
-  - [New-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/New-RegistryValue.md)
+  - [Find-EntriesMatchingName](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Find-EntriesMatchingName.md)
+  - [Set-RegistryValue2](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Set-RegistryValue2.md)
   - [Get-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-RegistryValue.md)
-  - [Remove-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Remove-RegistryValue.md)
   - [Get-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-RegistryValue.md)
   - [Test-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Test-RegistryValue.md)
   - [Publish-SettingsUpdated](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Publish-SettingsUpdated.md)
-  - [Find-EntriesMatchingName](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Find-EntriesMatchingName.md)
+  - [Remove-RegistryValue](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Remove-RegistryValue.md)
 
 
 
@@ -351,10 +351,10 @@ The ClientTools Module contains generic PowerShell functions used in remote clie
 
 ## Functions - SaveEditProfile
  - [Sync-Profile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Sync-Profile.md)
-  - [Edit-Profile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Edit-Profile.md)
   - [Reload-Profile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Reload-Profile.md)
-  - [Get-GitExecutablePath](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-GitExecutablePath.md)
+  - [Edit-Profile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Edit-Profile.md)
   - [Save-Profile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Save-Profile.md)
+  - [Get-GitExecutablePath](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-GitExecutablePath.md)
 
 
 
@@ -376,13 +376,13 @@ The ClientTools Module contains generic PowerShell functions used in remote clie
 
 
 ## Functions - SetMappedDrives
- - [Unregister-NetworkDrivesMapping](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Unregister-NetworkDrivesMapping.md)
+ - [Invoke-RemapDrives](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-RemapDrives.md)
+  - [Unregister-NetworkDrivesMapping](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Unregister-NetworkDrivesMapping.md)
   - [Register-NetworkDrivesMapping](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Register-NetworkDrivesMapping.md)
-  - [Test-TemporaryDriveExist](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Test-TemporaryDriveExist.md)
-  - [Invoke-RemapDrives](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-RemapDrives.md)
-  - [Register-NetworkDrive](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Register-NetworkDrive.md)
   - [Test-AreNetworkDrivesMapped](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Test-AreNetworkDrivesMapped.md)
   - [Unregister-NetworkDrive](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Unregister-NetworkDrive.md)
+  - [Register-NetworkDrive](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Register-NetworkDrive.md)
+  - [Test-TemporaryDriveExist](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Test-TemporaryDriveExist.md)
 
 
 
@@ -407,17 +407,17 @@ The ClientTools Module contains generic PowerShell functions used in remote clie
 
 
 ## Functions - WgetDl
- - [Test-WGetDownloadFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Test-WGetDownloadFile.md)
-  - [Test-Aria2DownloadFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Test-Aria2DownloadFile.md)
+ - [Invoke-WGetDownloadFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-WGetDownloadFile.md)
   - [Invoke-Aria2DownloadFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-Aria2DownloadFile.md)
-  - [Invoke-WGetDownloadFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-WGetDownloadFile.md)
+  - [Test-Aria2DownloadFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Test-Aria2DownloadFile.md)
+  - [Test-WGetDownloadFile](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Test-WGetDownloadFile.md)
 
 
 
 ## Functions - WinUpdateNotify
- - [Get-XamlUiContent](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-XamlUiContent.md)
+ - [Show-WinUpdateNotification](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Show-WinUpdateNotification.md)
+  - [Get-XamlUiContent](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Get-XamlUiContent.md)
   - [Invoke-WinUpdateTask](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-WinUpdateTask.md)
-  - [Show-WinUpdateNotification](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Show-WinUpdateNotification.md)
   - [Invoke-WinUpdateTask](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Invoke-WinUpdateTask.md)
 
 
@@ -429,7 +429,7 @@ The ClientTools Module contains generic PowerShell functions used in remote clie
 
 ## Last Update
 
-Sunday, August 3, 2025 12:40 AM
+Sunday, August 3, 2025 6:12 PM
 
 
 
