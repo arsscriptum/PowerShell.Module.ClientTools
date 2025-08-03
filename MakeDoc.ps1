@@ -16,7 +16,7 @@ $FunctionsRequestCodeCompletion = Get-FunctionList .\src\ | Where Base -match "\
 $FunctionsModels = Get-FunctionList .\src\ | Where Base -match "\b(?:Model)\b" | Select -ExpandProperty Name
 
 function Get-FunctionDocUrl($Name){
-    $Url = "https://github.com/arsscriptum/PowerShell.Module.OpenAI/blob/master/doc/{0}.md" -f $Name
+    $Url = "https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/{0}.md" -f $Name
     [string]$res = " - [{0}]({1})`n" -f $Name, $Url
     $res
 }

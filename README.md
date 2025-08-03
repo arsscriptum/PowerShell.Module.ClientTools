@@ -1,4 +1,4 @@
-# $${\color{red}OpenAI \space \color{lightblue}PowerShell \space \color{orange}Module}$$
+# $${\color{red}ClientTools \space \color{lightblue}PowerShell \space \color{orange}Module}$$
 
 
 $${\color{yellow}Important: \space this \space module \space is \space a \space Sandbox/Development \space project \space only. \space Not \space Production \space code.}$$
@@ -6,9 +6,27 @@ $${\color{yellow}Important: \space this \space module \space is \space a \space 
 
 The ClientTools Module contains generic PowerShell functions used in remote clients at home
 
-## Speech Synthesis
+
+## Functions
+
+
+## Functions - Init and Authentication
+ - [Uninitialize-ClientToolsModule](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Uninitialize-ClientToolsModule.md)
+  - [Initialize-ClientToolsModule](https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/Initialize-ClientToolsModule.md)
+
+
+## Functions - Request Text Completion
+
+
+## Functions - Request Code Completion
+
+
+## Functions - Open AI Models data requests
+
 
 ## Last Update
 
-Tuesday, January 24, 2023 11:34 PM
+Saturday, August 2, 2025 11:08 PM
+
+
 
