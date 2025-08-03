@@ -1,7 +1,7 @@
 <#
   ã--------------------------------------------------------------------------------------
   ¦   PowerShell PowerShell.Module.ClientTools Module
-  ¦   Version 1.0.441 , Generated on Sat, 02 Aug 2025 21:40:53 GMT 
+  ¦   Version 1.0.471 , Generated on Sat, 02 Aug 2025 23:00:00 GMT 
   ¦   Description: 
   ¦   Current Git Revision 676b38112b9b684031084bb1d23bce5741820ab6
   L--------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ $ScriptBlockException = "H4sIAAAAAAAACs1XbW/bNhD+HiD/4eBqsANESvO1Wwq4tpN5TWzPUjs
 # ------------------------------------
 # Script file - Helpers - 
 # ------------------------------------
-$ScriptBlockHelpers = "H4sIAAAAAAAACsVXbW7jNhD9v8DeYaAKkFRYrgMs+pEgQF3H2Q1aJ0bkbls4RqBItE2sJKokFa9h5Aa9QW/Xk3QoUrZky9nt/kgVO5HI4ZuZN49DZV5kkaQsg984lcQfc7bgRIh3JMkJ37x+BXhNB2mcEPkTzWKaLVxvpofzkIep6+kHydfGWl107tpBxGkuTydMhkkgSS7AJ39Cz9twIguePe2sm67B72NEj1SuocKopiZUJgT8QIayEAezI/yGC5wfEx6RTA5YmmPYBNxtMCqO6yJ9IBy+ATgM0YOv4aTXMzk9RaGMlpv9QN8xIcH656+/oQZ36MECfw4XIf/wB0kStnoGpVypKToM6SiM/RgmcH4suU/l1hbIPm/Kw1H3wZKt/OHHiORKPhdEhjTB+O+xPDiDJYo+GBZfv8KP+plXWpsQIf1L87SpEBvXV80Lrm+Gv49vbietigyKPGdcCvRcJDHqIUIpNGW6C3w6VgOYH3dHYRaHkvH1uS15QTpjJqgK6bznzab9hIbCdTIH7wPJ0c/MvsaFnf8GdbKDSutQIxYXCdFYXomm7+1bIrCs9gRR2raWLtp7wh+YIGApKqGMC6YGc2Y1NqKfMem+JdLHuqYYJVilORZ2yDnjfV2Sq0XGOPE82IBccrYCK6VCYKSwrZrOHuacpZCWnsB4tOBpl8Czu2Y6MqgXJCdZTLJoPQMMJatkdkvi9pX2vQVHt4Lh7DJMhCHNtBfda0oDlCEcqnAbByXiZZSoi/3Z9bYHWBe1V5TVj64TYCVvyYIKNHsfJgVxOs41WR2M6WfC/X6eDzjBFCVFenDmgkR8nUtfK9GpNYRLxodhtHTtOdCs5tmrxVNXVWMfqyJa9hyLmYI1ZivCgyXWqasl0r1BnvtXludtmuWCM3jgJPxwVpWsVr0jUip1WyriCyWAEzUdDFj2SLi8RF37A0lxJ33OudfaBapdj5H0OrDfEwDUsWqOqXMLveM2rFBLpKtMfvtmZpdRmNZQRqvmEIqo8ZlNchYt0YVz8sN3Pb93gh/o9U7Lj7NTVm0FHo9FIhU/5dpuP44DErEsFq525jW50vamcbdwNWH+YPJyTF1leSGHKvImXbsEdxbHaRs+R5uxprUCqNAqmO2Iq/aaSj3IQ5Q8nnMc+6+G9ofYXWuheF19+mqmmwybEpcEtyrx14x+VH6+mOEtpx0oe4JCHdOcJDRDguv8t0mwcr+lU/15wJ6SVTUvaamkOL1AmpX97PQ0yElE5+ufMVS3xrXTAecXFoVJ1XHM/sx1kzyEbai0ime3tpU6FGZlCS/N3JYCu7r7X8gzFXS3UYBvXLXp8YBI9aawT6F9jS8E5+WUAm0ouYV4ZX740let1seOOxUris19ZptXGXXGaGD1z0NtsMrL+HPdCsjr4l2VJB5daSiF602/n3ndW5InYURcB/C8u3dU4sbtjj6TWlRw1SJUb3QXiFw++BoOrDVe/mjkx/H93XK59O9SvPw7IYS11zIrnOOJI+YlTYh6i9plP6IZTcMET0Xdtm0Rqy7ziRxP3pTC08b4uxvkCZWu03W8aW9vildcnCIXvuOdqWnF8da1YeJwhY8rzIJSb1WuAt/Rnv4F8Wlr4joOAAA="
+$ScriptBlockHelpers = "H4sIAAAAAAAACsVXbW7jNhD9HyB3GKgCJBWW6wCLfiQIUNdxdoPWiRG52xaOESgSbRORRJWk4jWM3KA36O16kg5Fypb8kd1ui5RQbEsczrx58zhipkUWScoy+IVTSfwhZzNOhHhHkpzw1fER4Bj30jgh8geaxTSbud5EP85DHqaup28kXxprNejUtYOI01yejpgMk0CSXIBPfoeOt+JEFjx73lg3Q4PfRURPVC6h8lFNjahMCPiBDGUhdmYH+BfOcH5IeEQy2WNpjrAJuGswCsd1kT4QDl8B7EL04Es46XRMTs9RKKP5ahvoOyYkWH/98SfU3O1GsMCfwkXIH38jScIWL3gpV2qKdiEddGM/hQmcH0ruY7ntA7LNm4pwMHwwZwu//yEiuZLPBZEhTRD/PZYHZ7BE0aNh8fgIr+OjaVNpvYRirBFjiVAIPkVqm+DjoXqAGLk7CLM4lIwvz23JC9IaMkFVmPOONxl3ExoK10mdylG5OJAcnU9sIxg944H+rpMyroGEAYuLhExgzcgticHPdldVfneoK2loUDEiQvqX5m5VAWyML5oDrm/6vw5vbkd7+QqKPGdcCixBkcS4MSKE8h+RmCGJa+qucWHrn7k6adZjU4WS16oIaujf9i0RqG97hF729RhN+XvCH5ggYCkqocQFY+NzYjU6kp8x6b4l0keBp4gSK6XMsUx9zhnv6pJczTLGiefBCuScswVYKRUCkcK6ajp7mHKWQlpGAhPRgudNAi+2j/HAeL0gOclikkXLUlpZTV37V9r3FhzsCYazyzARhjTTZ3XTLQ1QiLCrwjUOSsTrKFEX+5PrbfewLmqvKKvvXSfASt6SGRVo9j5MCuK0nGuy2Hmm7wn3u3ne4wRTlBTpwZkLEvFlLn2tRKfWGS8Z74fR3LWnQLNaZK+Gp66qxj5WRbTsKRYzBWvIFoQHc6xTW0ukfYM8d68sz1s1ywVn8MBJ+HhWlaxWvQNSKnVbKuIzJYATNR30WPZEuLxEXfs9SXEnfXZXrnY9Ium0YLsnAKjzhWmT5xZGx23YaNFXmfz6zcQuUZjWUKJVc+iKqOcTm+QsmmMI5+S7bzp+5wQv6HROy8vZKKu2As8JRSIVP+XadjeOAxKxLBauDuY1udL2pnXv4WrE/N7o9Zi6yvJC9hXyJl2bBDcWh2nrv0Sbsaa1AiholZv1E1ftNZV6kIcoeXzhc+y/2rXfx+5ag+K19TFEM91k2JS4eUSoK/HnjH5Qcf79CaEFZU9QXoc0JwnNkOA6//skWIVf06m+HrCnZFXNS1oqKY4vkGZlPzk9DXIS0enyR4Tq1rh2WuD8xKIwqTqO2Z+5bpK7bhsqrfBs1u6lDoVZWcJrM7emwK5+/S/kmQq6axTgm1D79LhDpDopbFNoX+OB4LycUk4bSt5DvDJfH/sajtVq/dpxx2JBsblPbHOUUe8Y7Vj9F1V7WOVl4rlu5chr468qSXx1paEUrjf+duK1b0mehBFxHcD33b2jEjdhN/SZ1KKCqxaheqM7Q8/lja/dgbXE4Q8Gfhzf383nc/8uxeHfCSGsrZZZ+TmcOPq8pAlRp6hN9gOa0TRM8K2o27YtYtVlPpLjyZtSeNoYP9tBnlDpOm3HG3e2pnjFxSly4TvemZpWHK9DGyZ2V/i4wiwo9VblKvCM9vw3vCYGhkMPAAA="
 
 # ------------------------------------
 # Script file - Initialize - 
@@ -36,7 +36,7 @@ $ScriptBlockInitialize = "H4sIAAAAAAAACs1UXUvDMBR9H+w/XEahLayivu9hbn4U51bWyhhjSD
 # ------------------------------------
 # Script file - ModuleUpdater - 
 # ------------------------------------
-$ScriptBlockModuleUpdater = "H4sIAAAAAAAACs1VW0/bMBR+R+I/eFGmphJJ6eskpDFYp6KVVRTYw9QHN3FImBNHvgyhwn/fsZ2Lk5Zt7GFa+uKcfufzuX5JVRnLnJXoE5HhGc1JKa8Zo+KWcAHmJZYZ2h4eIHj8BUvM+wkKBmj4R1EyL1PGC6zpxlFjEhJTqt1qEpf4BF2wvAzNuWUf/bCIkXXgRCpe9vwOD54PD/QvbYK/JA+74dQes5ySJoVvZ0VCifyQl0le3gUrVVWMS7HKmKLJkrOYCDFeW2yFOS4Ceza+S20gkvBggcsES8YfIQM/xVSQxskANxDD2p+LUyXZTQVIonEzjTv6Gz7xkMs4W/szxmNi7eO6mi907OQX7aw9L0SLDZwuvEDoxcYutT26B1cPIujGAqp9Cbm8ZjI0viaoRDGtXjlYTiaVSBr3liq6IhXFMQlGkTaNjpA+JNNRUzjblxtOwcvLpKzEu8kEcyFinldSFdFdLjO1iXI22R4/eyhM3USb6ivOz2177yBu0+nwZmZiRd5b4fVnHm5bSQ6D597J8UN9lxKEx6yUkHsUs8KNRscw4SQVk4zgREwKLGBuJjVvBOXZH2GeoiB4E1wTIW1/vbbv3niMQsZRYMcK3rbOyFUiVkKygm3uSSzXPoOQh8b3joN+dDUg9jooneM0Oo6O6yI0z2cIvV0Kry3hANWbKc/Ja4DrtbFr6gDV1d/Ahu0YoPtr667xIBMWY7pcLaaGtJk8by/ovAElQxBIWXP0Qca0WukWQU2wvp6hJ3TGStBEWIhQ/9PhterNJSnQTm+RsV8/VgQZ+QtNj1H48RStJKtQeIupIrsXPqEvSoaXilJ7i9HZWmwduTXz5GyprU7yb1X2/1ZFvXkvL56zOV95LkkIrBsmCPJKhoSKM5TqtrU+URQhZ2Z+97lzmmeyqofJZG8Fpjcs7YTNOCucGfNtx7pd0DzRcB10pj1kX0nqr/na7+ShpeorRhOuuRpsdl0tslvZfdQFSyztvPzBvpPwCsq+IDJjCcgxz+3KW1no3E3cTlAhlahm6mVgwrFrDNvbRtQu9n5ksYNcDJGarpYkLe/b6bP5RFklN56tnh3VhqG+O1zFLlfxx1x9tp44uULwE95SEFQtCgAA"
+$ScriptBlockModuleUpdater = "H4sIAAAAAAAACr1X32/bNhB+D5D/gRM8WAYiJQb6MAzI0DSutxSNZ8R2g6LwAy1RtjpJ1EiqQZDmf9/xhySKctI4QKc+VKbvjnffffedk1RFJFJaoD+JCC6zlBRiSWnGPxHG4XiOxQ49HB8heAbXNFafz5HvWMM3VUauioSyHMtwo7A+4gJnmXQzQezA5+gDTYtAvTfRh9+0xVA7MCIqVnT8jo8ej4/kv6ROfkbu+ukYj2makbqEL5d5nBHxLi3itNj6i6osKRN8saNVFs8ZjQjno7W2LTHDua/fle9cHhBBmH+NixgLyu6hgkGCM05qJ2W4gRzWg4tK0FUJdmSa4e3JawLxu1REu/VgSllE9PnIwPhEq86f6aPx/MAbW9+C/4mAXqTOhTwPv4Kr12RQMTaB6syd6jVYTRUDkPcr91rWQDNmUPEhxJH2JkDJ83F5IO+sekse1+5NqPCGlBmOiD8M5dHwBMmXeDysi9ONW7EMvLydECX//fQUM84jlpaiysNtKnbVJkzp6cPZo4eCxC60S/WXRjl9GPcinSDPRAmhSANpmiDf/8VfEi5087ymqd5ohALKkK85A58eLD6VPKq4oDndfCWRWA8o5OUevrUc5CPbDHCbLGQh4/AsPDOp1M9HzIXGTFrU1HCMOqC2EDtWXdQsEB27Dq88CzPHrp1DyYDuVDpF0Ahn88X1WAWsueLtNZrURrFrBNpUvw5Al6T8yO4AHlgmQNF3dEkLEDmgcCC/ae2ljF0JkqNeW5E6X96XBCk9C1R7UfD+Ai0ELVHwCWcV6V/4Hf1diWBWZZm+RQmnq55XxTf6D7HnysLsf1XOWvBm5vafoHmvkTyJVj149tw1cbtzdstSQQIIuaGcIG9GEa+iHUpk4xqXMAxRxAioVrFFMUlwlQlkVp8yDS1O/Wi/Wc1V9RqyKVxoIcDPwqDh35TR3GKgrE55hm37u/ph0lsr7W8VQTt1haL1EtBsR1PaQB/hDm6Ji6HiDRxeE7GjMawUlsIkmMxaNRjZI4ciDLxxr9F9uMWskBh7l7goqDAqhII/EDSmvhlWVjcXZ+r1r5C9Q+5024ZGkbb97D3p1IWhn0rrqJrUNQ+2onNNp2d7LtMza+Hwmchl3fVR99Rj2IvYQoIGglWGfxY43QN7hes+NlLbM4z3Gk5cwzkYmhVhVqda4Hp/Ks9mv5yYA3c/W7Hyfqz8xbGeBXtC74qMYimabdKA+b7NIR8zALdkc0P+raDLegBaV9BztQFaqIIVJ+8wTyOQWS7vCd4zRtmFFne5Hg7LMbdyzA/LMe/lmL82R6dHeyRGcqQzCeGSLgST62m0x7u3d1EwISXk9ga+WVhK6Wg7pFpEVIGzWk5/24+lJc5/UQDE0wSRwi83YwIL+B5VikUxErQR+mdF5yqXOzYwoRoNbLk3AopafxvIxxImAtv1UCmY1b8xf1AeSKdxkhRIGYkdv5frh/oV0BMQ5xX+e/wPFdCX9KsOAAA="
 
 
 
@@ -106,6 +106,7 @@ if($AssembliesFound){
     }
 }
 
+
 # For each scripts in the module, decompress and load it.
 # Set a flag in the Script Scope so that the scripts know we are loading a module
 # so he can have a specific logic
@@ -113,18 +114,40 @@ $Script:LoadingState = $True
 $ScriptList = @('Aliases','Config','Exception','Helpers','Initialize','ModuleUpdater')
 $ScriptList | ForEach-Object {
     $ScriptId = $_
-     $ScriptBlock = "`$ScriptBlock$($ScriptId)" | Invoke-Expression
-    $ClearScript = ConvertFrom-Base64CompressedScriptBlock -ScriptBlock $ScriptBlock
-    try{
-        $ClearScript | Invoke-Expression
-    }catch{
-        Write-Host "===============================" -f DarkGray
-        Write-Host "$ClearScript" -f DarkGray
-        Write-Host "===============================" -f DarkGray
-        Write-Error "ERROR IN script $ScriptId . Details $_"
+    $ScriptVariable = Get-Variable -Name "ScriptBlock$($ScriptId)" -ea Ignore
+    if($ScriptVariable -eq $Null){
+        Write-Warning "Cannot load $ScriptId"
+    }
+    else{
+          
+            #Write-Host "[DEBUG] Loading Submodule $ScriptId" -f DarkRed
+          
+          
+         $CodedScript = $ScriptVariable.Value
+         ###$CodedScript = "`$ScriptBlock$($ScriptId)" | Invoke-Expression
+         $ClearScript = ConvertFrom-Base64CompressedScriptBlock -ScriptBlock $CodedScript
+          if([string]::IsNullOrEmpty($ClearScript)){
+            Write-Warning "$ScriptId Looks Empty!"
+          }else{
+               try{
+                  $ClearScript | Invoke-Expression
+               }catch{
+                    Write-Host "===============================" -f DarkGray
+                    Write-Host "$ClearScript" -f DarkGray
+                    Write-Host "===============================" -f DarkGray
+                    Write-Error "ERROR IN script $ScriptId . Details $_"
+               } 
+          }
+
     }
 }
 $Script:LoadingState = $False
 
+$AutoUpdateCommandName = "Invoke-ClientToolsAutoUpdate"
+$AutoUpdateCmd = Get-Command -Name "$AutoUpdateCommandName" -ErrorAction Ignore
+if($AutoUpdateCmd -ne $Null){
+    Write-Host "Function "Invoke-ClientToolsAutoUpdate" Exists... Attempt AutoUpdate."
+    &$AutoUpdateCmd.Name
+}
 
 

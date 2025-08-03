@@ -1,7 +1,7 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Sat, 02 Aug 2025 21:40:53 GMT
+#̷\  Manifest File Generated on Sat, 02 Aug 2025 23:00:00 GMT
 #̷\  Current Git Revision 676b38112b9b684031084bb1d23bce5741820ab6
 #̷\  ===================================================================
 
@@ -11,9 +11,9 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.0.441'
+    ModuleVersion     = '1.0.471'
 
-    GUID              = 'f68c5950-2d24-490c-a95a-606880fd5e02'
+    GUID              = '7b704b96-48a7-4e3a-819d-feed6de05664'
 
     CompanyName       = 'Unknown'
 
@@ -70,11 +70,12 @@
 		"Disable-ExceptionDetailsTextBox",
 
 		# --- Exported Functions from Helpers.ps1 ---
+		"ConvertTo-UnixTime",
 		"Write-ProgressHelper",
+		"Write-ClientToolsHost",
 		"ConvertFrom-Ctime",
 		"ConvertTo-CTime",
 		"ConvertFrom-UnixTime",
-		"ConvertTo-UnixTime",
 		"Get-UnixTime",
 		"Get-DateString",
 		"Get-DateForFileName",
@@ -86,7 +87,7 @@
 		# --- Exported Functions from ModuleUpdater.ps1 ---
 		"New-ClientToolsModuleVersionFile",
 		"Get-ClientToolsVersionPath",
-		"Test-ClientToolsUpdated")
+		"Invoke-ClientToolsAutoUpdate")
 	
 
     #̷\  ===================================================
