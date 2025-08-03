@@ -81,10 +81,9 @@ Start-SaveScreenshots -Minutes {0} -Delay {1}
 
 "@
 
-function Invoke-MapRemoteDrive {
 
-    # TakeScreenshots.ps1
-    [CmdletBinding()]
+function Invoke-MapRemoteDrive {
+    [CmdletBinding(SupportsShouldProcess)]
     param()
 
 
@@ -107,9 +106,8 @@ function Invoke-MapRemoteDrive {
         }
 }
 
-
 function Invoke-StartRecord {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]
@@ -177,7 +175,7 @@ $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
 }
 
 function Invoke-StopRecord {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]

@@ -9,7 +9,7 @@
 
 
 
-function Get-ClientToolsVersionPath {
+function Get-ClientToolsModuleVersionPath {
     $ModPath = (Get-ClientToolsModuleInformation).ModuleInstallPath
     $VersionPath = Join-Path $ModPath 'version'
     return $VersionPath
@@ -24,7 +24,7 @@ function New-ClientToolsModuleVersionFile {
         [Parameter(Mandatory = $false)]
         [switch]$Force
     )
-    $ClientToolsVersionPath = Get-ClientToolsVersionPath
+    $ClientToolsVersionPath = Get-ClientToolsModuleVersionPath
     $JsonPath = (Join-Path $ClientToolsVersionPath "clienttools.json")
     $CurrDate = Get-Date -UFormat "%s"
     $ModuleName = (Get-ClientToolsModuleInformation).ModuleName
