@@ -10,10 +10,10 @@
 
 
 
-$FunctionsAuth = Get-FunctionList .\src\ | Where Base -match "\b(?:AuthToken|Initialize)\b" | Select -ExpandProperty Name
-$FunctionsRequestTextCompletion = Get-FunctionList .\src\ | Where Base -match "\b(?:TextCompletion)\b" | Select -ExpandProperty Name
-$FunctionsRequestCodeCompletion = Get-FunctionList .\src\ | Where Base -match "\b(?:CodeCompletion)\b" | Select -ExpandProperty Name
-$FunctionsModels = Get-FunctionList .\src\ | Where Base -match "\b(?:Model)\b" | Select -ExpandProperty Name
+$FunctionsAuth = Get-FunctionList .\src\ | Where Base -match "\b(?:Initialize)\b" | Select -ExpandProperty Name
+$FunctionsAutoUpdate = Get-FunctionList .\src\ | Where Base -match "\b(?:ModuleUpdater)\b" | Select -ExpandProperty Name
+$FunctionsHelpers = Get-FunctionList .\src\ | Where Base -match "\b(?:Helpers)\b" | Select -ExpandProperty Name
+$FunctionsConfig = Get-FunctionList .\src\ | Where Base -match "\b(?:Config)\b" | Select -ExpandProperty Name
 
 function Get-FunctionDocUrl($Name){
     $Url = "https://github.com/arsscriptum/PowerShell.Module.ClientTools/blob/master/doc/{0}.md" -f $Name
@@ -26,17 +26,16 @@ $FunctionsAuthText = ForEach($fn in $FunctionsAuth){
     $DocUrl
 }
 
-$FunctionsRequestTextCompletionText = ForEach($fn in $FunctionsRequestTextCompletion){
+$FunctionsAutoUpdateText = ForEach($fn in $FunctionsAutoUpdate){
+    $DocUrl= Get-FunctionDocUrl $fn
+    $DocUrl
+}
+$FunctionsHelpersText = ForEach($fn in $FunctionsHelpers){
     $DocUrl= Get-FunctionDocUrl $fn
     $DocUrl
 }
 
-$FunctionsRequestCodeCompletionsText = ForEach($fn in $FunctionsRequestCodeCompletion){
-    $DocUrl= Get-FunctionDocUrl $fn
-    $DocUrl
-}
-
-$FunctionsModelsText = ForEach($fn in $FunctionsModels){
+$FunctionsConfigText = ForEach($fn in $FunctionsConfig){
     $DocUrl= Get-FunctionDocUrl $fn
     $DocUrl
 }
@@ -44,17 +43,20 @@ $FunctionsModelsText = ForEach($fn in $FunctionsModels){
 [string]$LastUpdate = (Get-Date).GetDateTimeFormats()[5]
 $Text = @"
 
-## Functions - Init and Authentication
+## Functions - Initialization
 $FunctionsAuthText
 
-## Functions - Request Text Completion
-$FunctionsRequestTextCompletionText
+## Functions - AutoUpdate
+$FunctionsAutoUpdateText
 
-## Functions - Request Code Completion
-$FunctionsRequestCodeCompletionsText
+## Functions - Config
+$FunctionsConfigText
 
-## Functions - Open AI Models data requests
-$FunctionsModelsText
+
+
+## Functions - Helpers
+$FunctionsHelpersText
+
 
 ## Last Update
 
