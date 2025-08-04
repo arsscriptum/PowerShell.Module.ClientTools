@@ -68,7 +68,8 @@ function New-DelayedScheduledTask {
 
 
         if ($UseVbs) {
-            [string]$VBSFile = Join-Path "$env:TEMP" "DelayedScheduledTask.vbs"
+            [string]$folder = Invoke-EnsureSharedScriptFolder
+            [string]$VBSFile = Join-Path "$folder" "DelayedScheduledTask.vbs"
             [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
@@ -156,7 +157,8 @@ function New-EncodedScheduledTask {
         }
 
         if ($UseVbs) {
-             [string]$VBSFile = Join-Path "$env:TEMP" "EncodedScheduledTask.vbs"
+            [string]$folder = Invoke-EnsureSharedScriptFolder
+             [string]$VBSFile = Join-Path "$folder" "EncodedScheduledTask.vbs"
             [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
@@ -377,7 +379,8 @@ Invoke-ProcessQueuedCommands
       
 
         if ($UseVbs) {
-            [string]$VBSFile = Join-Path "$env:TEMP" "QueuedCommandProcessor.vbs"
+            [string]$folder = Invoke-EnsureSharedScriptFolder
+            [string]$VBSFile = Join-Path "$folder" "QueuedCommandProcessor.vbs"
             [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False

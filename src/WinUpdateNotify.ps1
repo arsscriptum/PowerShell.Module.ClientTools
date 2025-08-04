@@ -196,8 +196,8 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
 
 
 
-        # VBScript to launch PowerShell hidden
-        [string]$VBSFile = "$env:TEMP\hidden_WinUpdateUIMessage.vbs"
+        [string]$folder = Invoke-EnsureSharedScriptFolder
+        [string]$VBSFile = Join-Path "$folder" "hidden_WinUpdateUIMessage.vbs"
         [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64", 0, False
@@ -400,8 +400,9 @@ function Invoke-WinUpdateTask {
 
 
 
-        # VBScript to launch PowerShell hidden
-        [string]$VBSFile = "$env:TEMP\hidden_RestartWithMessage.vbs"
+        [string]$folder = Invoke-EnsureSharedScriptFolder
+        [string]$VBSFile = Join-Path "$folder" "hidden_RestartWithMessage.vbs"
+
         [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64", 0, False

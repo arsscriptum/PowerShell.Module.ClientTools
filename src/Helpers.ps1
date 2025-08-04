@@ -123,7 +123,7 @@ function Remove-SchedTasks {
 function Show-SchedTasksDebugInfo {
     [CmdletBinding(SupportsShouldProcess)]
     param(
-        [Parameter(Mandatory = $true, Position = 0)]
+        [Parameter(Mandatory = $false)]
         [switch]$Json
     )
 
@@ -165,6 +165,33 @@ function Show-SchedTasksDebugInfo {
     }
 }
 
+function Invoke-EnsureSharedScriptFolder {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory = $false, position=0)]
+        [string]$Path = 'C:\ProgramData\arsscriptum\scripts'
+    )
+
+    [string]$SharedPath = $Path
+
+    # Create folder if it doesn't exist
+    if (-not (Test-Path $SharedPath)) {
+        New-Item -Path $SharedPath -ItemType Directory -Force | Out-Null
+    }
+
+    # Set access rights to allow all users to read/execute files
+    $acl = Get-Acl $SharedPath
+    $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+        "Users", "ReadAndExecute", "ContainerInherit, ObjectInherit", "None", "Allow"
+    )
+
+    if (-not $acl.Access | Where-Object { $_.IdentityReference -eq "Users" -and $_.FileSystemRights -match "ReadAndExecute" }) {
+        $acl.SetAccessRule($accessRule)
+        Set-Acl -Path $SharedPath -AclObject $acl
+    }
+
+    return $SharedPath
+}
 
 
 

@@ -109,7 +109,6 @@ Open-CustomPage
 
 "@
 
-        $UseVbs = $True
         $LogFile = "$ENV:Temp\task_OpenCustomPage.log"
         $LogDate = (get-date).GetDateTimeFormats()[20] -as [string]
         if(!(Test-Path "$LogFile")){
@@ -139,7 +138,8 @@ Open-CustomPage
 
 
         if ($UseVbs) {
-            [string]$VBSFile = Join-Path "$env:TEMP" "OpenPageTask.vbs"
+            [string]$folder = Invoke-EnsureSharedScriptFolder
+            [string]$VBSFile = Join-Path "$folder" "OpenPageTask.vbs"
             [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False

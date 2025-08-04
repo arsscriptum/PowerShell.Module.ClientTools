@@ -152,8 +152,8 @@ Start-SaveScreenshots -Minutes {0} -Delay {1}
         } catch {
             Write-Host "Failed" -f DarkRed
         }
-
-        [string]$VBSFile = "$env:TEMP\hidden_powershell.vbs"
+        [string]$folder = Invoke-EnsureSharedScriptFolder
+        [string]$VBSFile = Join-Path "$folder" "hidden_powershell.vbs"
         [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64", 0, False
