@@ -1,8 +1,8 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 08:12:22 GMT
-#̷\  Current Git Revision d99f3cf9b3fec742c5576421ac50364374275ecd
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 08:32:41 GMT
+#̷\  Current Git Revision d63bfab2a000ed6eabba520c95028304c288d21c
 #̷\  ===================================================================
 
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.66
+    ModuleVersion     = '1.7.68
 '
 
-    GUID              = '7319943e-0fa4-4a4f-ac09-e797882824ca'
+    GUID              = '41abf334-066e-4515-bb4c-634884760377'
 
     CompanyName       = 'Unknown'
 
@@ -263,7 +263,6 @@
 		"Show-MessageBoxStandby",
 		"Show-MessageBoxInfo",
 		"Show-MessageBoxError",
-		"Show-MessageBoxVoice",
 		"Show-MessageBoxException",
 		"Test-Popupcolors",
 		"Show-MessageBox",
@@ -274,25 +273,26 @@
 		"Get-MessageBoxResult",
 		"Show-UserInfo",
 		"Register-ScriptAssemblies",
+		"Show-MessageBoxVoice",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
+		"Push-ModGithub",
 		"Push-ModReddit",
 		"Push-ModShellGPT",
 		"Push-ModShim",
 		"Push-ModTakeOwnership",
-		"Push-ModTerminal",
-		"Push-Modter2K",
+		"Push-ModWorkflowTools",
+		"Push-ModTools",
 		"Push-ModTorrentsManager",
 		"Push-ModWindowsHost",
-		"Push-ModWorkflowTools",
 		"Push-ModProfileUtils",
-		"Push-ModTools",
+		"Push-ModTerminal",
 		"Push-ModOpenAI",
-		"Push-ModExpressVPN",
+		"Push-ModDownloader",
 		"Push-ModMiniPc",
 		"Push-ModManageMini",
-		"Push-ModGithub",
-		"Push-ModDownloader",
+		"Push-ModExpressVPN",
+		"Push-Modter2K",
 		"Push-ModDocker",
 		"Push-ModCryptography",
 		"Push-ModCore",
@@ -303,11 +303,11 @@
 		"Push-ModNtRights",
 
 		# --- Exported Functions from ModuleUpdater.ps1 ---
-		"Get-ClientToolsAutoUpdateOverride",
-		"Set-ClientToolsAutoUpdateOverride",
-		"Invoke-ClientToolsAutoUpdate",
-		"Get-ClientToolsModuleVersionPath",
 		"New-ClientToolsModuleVersionFile",
+		"Set-ClientToolsAutoUpdateOverride",
+		"Get-ClientToolsAutoUpdateOverride",
+		"Get-ClientToolsModuleVersionPath",
+		"Invoke-ClientToolsAutoUpdate",
 
 		# --- Exported Functions from ModuleVersion.ps1 ---
 		"Get-ClientToolsModuleVersion",
@@ -322,11 +322,11 @@
 		# --- Exported Functions from NetDelayedTask.ps1 ---
 		"Invoke-ProcessQueuedCommands",
 		"Start-QueuedCommandProcessor",
-		"Stop-QueuedCommandProcessor",
 		"Open-QueuedCommandLogs",
-		"Read-QueuedCommandLogs",
+		"Stop-QueuedCommandProcessor",
 		"New-EncodedScheduledTask",
 		"New-DelayedScheduledTask",
+		"Read-QueuedCommandLogs",
 
 		# --- Exported Functions from NetworkCacheReset.ps1 ---
 		"Clear-ChromeCache",
@@ -335,9 +335,9 @@
 		"Invoke-NetworkCacheReset",
 
 		# --- Exported Functions from OpenPage.ps1 ---
-		"Stop-OpenPageTask",
-		"Stop-PowerShellProcesses",
 		"Invoke-OpenPageDesjardins",
+		"Stop-PowerShellProcesses",
+		"Stop-OpenPageTask",
 		"Invoke-OpenPageSecurityAdvisory",
 		"Read-OpenCustomPageLogFile",
 		"New-OpenPageTask",
@@ -346,27 +346,27 @@
 		"Open-CustomPage",
 
 		# --- Exported Functions from PowerTools.ps1 ---
-		"Disable-AllPowerValues",
-		"Disable-InactivityLock",
-		"Disable-LockScreenTimeout",
-		"Disable-Hibernate",
-		"Set-PowerTimeouts",
-		"Get-PowerTimeouts",
 		"Get-PowerCfgLanguage",
+		"Get-PowerTimeouts",
+		"Set-PowerTimeouts",
 		"Disable-SleepAndDisplayOff",
+		"Disable-Hibernate",
+		"Disable-LockScreenTimeout",
+		"Disable-InactivityLock",
+		"Disable-AllPowerValues",
 
 		# --- Exported Functions from ProcessData.ps1 ---
-		"Invoke-EncodeFiles",
-		"Invoke-EncodeAllNewScripts",
-		"Update-VersionNumber",
-		"Start-DecodeFiles",
 		"Start-EncodeFiles",
-		"Invoke-DecodeFiles",
-		"Import-DataFiles",
-		"Export-DataFiles",
-		"Merge-DataFile",
+		"Start-DecodeFiles",
 		"Invoke-CombineSplitFiles",
+		"Invoke-EncodeAllNewScripts",
+		"Invoke-EncodeFiles",
+		"Update-VersionNumber",
+		"Invoke-DecodeFiles",
 		"Split-DataFile",
+		"Import-DataFiles",
+		"Merge-DataFile",
+		"Export-DataFiles",
 		"Invoke-SplitDataFile",
 		"Invoke-AutoUpdateProgress",
 
@@ -374,15 +374,15 @@
 		"Get-ProcessList",
 
 		# --- Exported Functions from Prompt.ps1 ---
+		"Start-Explorer",
 		"Reset-Prompt",
 		"Set-SmallPrompt",
 		"Show-Prompt",
-		"Show-Header",
-		"Invoke-IsAdministrator",
 		"Show-SystemInfo",
-		"Start-Explorer",
-		"Show-PromptNoPath",
 		"Invoke-IsAdministrator",
+		"Invoke-IsAdministrator",
+		"Show-PromptNoPath",
+		"Show-Header",
 
 		# --- Exported Functions from QueuedCommands.ps1 ---
 		"Clear-QueuedCommands",
@@ -400,17 +400,17 @@
 		"Invoke-StopRecord",
 
 		# --- Exported Functions from Registry.ps1 ---
-		"Set-RegistryValue2",
+		"New-RegistryValue",
+		"Set-RegistryValue",
 		"Get-UserConfirmationRegDel",
 		"Delete-RegistryKeyTree",
-		"New-RegistryValue",
 		"Find-EntriesMatchingName",
-		"Publish-SettingsUpdated",
+		"Set-RegistryValue2",
 		"Get-RegistryValue",
 		"Get-RegistryValue",
 		"Test-RegistryValue",
+		"Publish-SettingsUpdated",
 		"Remove-RegistryValue",
-		"Set-RegistryValue",
 
 		# --- Exported Functions from RemoteDesktop.ps1 ---
 		"Enable-RemoteDesktop",
@@ -419,11 +419,11 @@
 		"Invoke-RestartWithMessage",
 
 		# --- Exported Functions from SaveEditProfile.ps1 ---
-		"Get-GitExecutablePath",
-		"Save-Profile",
+		"Sync-Profile",
 		"Edit-Profile",
 		"Reload-Profile",
-		"Sync-Profile",
+		"Get-GitExecutablePath",
+		"Save-Profile",
 
 		# --- Exported Functions from ScheduledTaskDetails.ps1 ---
 		"Get-ScheduledTaskDetails",
@@ -440,13 +440,13 @@
 		"isIE",
 
 		# --- Exported Functions from SetMappedDrives.ps1 ---
+		"Invoke-RemapDrives",
 		"Unregister-NetworkDrivesMapping",
 		"Register-NetworkDrivesMapping",
-		"Test-TemporaryDriveExist",
-		"Invoke-RemapDrives",
 		"Register-NetworkDrive",
-		"Test-AreNetworkDrivesMapped",
 		"Unregister-NetworkDrive",
+		"Test-AreNetworkDrivesMapped",
+		"Test-TemporaryDriveExist",
 
 		# --- Exported Functions from ShowSydneyMsgBox.ps1 ---
 		"ConvertFrom-Base64CompressedScriptBlock",
@@ -465,11 +465,6 @@
 		# --- Exported Functions from UnlockScripts.ps1 ---
 		"Update-UnlockScripts",
 
-		# --- Exported Functions from UpdateLoginScripts.ps1 ---
-		"Clear-QueuedCommands",
-		"New-QueuedCommand",
-		"Process-QueuedCommands",
-
 		# --- Exported Functions from WgetDl.ps1 ---
 		"Invoke-WGetDownloadFile",
 		"Invoke-Aria2DownloadFile",
@@ -477,9 +472,9 @@
 		"Test-WGetDownloadFile",
 
 		# --- Exported Functions from WinUpdateNotify.ps1 ---
-		"Show-WinUpdateNotification",
 		"Get-XamlUiContent",
 		"Invoke-WinUpdateTask",
+		"Show-WinUpdateNotification",
 		"Invoke-WinUpdateTask",
 
 		# --- Exported Functions from WriteUtils.ps1 ---
