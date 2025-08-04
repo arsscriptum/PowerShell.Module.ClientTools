@@ -1,7 +1,8 @@
 <#
   ã--------------------------------------------------------------------------------------
   ¦   PowerShell PowerShell.Module.ClientTools Module
-  ¦   Version 1.7.50 , Generated on Mon, 04 Aug 2025 05:13:41 GMT 
+  ¦   Version 1.7.54
+ , Generated on Mon, 04 Aug 2025 05:20:28 GMT 
   ¦   Description: 
   ¦   Current Git Revision ae37ccf97e9ccbc358b4bd0ec2f041973209786a
   L--------------------------------------------------------------------------------------
@@ -161,7 +162,7 @@ $ScriptBlockModuleUpdater = "H4sIAAAAAAAACs0Y207cOPS9Ev/gRqyYaJvQSvuwqtTVAtNpaQu
 # ------------------------------------
 # Script file - ModuleVersion - 
 # ------------------------------------
-$ScriptBlockModuleVersion = "H4sIAAAAAAAACn1STU/DMAy9I+0/ZFUO7aGVkJAQBy6MDzExNLENDtMOUZvSQBpPjjvEx/476Ue2ToL5ZD37PT87ySuTkgLD7iTFI62koTmAthPIKi2fJdq6+D04YS6WozLTkq6UyZR5DWfVeg1IdlZApbMpQiqtjVZt71qgKMM2b7jTGpAkMZwIkwkC/GSXjOdCW+lJTaP9UJQWK/4gSFpqC9HgpE1UHnaFqDNVB+857zxPBRVO/9hadUtPY2x3rDEoEzf5f8pB2uBU48mbYwbeYeuShcNw7lx2Kl47ivwtfbygIhnfIAKyoGzsMQPElFGkhFZfMhs6gOXKFXY6waEISqrQMP5Yab2vbPuWlpvW/YqPKkT/sMcP1Ofza0HC94MhR+id7Ic5zE2gW4QyruG/JrcPt599bzbwLuMnB04kFZCxeIGKBTxspiVd5wJ11FvYL3uglsxhRlj/SvdVDpbn+3nBaXKenF10Wl5nt+z2FwJMZ24NAwAA"
+$ScriptBlockModuleVersion = "H4sIAAAAAAAACn1STU/DMAy9I+0/ZFUO7aGVkECcuDA+xMTQxDY4TDtEbUoDaTw57hAf+++kH9k6CeaT9ez3/Owkr0xKCgy7kxSPtJKG5gDaTiCrtHyWaOvi9+CEuViOykxLulImU+Y1nFXrNSDZWQGVzqYIqbQ2WrW9a4GiDNu84U5rQJLEcCJMJgjwk10yngttpSc1jfZDUVqs+IMgaaktRIOTNlF52BWizlQdvOe88zwVVDj9Y2vVLT2Nsd2xxqBM3OT/KQdpg1ONJ2+OGXiHrUsWDsO5c9mpeO0o8rf08YKKZHyDCMiCsrHHDBBTRpESWn3JbOgAlitX2OkEhyIoqULD+GOl9b6y7Vtablr3Kz6qEP3DHj9Qn8+vBQnfD4YcoXeyH+YwN4FuEcq4hv+a3D7cfva92cC7jJ8cOJFUQMbiBSoW8LCZlnSdC9RRb2G/7IFaMocZYf0r3Vc5WJ7v5wWnyUVyftZpeZ3dsttftkpLmA0DAAA="
 
 # ------------------------------------
 # Script file - NamedPipe - 
