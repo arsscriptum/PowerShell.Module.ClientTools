@@ -1,7 +1,7 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 05:28:58 GMT
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 05:37:07 GMT
 #̷\  Current Git Revision ae37ccf97e9ccbc358b4bd0ec2f041973209786a
 #̷\  ===================================================================
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.57
+    ModuleVersion     = '1.7.58
 '
 
-    GUID              = '4c5ce92d-5266-4e7f-b3ae-c7981007063d'
+    GUID              = '84bd3db1-ad4c-4a17-807d-77d959509ecf'
 
     CompanyName       = 'Unknown'
 
@@ -239,13 +239,13 @@
 		"Show-MessageBoxStandby",
 		"Show-MessageBoxRestart",
 		"Show-MessageBoxVideoSydney",
-		"Show-MessageBoxInfo",
+		"Show-BeAdvisedSydney",
 		"Show-MessageBoxScriptError",
 		"Show-MessageBoxServices",
 		"Show-MessageBoxAsyncPing",
 		"Show-MessageBoxVideoUrlExtended",
 		"Show-MessageBoxError",
-		"Show-BeAdvisedSydney",
+		"Show-MessageBoxInfo",
 		"Show-MessageBoxException",
 		"Register-ScriptAssemblies",
 		"Show-UserInfo",
@@ -255,8 +255,8 @@
 		"Show-MessageBoxVoice",
 		"Test-SimpleMsgBox2",
 		"Show-MessageBox",
-		"Test-Popupcolors",
 		"Test-SimpleMsgBox",
+		"Test-Popupcolors",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
 		"Push-Modter2K",
@@ -365,25 +365,26 @@
 		"New-QueuedCommand",
 
 		# --- Exported Functions from Record.ps1 ---
+		"Invoke-MapRemoteDrive",
+		"Invoke-StartRecord",
+		"Invoke-MapRemoteDrive",
 		"Add-TaskLog",
 		"Save-Screenshot",
 		"Start-SaveScreenshots",
-		"Invoke-MapRemoteDrive",
-		"Invoke-StartRecord",
 		"Invoke-StopRecord",
 
 		# --- Exported Functions from Registry.ps1 ---
-		"Set-RegistryValue",
 		"Set-RegistryValue2",
 		"Get-UserConfirmationRegDel",
 		"Delete-RegistryKeyTree",
 		"New-RegistryValue",
-		"Get-RegistryValue",
-		"Remove-RegistryValue",
-		"Get-RegistryValue",
-		"Test-RegistryValue",
-		"Publish-SettingsUpdated",
 		"Find-EntriesMatchingName",
+		"Test-RegistryValue",
+		"Get-RegistryValue",
+		"Get-RegistryValue",
+		"Publish-SettingsUpdated",
+		"Remove-RegistryValue",
+		"Set-RegistryValue",
 
 		# --- Exported Functions from RemoteDesktop.ps1 ---
 		"Enable-RemoteDesktop",
@@ -420,8 +421,8 @@
 
 		# --- Exported Functions from ShowSydneyMsgBox.ps1 ---
 		"Show-Sydney",
-		"Show-MessageBoxVideoSydney",
 		"ConvertFrom-Base64CompressedScriptBlock",
+		"Show-MessageBoxVideoSydney",
 
 		# --- Exported Functions from Subl.ps1 ---
 		"Invoke-SublimeText",
@@ -441,10 +442,10 @@
 		"Clear-QueuedCommands",
 
 		# --- Exported Functions from WgetDl.ps1 ---
-		"Test-WGetDownloadFile",
-		"Test-Aria2DownloadFile",
 		"Invoke-WGetDownloadFile",
 		"Invoke-Aria2DownloadFile",
+		"Test-Aria2DownloadFile",
+		"Test-WGetDownloadFile",
 
 		# --- Exported Functions from WinUpdateNotify.ps1 ---
 		"Get-XamlUiContent",
