@@ -1,7 +1,7 @@
 <#
   ã--------------------------------------------------------------------------------------
   ¦   PowerShell PowerShell.Module.ClientTools Module
-  ¦   Version 1.7.43 , Generated on Mon, 04 Aug 2025 04:45:16 GMT 
+  ¦   Version 1.7.44 , Generated on Mon, 04 Aug 2025 04:52:10 GMT 
   ¦   Description: 
   ¦   Current Git Revision ae37ccf97e9ccbc358b4bd0ec2f041973209786a
   L--------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ $ScriptBlockHistory = "H4sIAAAAAAAACt1YW0/rOBB+P9L5D1ZViaIlFY8rJKTlFFi6glJRBFpBV
 # ------------------------------------
 # Script file - Initialize - 
 # ------------------------------------
-$ScriptBlockInitialize = "H4sIAAAAAAAACrWQwW7CMAyG75X6DhHi0B76CDsMpm4cNqYB2wFxiBqXWYS4chymbeLdl9JOqBrSTjgnO/b/+XcdXCVITq0cOhTUFr+gmFoEJ0si6x/JBAvqO01UjPV0byzIBJ1Bt80WoWmIxS/eKVjzzFSB9/mm6200632Wp8lRpUn76l/W7DqkE6bNn+Djr/ArsI/wEiOjuA1Cq8ZogdLqrRovOcRqSVxBJzFzB9oN1juPREcDO+3PtS2Nu67JZ6O9VzfqHuTycvMDMKPpbWCdDSbzfpU23hgFigfyokbr/zxsVI+exzu2+iNV1OpO8+4FzFmTQQK7Lj8d6fgDVyyJ32ECAAA="
+$ScriptBlockInitialize = "H4sIAAAAAAAACrXOvQrCQAwH8L3Qd7jBoR36EFooOChCWxdxOHppDaTJcR8Iiu/uVXEQZ5MpIeT3HyMPAYVVz8gYUBPeoKoJgUMnQn4nJhKoe56pVKd6NgRhg2yQp6KN1ooLvr1IJHNwMoD35fl9a7XTc1Hm2UPl2dLjx9r+R3oxy5zIL28dg/zb3MP19/ERnE8BGkxGtaTordEBGtKTWnUupm0jboAU+AncE6vhiQEAAA=="
 
 # ------------------------------------
 # Script file - MessageBox - 
@@ -161,7 +161,7 @@ $ScriptBlockModuleUpdater = "H4sIAAAAAAAACs0Y207cOPS9Ev/gRqyYaJvQSvuwqtTVAtNpaQu
 # ------------------------------------
 # Script file - ModuleVersion - 
 # ------------------------------------
-$ScriptBlockModuleVersion = "H4sIAAAAAAAACn1STU/DMAy9I+0/ZFUO7aGVQEicuDA+xMTQxDY4TDtEbUoDaTw57hAf+++kH9k6CeaT9ez3/Owkr0xKCgy7kxSPtJKG5gDaTiCrtHyWaOvi9+CEuViOykxLulImU+Y1nFXrNSDZWQGVzqYIqbQ2WrW9a4GiDNu84U5rQJLEcCJMJgjwk10yngttpSc1jfZDUVqs+IMgaaktRIOTNlF52BWizlQdvOe88zwVVDj9Y2vVLT2Nsd2xxqBM3OT/KQdpg1ONJ2+OGXiHrUsWDsO5c9mpeO0o8rf08YKKZHyDCMiCsrHHDBBTRpESWn3JbOgAlitX2OkEhyIoqULD+GOl9b6y7Vtablr3Kz6qEP3DHj9Qn8+vBQnfD4YcoXeyH+YwN4FuEcq4hv+a3D7cfva92cC7jJ8cOJFUQMbiBSoW8LCZlnSdC9RRb2G/7IFaMocZYf0r3Vc5WJ7v5wWnyUVyftZpeZ3dsttfRowZyQ0DAAA="
+$ScriptBlockModuleVersion = "H4sIAAAAAAAACn1STU/DMAy9I+0/ZFUO7aGVEEicuDA+xMTQxDY4TDtEbUoDaTw57hAf+++kH9k6CeaT9ez3/Owkr0xKCgy7kxSPtJKG5gDaTiCrtHyWaOvi9+CEuViOykxLulImU+Y1nFXrNSDZWQGVzqYIqbQ2WrW9a4GiDNu84U5rQJLEcCJMJgjwk10yngttpSc1jfZDUVqs+IMgaaktRIOTNlF52BWizlQdvOe88zwVVDj9Y2vVLT2Nsd2xxqBM3OT/KQdpg1ONJ2+OGXiHrUsWDsO5c9mpeO0o8rf08YKKZHyDCMiCsrHHDBBTRpESWn3JbOgAlitX2OkEhyIoqULD+GOl9b6y7Vtablr3Kz6qEP3DHj9Qn8+vBQnfD4YcoXeyH+YwN4FuEcq4hv+a3D7cfva92cC7jJ8cOJFUQMbiBSoW8LCZlnSdC9RRb2G/7IFaMocZYf0r3Vc5WJ7v5wWnyUVyftZpeZ3dsttf0SoELg0DAAA="
 
 # ------------------------------------
 # Script file - NamedPipe - 
