@@ -9,17 +9,39 @@
 
 
 function New-QueuedCommand {
-    [CmdletBinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess,DefaultParameterSetName = "Command")]
     param(
-        [Parameter(Mandatory = $true, Position = 0)]
+        [Parameter(Mandatory = $true, Position = 0, ParameterSetName = "Command")]
         [string]$ExeName,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $false, ParameterSetName = "Command")]
         [string[]]$ArgumentList,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $false, ParameterSetName = "Command")]
         [uint32]$Delay = 30,
-        [Parameter(Mandatory = $false)]
-        [switch]$Wait
+        [Parameter(Mandatory = $false, ParameterSetName = "Command")]
+        [switch]$Wait,
+        [Parameter(Mandatory = $false, ParameterSetName = "Help")]
+        [switch]$Help
     )
+    $HelpMessage = @"
+
+EXAMPLES
+--------
+
+ -> Killing processes
+
+    New-QueuedCommand -ExeName `"taskkill.exe`" -ArgumentList `"/IM`",`"CalculatorApp.exe`",`"-F`" -Delay 10
+    New-QueuedCommand -ExeName `"pskill.exe`" -ArgumentList `"chrome`" -Delay 10
+
+ -> Starting Chrome...
+    `$url = `"https://www.cyber.gc.ca/fr/alertes-avis/al25-009-vulnerabilite-touchant-microsoft-sharepoint-server-cve-2025-53770`"
+    `$chromePath = `"`$ENV:ProgramFiles\Google\Chrome\Application\chrome.exe`"
+    new-QueuedCommand -ExeName "$chromePath" -ArgumentList "--new-window","$Url" -Delay 20
+
+"@
+    if($Help){
+        Write-Host "$HelpMessage" -f DarkCyan
+        return
+    }
     [decimal]$Now = (get-date -UFormat "%s") -as [decimal]
     [decimal]$WhenTime = $Now + $Delay
 
