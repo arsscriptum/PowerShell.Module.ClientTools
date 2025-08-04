@@ -1,8 +1,8 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 07:51:29 GMT
-#̷\  Current Git Revision 9383004aadc002f5065a08048a962db9ef850154
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 08:12:22 GMT
+#̷\  Current Git Revision d99f3cf9b3fec742c5576421ac50364374275ecd
 #̷\  ===================================================================
 
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.65
+    ModuleVersion     = '1.7.66
 '
 
-    GUID              = '2a5bc627-3919-48f5-b8bc-aa3cf09ca258'
+    GUID              = '7319943e-0fa4-4a4f-ac09-e797882824ca'
 
     CompanyName       = 'Unknown'
 
@@ -152,10 +152,10 @@
 		"Invoke-EncodeFiles",
 		"Invoke-EncodeAllNewScripts",
 		"Import-DataFiles",
-		"Update-VersionNumber",
-		"Invoke-SplitDataFile",
 		"Invoke-AutoUpdateProgress",
+		"Invoke-SplitDataFile",
 		"Split-DataFile",
+		"Update-VersionNumber",
 		"Get-ScriptEncodeAppCredentials",
 
 		# --- Exported Functions from Exception.ps1 ---
@@ -215,16 +215,17 @@
 		"ConvertTo-CTime",
 		"ConvertTo-UnixTime",
 		"ConvertFrom-Ctime",
-		"Get-DateForFileName",
-		"Get-DateString",
 		"Get-UnixTime",
+		"Get-DateString",
+		"Get-DateForFileName",
 		"Write-ClientToolsHost",
-		"Get-SchedTasks",
+		"Clear-SchedTasks",
 		"Show-ModuleInstallPaths",
 		"Wait-ClientToolsModuleUpdate",
+		"Invoke-EnsureSharedScriptFolder",
 		"Show-SchedTasksDebugInfo",
 		"Remove-SchedTasks",
-		"Clear-SchedTasks",
+		"Get-SchedTasks",
 		"Add-SchedTasks",
 		"Write-ProgressHelper",
 
@@ -251,7 +252,7 @@
 		"Get-TopMemoryUsers",
 
 		# --- Exported Functions from MessageBox.ps1 ---
-		"Show-MessageBoxInfo",
+		"Show-BeAdvisedSydney",
 		"Show-MessageBoxAsyncPing",
 		"Show-MessageBoxServices",
 		"Show-MessageBoxScriptError",
@@ -260,8 +261,9 @@
 		"Show-MessageBoxVideoUrl",
 		"Show-MessageBoxRestart",
 		"Show-MessageBoxStandby",
-		"Show-BeAdvisedSydney",
+		"Show-MessageBoxInfo",
 		"Show-MessageBoxError",
+		"Show-MessageBoxVoice",
 		"Show-MessageBoxException",
 		"Test-Popupcolors",
 		"Show-MessageBox",
@@ -272,41 +274,40 @@
 		"Get-MessageBoxResult",
 		"Show-UserInfo",
 		"Register-ScriptAssemblies",
-		"Show-MessageBoxVoice",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
-		"Push-ModDownloader",
-		"Push-ModProfileUtils",
 		"Push-ModReddit",
 		"Push-ModShellGPT",
 		"Push-ModShim",
-		"Push-ModWindowsHost",
-		"Push-ModTerminal",
-		"Push-ModTools",
-		"Push-ModTorrentsManager",
-		"Push-ModOpenAI",
 		"Push-ModTakeOwnership",
-		"Push-ModNtRights",
-		"Push-ModDocker",
+		"Push-ModTerminal",
+		"Push-Modter2K",
+		"Push-ModTorrentsManager",
+		"Push-ModWindowsHost",
+		"Push-ModWorkflowTools",
+		"Push-ModProfileUtils",
+		"Push-ModTools",
+		"Push-ModOpenAI",
+		"Push-ModExpressVPN",
+		"Push-ModMiniPc",
 		"Push-ModManageMini",
 		"Push-ModGithub",
-		"Push-ModExpressVPN",
-		"Push-ModWorkflowTools",
+		"Push-ModDownloader",
+		"Push-ModDocker",
 		"Push-ModCryptography",
 		"Push-ModCore",
 		"Push-ModCompiler",
 		"Push-ModAssert",
 		"Push-Mod1190",
 		"Push-Mod1138",
-		"Push-ModMiniPc",
-		"Push-Modter2K",
+		"Push-ModNtRights",
 
 		# --- Exported Functions from ModuleUpdater.ps1 ---
-		"Invoke-ClientToolsAutoUpdate",
 		"Get-ClientToolsAutoUpdateOverride",
 		"Set-ClientToolsAutoUpdateOverride",
-		"New-ClientToolsModuleVersionFile",
+		"Invoke-ClientToolsAutoUpdate",
 		"Get-ClientToolsModuleVersionPath",
+		"New-ClientToolsModuleVersionFile",
 
 		# --- Exported Functions from ModuleVersion.ps1 ---
 		"Get-ClientToolsModuleVersion",
@@ -319,52 +320,52 @@
 		"Send-NamedPipeData",
 
 		# --- Exported Functions from NetDelayedTask.ps1 ---
-		"New-DelayedScheduledTask",
-		"New-EncodedScheduledTask",
-		"Read-QueuedCommandLogs",
-		"Open-QueuedCommandLogs",
-		"Stop-QueuedCommandProcessor",
-		"Start-QueuedCommandProcessor",
 		"Invoke-ProcessQueuedCommands",
+		"Start-QueuedCommandProcessor",
+		"Stop-QueuedCommandProcessor",
+		"Open-QueuedCommandLogs",
+		"Read-QueuedCommandLogs",
+		"New-EncodedScheduledTask",
+		"New-DelayedScheduledTask",
 
 		# --- Exported Functions from NetworkCacheReset.ps1 ---
-		"Reset-Netstack",
-		"Invoke-NetworkCacheReset",
 		"Clear-ChromeCache",
 		"Invoke-FlushDNS",
+		"Reset-Netstack",
+		"Invoke-NetworkCacheReset",
 
 		# --- Exported Functions from OpenPage.ps1 ---
 		"Stop-OpenPageTask",
+		"Stop-PowerShellProcesses",
 		"Invoke-OpenPageDesjardins",
 		"Invoke-OpenPageSecurityAdvisory",
-		"Open-CustomPage",
-		"Stop-PowerShellProcesses",
-		"Stop-PidFromTempFile",
 		"Read-OpenCustomPageLogFile",
-		"Save-CurrentPidToTempFile",
 		"New-OpenPageTask",
+		"Stop-PidFromTempFile",
+		"Save-CurrentPidToTempFile",
+		"Open-CustomPage",
 
 		# --- Exported Functions from PowerTools.ps1 ---
-		"Get-PowerCfgLanguage",
-		"Get-PowerTimeouts",
-		"Set-PowerTimeouts",
-		"Disable-SleepAndDisplayOff",
-		"Disable-Hibernate",
-		"Disable-LockScreenTimeout",
-		"Disable-InactivityLock",
 		"Disable-AllPowerValues",
+		"Disable-InactivityLock",
+		"Disable-LockScreenTimeout",
+		"Disable-Hibernate",
+		"Set-PowerTimeouts",
+		"Get-PowerTimeouts",
+		"Get-PowerCfgLanguage",
+		"Disable-SleepAndDisplayOff",
 
 		# --- Exported Functions from ProcessData.ps1 ---
-		"Start-EncodeFiles",
-		"Start-DecodeFiles",
-		"Merge-DataFile",
-		"Invoke-EncodeAllNewScripts",
 		"Invoke-EncodeFiles",
+		"Invoke-EncodeAllNewScripts",
 		"Update-VersionNumber",
+		"Start-DecodeFiles",
+		"Start-EncodeFiles",
 		"Invoke-DecodeFiles",
-		"Invoke-CombineSplitFiles",
 		"Import-DataFiles",
 		"Export-DataFiles",
+		"Merge-DataFile",
+		"Invoke-CombineSplitFiles",
 		"Split-DataFile",
 		"Invoke-SplitDataFile",
 		"Invoke-AutoUpdateProgress",
@@ -373,19 +374,19 @@
 		"Get-ProcessList",
 
 		# --- Exported Functions from Prompt.ps1 ---
-		"Show-PromptNoPath",
+		"Reset-Prompt",
+		"Set-SmallPrompt",
+		"Show-Prompt",
+		"Show-Header",
 		"Invoke-IsAdministrator",
 		"Show-SystemInfo",
-		"Invoke-IsAdministrator",
-		"Show-Header",
-		"Show-Prompt",
-		"Set-SmallPrompt",
-		"Reset-Prompt",
 		"Start-Explorer",
+		"Show-PromptNoPath",
+		"Invoke-IsAdministrator",
 
 		# --- Exported Functions from QueuedCommands.ps1 ---
-		"Test-ProcessQueuedCommands",
 		"Clear-QueuedCommands",
+		"Test-ProcessQueuedCommands",
 		"New-QueuedCommand",
 		"Read-QueuedCommandsLogFile",
 
@@ -399,6 +400,7 @@
 		"Invoke-StopRecord",
 
 		# --- Exported Functions from Registry.ps1 ---
+		"Set-RegistryValue2",
 		"Get-UserConfirmationRegDel",
 		"Delete-RegistryKeyTree",
 		"New-RegistryValue",
@@ -407,7 +409,6 @@
 		"Get-RegistryValue",
 		"Get-RegistryValue",
 		"Test-RegistryValue",
-		"Set-RegistryValue2",
 		"Remove-RegistryValue",
 		"Set-RegistryValue",
 
