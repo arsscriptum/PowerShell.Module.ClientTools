@@ -1,13 +1,84 @@
-﻿
+﻿#╔════════════════════════════════════════════════════════════════════════════════╗
+#║                                                                                ║
+#║   initialize.ps1                                                               ║
+#║                                                                                ║
+#╟────────────────────────────────────────────────────────────────────────────────╢
+#║   Guillaume Plante <codegp@icloud.com>                                         ║
+#║   Code licensed under the GNU GPL v3.0. See the LICENSE file for details.      ║
+#╚════════════════════════════════════════════════════════════════════════════════╝
 
-param(
-    [switch]$TestMode
-)
 
-Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
+function Get-XamlUiContent {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
 
 
-$Script = @"
+    [xml]$xaml_v1 = @"
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        Title="Critical Update" WindowStyle="None" ResizeMode="NoResize"
+        WindowState="Maximized" Background="White" Topmost="True"
+        ShowInTaskbar="False">
+    <Grid>
+        <Border Background="#f0f0f0" BorderBrush="#0078D7" BorderThickness="10" CornerRadius="0">
+            <Grid>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Windows Update" FontSize="48" FontWeight="Bold"
+                               Foreground="#0078D7" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <TextBlock Text="A critical security update is in progress." FontSize="26"
+                               HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="⚠️ DO NOT RESTART YOUR COMPUTER ⚠️" FontSize="32" FontWeight="Bold"
+                               Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                    <TextBlock Text="Restarting may result in system instability or data loss."
+                               FontSize="20" HorizontalAlignment="Center" TextAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
+"@
+
+    [xml]$xaml_v2 = @"
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Critical Update" WindowStyle="None" ResizeMode="NoResize"
+        WindowState="Maximized" Background="White" Topmost="True"
+        ShowInTaskbar="False">
+    <Grid>
+        <Border Background="#f0f0f0" BorderBrush="#0078D7" BorderThickness="10" CornerRadius="0">
+            <Grid>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock x:Name="TitleText" Text="Windows Update" FontSize="48" FontWeight="Bold"
+                               Foreground="#0078D7" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <TextBlock Text="A critical security update is in progress." FontSize="26"
+                               HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,10"/>
+                    <TextBlock Text="⚠️ DO NOT RESTART YOUR COMPUTER ⚠️" FontSize="32" FontWeight="Bold"
+                               Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                    <TextBlock Text="Restarting may result in system instability or data loss."
+                               FontSize="20" HorizontalAlignment="Center" TextAlignment="Center"/>
+                    <TextBlock x:Name="CountdownText" Text="Estimated completion in 05:00"
+                               FontSize="22" FontWeight="Normal" Foreground="Black"
+                               HorizontalAlignment="Center" Margin="0,40,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
+"@
+
+
+    return $xaml_v2
+}
+
+function Invoke-WinUpdateTask {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory = $false)]
+        [Alias('v')]
+        [switch]$UseVbs
+    )
+    try {
+
+        $Script = @"
 
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
 [xml]`$xaml = @`"
@@ -22,7 +93,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
                 <StackPanel VerticalAlignment=`"Center`" HorizontalAlignment=`"Center`">
                     <TextBlock x:Name=`"TitleText`" Text=`"Windows Update`" FontSize=`"48`" FontWeight=`"Bold`"
                                Foreground=`"#0078D7`" HorizontalAlignment=`"Center`" Margin=`"0,0,0,20`"/>
-                    <TextBlock Text=`"A critical security update is in progress.`" FontSize=`"26`"
+                    <TextBlock Text=`"{0}`" FontSize=`"26`"
                                HorizontalAlignment=`"Center`" TextAlignment=`"Center`" Margin=`"0,0,0,10`"/>
                     <TextBlock Text=`"⚠️ DO NOT RESTART YOUR COMPUTER ⚠️`" FontSize=`"32`" FontWeight=`"Bold`"
                                Foreground=`"Red`" HorizontalAlignment=`"Center`" Margin=`"0,0,0,30`"/>
@@ -100,78 +171,8 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
 
 
 
-function Get-XamlUiContent {
-    [CmdletBinding(SupportsShouldProcess)]
-    param()
 
-
-    [xml]$xaml_v1 = @"
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        Title="Critical Update" WindowStyle="None" ResizeMode="NoResize"
-        WindowState="Maximized" Background="White" Topmost="True"
-        ShowInTaskbar="False">
-    <Grid>
-        <Border Background="#f0f0f0" BorderBrush="#0078D7" BorderThickness="10" CornerRadius="0">
-            <Grid>
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="Windows Update" FontSize="48" FontWeight="Bold"
-                               Foreground="#0078D7" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-                    <TextBlock Text="A critical security update is in progress." FontSize="26"
-                               HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,10"/>
-                    <TextBlock Text="⚠️ DO NOT RESTART YOUR COMPUTER ⚠️" FontSize="32" FontWeight="Bold"
-                               Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,30"/>
-                    <TextBlock Text="Restarting may result in system instability or data loss."
-                               FontSize="20" HorizontalAlignment="Center" TextAlignment="Center"/>
-                </StackPanel>
-            </Grid>
-        </Border>
-    </Grid>
-</Window>
-"@
-
-    [xml]$xaml_v2 = @"
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Critical Update" WindowStyle="None" ResizeMode="NoResize"
-        WindowState="Maximized" Background="White" Topmost="True"
-        ShowInTaskbar="False">
-    <Grid>
-        <Border Background="#f0f0f0" BorderBrush="#0078D7" BorderThickness="10" CornerRadius="0">
-            <Grid>
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock x:Name="TitleText" Text="Windows Update" FontSize="48" FontWeight="Bold"
-                               Foreground="#0078D7" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-                    <TextBlock Text="A critical security update is in progress." FontSize="26"
-                               HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,10"/>
-                    <TextBlock Text="⚠️ DO NOT RESTART YOUR COMPUTER ⚠️" FontSize="32" FontWeight="Bold"
-                               Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,30"/>
-                    <TextBlock Text="Restarting may result in system instability or data loss."
-                               FontSize="20" HorizontalAlignment="Center" TextAlignment="Center"/>
-                    <TextBlock x:Name="CountdownText" Text="Estimated completion in 05:00"
-                               FontSize="22" FontWeight="Normal" Foreground="Black"
-                               HorizontalAlignment="Center" Margin="0,40,0,0"/>
-                </StackPanel>
-            </Grid>
-        </Border>
-    </Grid>
-</Window>
-"@
-
-
-    return $xaml_v2
-}
-
-function Invoke-WinUpdateTask {
-    [CmdletBinding(SupportsShouldProcess)]
-    param(
-        [Parameter(Mandatory = $false)]
-        [Alias('v')]
-        [switch]$UseVbs
-    )
-    try {
-
-
-        [string]$ScriptString = $Script
+        [string]$ScriptString = $Script -f "A critical security update is in progress."
 
         [string]$ScriptBase64 = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($ScriptString))
         [bool]$DryRun = $False
@@ -319,11 +320,11 @@ function Show-WinUpdateNotification {
                 })
             $autoCloseTimer.Start()
         }
-if ($HideTimer) {
-    $CountdownText.Dispatcher.Invoke([action]{
-        $CountdownText.Visibility = [System.Windows.Visibility]::Collapsed
-    })
-}
+        if ($HideTimer) {
+            $CountdownText.Dispatcher.Invoke([action]{
+                    $CountdownText.Visibility = [System.Windows.Visibility]::Collapsed
+                })
+        }
 
         # Show UI
         $null = $window.ShowDialog()
@@ -334,7 +335,7 @@ if ($HideTimer) {
 }
 
 
-function Invoke-WinUpdateTask{
+function Invoke-WinUpdateTask {
 
     [CmdletBinding(SupportsShouldProcess)]
     param(

@@ -13,18 +13,18 @@ function New-QueuedCommand {
     param(
         [Parameter(Mandatory = $true, Position = 0)]
         [string]$ExeName,
-        [Parameter(Mandatory = $true, Position = 1)]
+        [Parameter(Mandatory = $false, Position = 1)]
         [string[]]$ArgumentList,
         [Parameter(Mandatory = $false)]
-        [uint32]$Delay = 30
+        [uint32]$Delay = 30,
+        [Parameter(Mandatory = $false)]
+        [switch]$Wait
     )
-    $Now = Get-Date
-    $epoch = [datetime]::SpecifyKind('1970-01-01', 'Utc')
-    $epoch = [int64]($Now.ToUniversalTime() - $epoch).TotalSeconds
-    $WhenTime = $epoch + $Delay
+    [decimal]$Now = (get-date -UFormat "%s") -as [decimal]
+    [decimal]$WhenTime = $Now + $Delay
 
     $RegKeyRoot = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\QueuedCommands"
-    $registryPath = "$RegKeyRoot\$epoch"
+    $registryPath = "$RegKeyRoot\$Now"
 
     # Ensure the registry path exists
     if (-not (Test-Path $registryPath)) {
@@ -34,19 +34,23 @@ function New-QueuedCommand {
     # Get all script files (*.ps1) in the specified folder
     $scriptFiles = Get-ChildItem -Path $scriptFolder -Filter "*.ps1" | ForEach-Object { $_.FullName }
 
+
+    $WaitForExit = 0
+    if($Wait){
+        $WaitForExit = 1
+    }
     # Set the registry key as REG_MULTI_SZ (array of strings)
+    Set-ItemProperty -Path $registryPath -Name "wait" -Value $WaitForExit -Type DWORD
     Set-ItemProperty -Path $registryPath -Name "when" -Value $WhenTime -Type DWORD
     Set-ItemProperty -Path $registryPath -Name "exename" -Value $ExeName -Type String
     Set-ItemProperty -Path $registryPath -Name "argumentlist" -Value $ArgumentList -Type MultiString
 }
 
-
-
 function Process-QueuedCommands {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false)]
-        [string]$DryRun
+        [switch]$DryRun
     )
     $ExecuteCommand = $True
     if ($DryRun) {
@@ -63,9 +67,11 @@ function Process-QueuedCommands {
     }
 
     function Write-Log {
+        [CmdletBinding(SupportsShouldProcess)]
         param([string]$Message)
         $ts = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
         "$ts - $Message" | Out-File -FilePath $LogFile -Append -Encoding UTF8
+        Write-Verbose "$ts - $Message"
     }
 
     $RegKeyRoot = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\QueuedCommands"
@@ -74,21 +80,20 @@ function Process-QueuedCommands {
         return
     }
 
-    $Now = Get-Date
-    $EpochBase = [datetime]::SpecifyKind('1970-01-01', 'Utc')
+    [decimal]$Now = (get-date -UFormat "%s") -as [decimal]
 
     $QueuedCmds = Get-ChildItem -Path $RegKeyRoot
     foreach ($command in $QueuedCmds) {
         try {
+            $shouldwait = $command.GetValue('wait')
             $whenval = $command.GetValue('when')
             $exeName = $command.GetValue('exename')
             $argList = $command.GetValue('argumentlist')
-            [datetime]$whenDate = $EpochBase.AddSeconds($whenval)
-
-            if ($Now -ge $whenDate) {
-                
+            $Diff = $Now - $whenval
+            Write-Verbose "Now $Now whenval $whenval. Diff $Diff"
+            if ($Diff -gt 0) {
                 if ($ExecuteCommand) {
-                    Write-Log "Executing queued command '$exeName $argList' scheduled for $whenDate"
+                    Write-Log "Executing queued command '$exeName $argList' scheduled for $Diff seconds ago"
                     $psi = New-Object System.Diagnostics.ProcessStartInfo
                     $psi.FileName = $exeName
                     $psi.Arguments = $argList -join ' '
@@ -99,20 +104,22 @@ function Process-QueuedCommands {
                     $proc = [System.Diagnostics.Process]::Start($psi)
                     $stdout = $proc.StandardOutput.ReadToEnd()
                     $stderr = $proc.StandardError.ReadToEnd()
-                    $proc.WaitForExit()
-
-                    Write-Log "Command exit code: $($proc.ExitCode)"
-                    if ($stdout) { Write-Log "STDOUT:`n$stdout" }
-                    if ($stderr) { Write-Log "STDERR:`n$stderr" }
-
+                    if($shouldwait){
+                        $proc.WaitForExit()
+                        Write-Log "Command exit code: $($proc.ExitCode)"
+                        if ($stdout) { Write-Log "STDOUT:`n$stdout" }
+                        if ($stderr) { Write-Log "STDERR:`n$stderr" }
+                    }
+                    
                     # Remove registry key after execution
                     Remove-Item -Path $command.PSPath -Force -Recurse
                     Write-Log "Deleted registry key: $($command.PSChildName)"
                 }else{
-                    Write-Log "Would be executing queued command '$exeName $argList' scheduled for $whenDate"
+                    Write-Log "Would be executing queued command '$exeName $argList' scheduled for $Diff seconds ago"
                 }
             } else {
-                Write-Log "Command '$exeName $argList' is scheduled for $whenDate - not time yet."
+                $DiffAbs = [math]::Abs($Diff)
+                Write-Log "Command '$exeName $argList' is scheduled to run in $DiffAbs seconds - not time yet."
             }
         } catch {
             Write-Log "ERROR processing command $($command.PSChildName): $_"
