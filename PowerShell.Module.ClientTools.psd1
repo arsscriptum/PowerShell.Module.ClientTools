@@ -1,8 +1,8 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 07:05:02 GMT
-#̷\  Current Git Revision 9afc7a80bd43200193aed89aa5cae6c698151501
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 07:47:58 GMT
+#̷\  Current Git Revision 809322eeeb0bed519161b4700bada70536cdf6f1
 #̷\  ===================================================================
 
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.62
+    ModuleVersion     = '1.7.63
 '
 
-    GUID              = '1fc154b3-ab1e-4690-a232-eaa4083f1f01'
+    GUID              = '1af6fe61-1789-41e5-ad57-1a8448b63a76'
 
     CompanyName       = 'Unknown'
 
@@ -75,111 +75,111 @@
 		"Test-ClientToolsModuleConfig",
 		"Get-ClientToolsServer",
 		"Get-ClientToolsDefaultUsername",
-		"Get-ClientToolsDevAccountOverride",
+		"Set-ClientToolsDefaultUsername",
 		"Get-ClientToolsModuleUserAgent",
 		"Set-ClientToolsDevAccountOverride",
+		"Get-ClientToolsDevAccountOverride",
 		"Get-ClientToolsAppCredentialID",
 		"Get-ClientToolsUserCredentialID",
-		"Set-ClientToolsDefaultUsername",
 
 		# --- Exported Functions from ConfigureWellKnownPaths.ps1 ---
 		"Update-WellKnownPaths",
-		"Set-EnvironmentVariable",
-		"Publish-RegistryChanges",
-		"Publish-SettingsUpdated",
-		"Update-ModulesShortcuts",
-		"Get-DocumentsPath",
 		"Get-CustomPathValues",
+		"Get-DocumentsPath",
+		"Update-ModulesShortcuts",
+		"Publish-SettingsUpdated",
+		"Publish-RegistryChanges",
+		"Set-EnvironmentVariable",
 
 		# --- Exported Functions from ConfigureWindowsTerminal.ps1 ---
-		"Edit-TerminalConfig",
-		"Save-TerminalConfig",
 		"Get-WindowsTerminalConfigPath",
 		"Get-WindowsTerminalProfilePath",
+		"Edit-TerminalConfig",
+		"Save-TerminalConfig",
 
 		# --- Exported Functions from ControlMouse.ps1 ---
-		"Get-RegistryInstanceId",
-		"Set-RegistryInstanceId",
-		"Get-PSControlsRegistryRoot",
-		"Disable-LocalMouse",
-		"Get-LocalMouseStatus",
 		"Enable-LocalMouse",
+		"Get-LocalMouseStatus",
+		"Disable-LocalMouse",
+		"Get-PSControlsRegistryRoot",
+		"Set-RegistryInstanceId",
+		"Get-RegistryInstanceId",
 
 		# --- Exported Functions from ConvertScriptVar.ps1 ---
 		"ConvertTo-ScriptVariable",
 
 		# --- Exported Functions from Credential.ps1 ---
-		"Get-ElevatedCredential",
 		"Get-AppCredentials",
 		"Register-AppCredentials",
 		"Remove-AppCredentials",
-		"Show-RegisteredCredentials",
+		"Get-ElevatedCredential",
 		"Get-CredentialsRegistryPath",
 		"Get-CoreModuleRegistryPath",
+		"Show-RegisteredCredentials",
 
 		# --- Exported Functions from CustomPathFunctions.ps1 ---
+		"Push-MyCode",
+		"Push-Templates",
 		"Push-CodeTemplates",
 		"Push-WinSandbox",
-		"Push-Templates",
 		"Push-CodeSandbox",
 		"Push-ScriptsSandbox",
 		"Push-PowerShellSandbox",
 		"Push-Sandbox",
 		"Push-ProfilePath",
-		"Push-MyCode",
-		"Push-DevelopmentRoot",
-		"Push-RedditSupport",
+		"Push-moddev",
 		"Push-siteroot",
 		"Push-wwwroot2",
 		"Push-wwwroot",
 		"Push-ToolsRoot",
 		"Push-ScriptsRoot",
+		"Push-DevelopmentRoot",
 		"Push-DejaToolsRootDirectory",
 		"Push-MyDocuments",
-		"Push-moddev",
+		"Push-RedditSupport",
 
 		# --- Exported Functions from Decode.ps1 ---
-		"Export-DataFiles",
-		"Invoke-DecodeFiles",
-		"Merge-DataFile",
 		"Start-DecodeFiles",
+		"Invoke-AutoUpdateProgress",
 		"Get-ScriptEncodeAppCredentials",
 		"Invoke-CombineSplitFiles",
-		"Invoke-AutoUpdateProgress",
+		"Merge-DataFile",
+		"Export-DataFiles",
+		"Invoke-DecodeFiles",
 
 		# --- Exported Functions from Encode.ps1 ---
-		"Invoke-EncodeAllNewScripts",
-		"Invoke-EncodeFiles",
-		"Import-DataFiles",
-		"Split-DataFile",
 		"Start-EncodeFiles",
-		"Invoke-AutoUpdateProgress",
+		"Invoke-EncodeFiles",
+		"Invoke-EncodeAllNewScripts",
+		"Import-DataFiles",
 		"Update-VersionNumber",
-		"Get-ScriptEncodeAppCredentials",
 		"Invoke-SplitDataFile",
+		"Invoke-AutoUpdateProgress",
+		"Split-DataFile",
+		"Get-ScriptEncodeAppCredentials",
 
 		# --- Exported Functions from Exception.ps1 ---
-		"Show-ExceptionDetails",
-		"New-ErrorRecord",
-		"Enable-ExceptionDetailsTextBox",
-		"Disable-ExceptionDetailsTextBox",
-		"Get-ExceptionDetailsTextBox",
 		"Test-ExceptionDetailsTextBox",
+		"Get-ExceptionDetailsTextBox",
+		"Show-ExceptionDetails",
+		"Enable-ExceptionDetailsTextBox",
+		"New-ErrorRecord",
+		"Disable-ExceptionDetailsTextBox",
 
 		# --- Exported Functions from ExportConnectionsData.ps1 ---
-		"Export-NetConnections",
-		"Get-LogsPath",
 		"Get-HomePath",
+		"Get-LogsPath",
+		"Export-NetConnections",
 
 		# --- Exported Functions from ExportSystemInfo.ps1 ---
 		"Export-SystemInfo",
 
 		# --- Exported Functions from GetConns.ps1 ---
+		"Get-V6ConnectionsOnly",
 		"Get-ConnectionDoc",
 		"Get-ActiveConnectionsEstablished",
 		"Get-ActiveConnectionsListening",
 		"Get-ActiveConnectionsOnly",
-		"Get-V6ConnectionsOnly",
 		"Get-ActiveConnectionsWithLocalPort",
 		"Get-ActiveConnectionsNetstat",
 		"Test-ExternalPort",
@@ -201,8 +201,8 @@
 
 		# --- Exported Functions from GetHistory.ps1 ---
 		"Show-PsHistory",
-		"Get-HomePath",
 		"Clear-PsHistory",
+		"Get-HomePath",
 
 		# --- Exported Functions from GetLoggedInUsers.ps1 ---
 		"Get-LoggedInUsers",
@@ -211,172 +211,177 @@
 		"Get-TerminalStartingDirectory",
 
 		# --- Exported Functions from Helpers.ps1 ---
+		"ConvertFrom-UnixTime",
+		"ConvertTo-CTime",
+		"ConvertTo-UnixTime",
+		"ConvertFrom-Ctime",
 		"Get-DateForFileName",
 		"Get-DateString",
 		"Get-UnixTime",
-		"ConvertTo-UnixTime",
-		"ConvertTo-CTime",
-		"ConvertFrom-UnixTime",
 		"Write-ClientToolsHost",
-		"Write-ProgressHelper",
+		"Get-SchedTasks",
 		"Show-ModuleInstallPaths",
 		"Wait-ClientToolsModuleUpdate",
-		"ConvertFrom-Ctime",
+		"Show-SchedTasksDebugInfo",
+		"Remove-SchedTasks",
+		"Clear-SchedTasks",
+		"Add-SchedTasks",
+		"Write-ProgressHelper",
 
 		# --- Exported Functions from History.ps1 ---
 		"Search-PsHistory",
-		"Out-SplitMatchLine",
 		"Get-FileInfoWithTimeSpan",
 		"Search-StringInFile",
+		"Out-SplitMatchLine",
 
 		# --- Exported Functions from Initialize.ps1 ---
-		"AutoInitialize-ClientToolsModule",
 		"Uninitialize-ClientToolsModule",
 		"Initialize-ClientToolsModule",
+		"AutoInitialize-ClientToolsModule",
 
 		# --- Exported Functions from ManageScreenshots.ps1 ---
 		"Invoke-ManageScreenshotArchive",
 
 		# --- Exported Functions from Memory.ps1 ---
+		"Get-ProcessCmdLine",
+		"Get-ProcessCmdLineById",
+		"Get-ProcessMemoryUsageDetails",
 		"Get-ProcessMemoryUsage",
 		"Get-MemoryUsageForAllProcesses",
 		"Get-TopMemoryUsers",
-		"Get-ProcessMemoryUsageDetails",
-		"Get-ProcessCmdLineById",
-		"Get-ProcessCmdLine",
 
 		# --- Exported Functions from MessageBox.ps1 ---
-		"Show-MessageBoxVideoUrl",
 		"Show-MessageBoxInfo",
-		"Show-MessageBoxRestart",
-		"Show-MessageBoxVideoSydney",
-		"Show-BeAdvisedSydney",
-		"Show-MessageBoxScriptError",
-		"Show-MessageBoxServices",
 		"Show-MessageBoxAsyncPing",
+		"Show-MessageBoxServices",
+		"Show-MessageBoxScriptError",
 		"Show-MessageBoxVideoUrlExtended",
-		"Show-MessageBoxError",
+		"Show-MessageBoxVideoSydney",
+		"Show-MessageBoxVideoUrl",
+		"Show-MessageBoxRestart",
 		"Show-MessageBoxStandby",
+		"Show-BeAdvisedSydney",
+		"Show-MessageBoxError",
 		"Show-MessageBoxException",
-		"Register-ScriptAssemblies",
-		"Show-UserInfo",
-		"Get-MessageBoxResult",
-		"Show-Popup",
-		"Show-SimpleMessageBox",
-		"Show-MessageBoxVoice",
+		"Test-Popupcolors",
+		"Show-MessageBox",
 		"Test-SimpleMsgBox2",
 		"Test-SimpleMsgBox",
-		"Show-MessageBox",
-		"Test-Popupcolors",
+		"Show-SimpleMessageBox",
+		"Show-Popup",
+		"Get-MessageBoxResult",
+		"Show-UserInfo",
+		"Register-ScriptAssemblies",
+		"Show-MessageBoxVoice",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
-		"Push-Modter2K",
-		"Push-ModWorkflowTools",
-		"Push-ModWindowsHost",
-		"Push-ModTorrentsManager",
-		"Push-ModTools",
-		"Push-ModTerminal",
-		"Push-ModTakeOwnership",
-		"Push-ModShim",
-		"Push-ModShellGPT",
-		"Push-ModReddit",
+		"Push-ModDownloader",
 		"Push-ModProfileUtils",
+		"Push-ModReddit",
+		"Push-ModShellGPT",
+		"Push-ModShim",
+		"Push-ModWindowsHost",
+		"Push-ModTerminal",
+		"Push-ModTools",
+		"Push-ModTorrentsManager",
 		"Push-ModOpenAI",
-		"Push-ModMiniPc",
+		"Push-ModTakeOwnership",
+		"Push-ModNtRights",
+		"Push-ModDocker",
 		"Push-ModManageMini",
 		"Push-ModGithub",
 		"Push-ModExpressVPN",
-		"Push-ModDownloader",
-		"Push-ModDocker",
+		"Push-ModWorkflowTools",
 		"Push-ModCryptography",
 		"Push-ModCore",
 		"Push-ModCompiler",
 		"Push-ModAssert",
 		"Push-Mod1190",
 		"Push-Mod1138",
-		"Push-ModNtRights",
+		"Push-ModMiniPc",
+		"Push-Modter2K",
 
 		# --- Exported Functions from ModuleUpdater.ps1 ---
+		"Invoke-ClientToolsAutoUpdate",
 		"Get-ClientToolsAutoUpdateOverride",
 		"Set-ClientToolsAutoUpdateOverride",
-		"Invoke-ClientToolsAutoUpdate",
-		"Get-ClientToolsModuleVersionPath",
 		"New-ClientToolsModuleVersionFile",
+		"Get-ClientToolsModuleVersionPath",
 
 		# --- Exported Functions from ModuleVersion.ps1 ---
 		"Get-ClientToolsModuleVersion",
 
 		# --- Exported Functions from NamedPipe.ps1 ---
-		"Send-NamedPipeData",
-		"New-NamedPipeClient",
+		"New-NamedPipeServer",
 		"New-NamedPipeServerAsync",
 		"Start-NamedPipeServerJob",
-		"New-NamedPipeServer",
+		"New-NamedPipeClient",
+		"Send-NamedPipeData",
 
 		# --- Exported Functions from NetDelayedTask.ps1 ---
-		"Start-QueuedCommandProcessor",
-		"Stop-QueuedCommandProcessor",
-		"Open-QueuedCommandLogs",
-		"Invoke-ProcessQueuedCommands",
-		"New-EncodedScheduledTask",
 		"New-DelayedScheduledTask",
+		"New-EncodedScheduledTask",
 		"Read-QueuedCommandLogs",
+		"Open-QueuedCommandLogs",
+		"Stop-QueuedCommandProcessor",
+		"Start-QueuedCommandProcessor",
+		"Invoke-ProcessQueuedCommands",
 
 		# --- Exported Functions from NetworkCacheReset.ps1 ---
-		"Clear-ChromeCache",
-		"Invoke-FlushDNS",
 		"Reset-Netstack",
 		"Invoke-NetworkCacheReset",
+		"Clear-ChromeCache",
+		"Invoke-FlushDNS",
 
 		# --- Exported Functions from OpenPage.ps1 ---
-		"Invoke-OpenPageSecurityAdvisory",
-		"Stop-PowerShellProcesses",
 		"Stop-OpenPageTask",
 		"Invoke-OpenPageDesjardins",
+		"Invoke-OpenPageSecurityAdvisory",
 		"Open-CustomPage",
-		"Read-OpenCustomPageLogFile",
+		"Stop-PowerShellProcesses",
 		"Stop-PidFromTempFile",
+		"Read-OpenCustomPageLogFile",
 		"Save-CurrentPidToTempFile",
 		"New-OpenPageTask",
 
 		# --- Exported Functions from PowerTools.ps1 ---
-		"Disable-AllPowerValues",
-		"Disable-InactivityLock",
+		"Get-PowerCfgLanguage",
+		"Get-PowerTimeouts",
+		"Set-PowerTimeouts",
+		"Disable-SleepAndDisplayOff",
 		"Disable-Hibernate",
 		"Disable-LockScreenTimeout",
-		"Set-PowerTimeouts",
-		"Get-PowerTimeouts",
-		"Get-PowerCfgLanguage",
-		"Disable-SleepAndDisplayOff",
+		"Disable-InactivityLock",
+		"Disable-AllPowerValues",
 
 		# --- Exported Functions from ProcessData.ps1 ---
-		"Invoke-DecodeFiles",
-		"Update-VersionNumber",
-		"Start-DecodeFiles",
 		"Start-EncodeFiles",
-		"Invoke-EncodeFiles",
-		"Invoke-EncodeAllNewScripts",
-		"Import-DataFiles",
+		"Start-DecodeFiles",
 		"Merge-DataFile",
+		"Invoke-EncodeAllNewScripts",
+		"Invoke-EncodeFiles",
+		"Update-VersionNumber",
+		"Invoke-DecodeFiles",
 		"Invoke-CombineSplitFiles",
+		"Import-DataFiles",
+		"Export-DataFiles",
 		"Split-DataFile",
 		"Invoke-SplitDataFile",
 		"Invoke-AutoUpdateProgress",
-		"Export-DataFiles",
 
 		# --- Exported Functions from processlist.ps1 ---
 		"Get-ProcessList",
 
 		# --- Exported Functions from Prompt.ps1 ---
-		"Reset-Prompt",
-		"Set-SmallPrompt",
-		"Show-Prompt",
-		"Show-Header",
-		"Invoke-IsAdministrator",
-		"Show-SystemInfo",
-		"Start-Explorer",
 		"Show-PromptNoPath",
 		"Invoke-IsAdministrator",
+		"Show-SystemInfo",
+		"Invoke-IsAdministrator",
+		"Show-Header",
+		"Show-Prompt",
+		"Set-SmallPrompt",
+		"Reset-Prompt",
+		"Start-Explorer",
 
 		# --- Exported Functions from QueuedCommands.ps1 ---
 		"Test-ProcessQueuedCommands",
@@ -386,12 +391,11 @@
 
 		# --- Exported Functions from Record.ps1 ---
 		"Invoke-MapRemoteDrive",
+		"Read-RecordLogFile",
 		"Invoke-StartRecord",
-		"Invoke-MapRemoteDrive",
 		"Add-TaskLog",
 		"Save-Screenshot",
 		"Start-SaveScreenshots",
-		"Read-RecordLogFile",
 		"Invoke-StopRecord",
 
 		# --- Exported Functions from Registry.ps1 ---
@@ -430,23 +434,23 @@
 		"Select-LoggedInUser",
 
 		# --- Exported Functions from SetFirewallConfig.ps1 ---
-		"isIE",
 		"Set-FirewallConfiguration",
 		"alertLoc",
+		"isIE",
 
 		# --- Exported Functions from SetMappedDrives.ps1 ---
-		"Invoke-RemapDrives",
-		"Test-AreNetworkDrivesMapped",
-		"Register-NetworkDrive",
-		"Unregister-NetworkDrive",
-		"Test-TemporaryDriveExist",
-		"Register-NetworkDrivesMapping",
 		"Unregister-NetworkDrivesMapping",
+		"Register-NetworkDrivesMapping",
+		"Test-TemporaryDriveExist",
+		"Invoke-RemapDrives",
+		"Register-NetworkDrive",
+		"Test-AreNetworkDrivesMapped",
+		"Unregister-NetworkDrive",
 
 		# --- Exported Functions from ShowSydneyMsgBox.ps1 ---
-		"Show-Sydney",
 		"ConvertFrom-Base64CompressedScriptBlock",
 		"Show-MessageBoxVideoSydney",
+		"Show-Sydney",
 
 		# --- Exported Functions from Subl.ps1 ---
 		"Invoke-SublimeText",
@@ -461,9 +465,9 @@
 		"Update-UnlockScripts",
 
 		# --- Exported Functions from UpdateLoginScripts.ps1 ---
+		"Clear-QueuedCommands",
 		"New-QueuedCommand",
 		"Process-QueuedCommands",
-		"Clear-QueuedCommands",
 
 		# --- Exported Functions from WgetDl.ps1 ---
 		"Invoke-WGetDownloadFile",
@@ -472,9 +476,9 @@
 		"Test-WGetDownloadFile",
 
 		# --- Exported Functions from WinUpdateNotify.ps1 ---
+		"Show-WinUpdateNotification",
 		"Get-XamlUiContent",
 		"Invoke-WinUpdateTask",
-		"Show-WinUpdateNotification",
 		"Invoke-WinUpdateTask",
 
 		# --- Exported Functions from WriteUtils.ps1 ---
