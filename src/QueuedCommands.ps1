@@ -46,6 +46,16 @@ function New-QueuedCommand {
     Set-ItemProperty -Path $registryPath -Name "argumentlist" -Value $ArgumentList -Type MultiString
 }
 
+function Read-QueuedCommandsLogFile {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+    
+    $LogFile = "$ENV:Temp\QueuedCommands.log"
+    get-content "$LogFile" | Select -Last 10
+
+}
+
 function Test-ProcessQueuedCommands {
     [CmdletBinding(SupportsShouldProcess)]
     param(
@@ -67,7 +77,7 @@ function Test-ProcessQueuedCommands {
         Write-Host "[Test-ProcessQueuedCommands] $ts - $Message"
     }
 
-    Write-Log "[Process-QueuedCommands] DryRun: Simulating Executing queued commands" -f DarkYellow
+    Write-Log "DryRun: Simulating Executing queued commands"
     $ExecuteCommand = $False
   
 
@@ -81,6 +91,8 @@ function Test-ProcessQueuedCommands {
     [decimal]$Now = (get-date -UFormat "%s") -as [decimal]
 
     $QueuedCmds = Get-ChildItem -Path $RegKeyRoot
+    $QueuedCmdsCount = $QueuedCmds.Count
+    Write-Log "Currently $QueuedCmdsCount Active Queued Commands"
     foreach ($command in $QueuedCmds) {
         try {
             $shouldwait = $command.GetValue('wait')

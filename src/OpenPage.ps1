@@ -73,7 +73,9 @@ function New-OpenPageTask {
         [string]$Url,
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]
-        [int]$Delay = 15
+        [int]$Delay = 15,
+        [Parameter(Mandatory = $false, HelpMessage = "Repeat interval in seconds.")]
+        [switch]$UseVbs
     )
     try {
 
@@ -92,7 +94,7 @@ function Open-CustomPage {{
     }}
 
     `$url = `"{0}`"
-    `$chromePath = `"`${{env:ProgramFiles}}\Google\Chrome\Application\`$browserName`"
+    `$chromePath = `"`$ENV:ProgramFiles\Google\Chrome\Application\chrome.exe`"
     if (Test-Path `$chromePath) {{
         Add-Content -Path `"`$LogFile`" -Value `"OPEN CUSTOM PAGE `$url using `$chromePath`"
         Start-Process -FilePath `$chromePath -ArgumentList `"--new-window`", `"`$url`"
@@ -132,19 +134,23 @@ Open-CustomPage
             Write-Host "Failed" -f DarkRed
         }
 
-        [string]$VBSFile = (Join-Path "$env:TEMP"  "$(((New-guid).guid).Substring(0,5))") + '.vbs'
-        [string]$VBSContent = @"
+        [string]$ar = "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand {0}" -f $ScriptBase64
+
+
+        if ($UseVbs) {
+            [string]$VBSFile = Join-Path "$env:TEMP" "OpenPageTask.vbs"
+            [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
-objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64", 0, False
+objShell.Run "pwsh.exe $ar", 0, False
 "@
-
-        [string]$ArgumentString = "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand {0}" -f $ScriptBase64
-        Write-host "Create Scheduled Task with Base64 Encoded Command"
-
-        $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
-        [int]$rc = 15
-        Write-Host "Create a Scheduled Task to Run the VBS Script"
-        $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+            Write-Host "Create a Scheduled Task to Run the VBS Script"
+            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+        }
+        else {
+            $Action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument $ar
+        }
+        
 
         $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -MultipleInstances IgnoreNew
         $Trigger = New-ScheduledTaskTrigger -At $now -Once:$false
@@ -168,11 +174,13 @@ function Invoke-OpenPageSecurityAdvisory {
     param(
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]
-        [int]$Delay = 15
+        [int]$Delay = 15,
+        [Parameter(Mandatory = $false, HelpMessage = "Repeat interval in seconds.")]
+        [switch]$UseVbs
     )
     try {
         $Url = "https://www.cyber.gc.ca/fr/alertes-avis/al25-009-vulnerabilite-touchant-microsoft-sharepoint-server-cve-2025-53770"
-        New-OpenPageTask -Url $Url -Delay $Delay
+        New-OpenPageTask -Url $Url -Delay $Delay -UseVbs:$UseVbs
     } catch {
         write-error "$_"
     }
@@ -184,11 +192,13 @@ function Invoke-OpenPageDesjardins {
     param(
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]
-        [int]$Delay = 15
+        [int]$Delay = 15,
+        [Parameter(Mandatory = $false, HelpMessage = "Repeat interval in seconds.")]
+        [switch]$UseVbs
     )
     try {
         $Url = "https://accesdc.mouv.desjardins.com/accueil"
-        New-OpenPageTask -Url $Url -Delay $Delay
+        New-OpenPageTask -Url $Url -Delay $Delay -UseVbs:$UseVbs
     } catch {
         write-error "$_"
     }

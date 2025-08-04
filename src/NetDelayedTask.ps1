@@ -24,6 +24,8 @@ function New-DelayedScheduledTask {
         [int]$Seconds = 20,
         [Parameter(Mandatory = $false, HelpMessage = "use profile or not.")]
         [switch]$UseProfile,
+        [Parameter(Mandatory = $false, HelpMessage = "Repeat interval in seconds.")]
+        [switch]$UseVbs,
         [Parameter(Mandatory = $false, HelpMessage = "Target user for the task.")]
         [ArgumentCompleter({
                 param($command, $parameter, $wordToComplete, $commandAst, $fakeBoundParams)
@@ -44,11 +46,15 @@ function New-DelayedScheduledTask {
         }
 
         if (-not $User) {
-            $User = Get-LoggedInUsers | Select-Object -First 1
+        $selectedUser = Select-LoggedInUser
+        Write-Host "You selected: $selectedUser"
             if (-not $User) {
                 throw "No logged-in users found and no user specified."
             }
+        }else{
+            $selectedUser = $User
         }
+
 
 
         $ScriptPathFull = (Resolve-Path -Path $ScriptPath).Path
@@ -59,10 +65,10 @@ function New-DelayedScheduledTask {
         } else {
             $ar = "-ExecutionPolicy Bypass -WindowStyle Hidden -NoProfile -File `"$ScriptPathFull`""
         }
-        $UseVbs = $True
+
 
         if ($UseVbs) {
-            [string]$VBSFile = (Join-Path "$env:TEMP" "$(((New-guid).guid).Substring(0,5))") + '.vbs'
+            [string]$VBSFile = Join-Path "$env:TEMP" "DelayedScheduledTask.vbs"
             [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
@@ -75,7 +81,7 @@ objShell.Run "pwsh.exe $ar", 0, False
             $Action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument $ar
         }
         $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddSeconds($Seconds)
-        $Principal = New-ScheduledTaskPrincipal -UserId "$env:USERNAME" -RunLevel Highest -LogonType Interactive
+        $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -RunLevel Highest -LogonType Interactive
 
         Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Principal $Principal -Force
 
@@ -103,6 +109,8 @@ function New-EncodedScheduledTask {
         [Parameter(Mandatory = $false, HelpMessage = "Repeat interval in seconds.")]
         [ValidateRange(0, 3600)]
         [int]$RepeatInterval = 0,
+        [Parameter(Mandatory = $false, HelpMessage = "Repeat interval in seconds.")]
+        [switch]$UseVbs,
         [Parameter(Mandatory = $false, HelpMessage = "use profile or not.")]
         [switch]$UseProfile,
         [Parameter(Mandatory = $false, HelpMessage = "Target user for the task.")]
@@ -124,12 +132,17 @@ function New-EncodedScheduledTask {
             Write-Verbose "Auto-generated task name: $TaskName"
         }
 
+
         if (-not $User) {
-            $User = Get-LoggedInUsers | Select-Object -First 1
+        $selectedUser = Select-LoggedInUser
+        Write-Host "You selected: $selectedUser"
             if (-not $User) {
                 throw "No logged-in users found and no user specified."
             }
+        }else{
+            $selectedUser = $User
         }
+
 
         Write-Host "Target user: $User" -ForegroundColor Cyan
 
@@ -141,10 +154,9 @@ function New-EncodedScheduledTask {
         } else {
             $ar = "-ExecutionPolicy Bypass -WindowStyle Hidden -NoProfile -EncodedCommand $EncodedCommand"
         }
-        $UseVbs = $True
 
         if ($UseVbs) {
-            [string]$VBSFile = (Join-Path "$env:TEMP" "$(((New-guid).guid).Substring(0,5))") + '.vbs'
+             [string]$VBSFile = Join-Path "$env:TEMP" "EncodedScheduledTask.vbs"
             [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
@@ -161,11 +173,11 @@ objShell.Run "pwsh.exe $ar", 0, False
             $Trigger.RepetitionInterval = New-TimeSpan -Seconds $RepeatInterval
             $Trigger.RepetitionDuration = [timespan]::FromDays(1)
         }
-        $Principal = New-ScheduledTaskPrincipal -UserId "$User" -RunLevel Highest -LogonType Interactive
+        $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -RunLevel Highest -LogonType Interactive
 
         Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Principal $Principal -Force
 
-        Write-Host "✅ Task '$TaskName' scheduled for user $User in $When seconds." -ForegroundColor Green
+        Write-Host "✅ Task '$TaskName' scheduled for user $selectedUser in $When seconds." -ForegroundColor Green
     }
     catch {
         Write-Error "❌ Error creating scheduled task: $_"
@@ -222,7 +234,10 @@ function Start-QueuedCommandProcessor {
         [int]$When = 20,
         [Parameter(Mandatory = $false, HelpMessage = "Repeat interval in seconds.")]
         [ValidateRange(60, 3600)]
-        [int]$RepeatInterval = 60
+        [int]$RepeatInterval = 60,
+        [Parameter(Mandatory = $false, HelpMessage = "Repeat interval in seconds.")]
+        [switch]$UseVbs
+
     )
 
 
@@ -334,7 +349,9 @@ Invoke-ProcessQueuedCommands
             throw "Repeat interval must be at least 60 seconds. Windows Task Scheduler does not support shorter intervals."
         }
 
-
+        # Example Usage
+        $selectedUser = Select-LoggedInUser
+        Write-Host "You selected: $selectedUser"
         Write-Host "Check for created processors..." -f DarkGray
         try {
             Stop-ScheduledTask -TaskName $TaskName -ErrorAction Stop
@@ -345,8 +362,7 @@ Invoke-ProcessQueuedCommands
             Write-Host "No Running Command Processor. OK!" -f DarkGray
         }
 
-        $User = Get-LoggedInUsers | Select-Object -First 1
-        Write-Host "Target user: $User" -ForegroundColor Cyan
+
 
         $Bytes = [System.Text.Encoding]::Unicode.GetBytes($ScriptContent)
         $EncodedCommand = [Convert]::ToBase64String($Bytes)
@@ -356,10 +372,10 @@ Invoke-ProcessQueuedCommands
             $ar = "-ExecutionPolicy Bypass -WindowStyle Hidden -NoProfile -EncodedCommand $EncodedCommand"
         }
 
-        $UseVbs = $True
+      
 
         if ($UseVbs) {
-            [string]$VBSFile = (Join-Path "$env:TEMP" "$(((New-guid).guid).Substring(0,5))") + '.vbs'
+            [string]$VBSFile = Join-Path "$env:TEMP" "QueuedCommandProcessor.vbs"
             [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
@@ -376,11 +392,11 @@ objShell.Run "pwsh.exe $ar", 0, False
         if ($RepeatInterval -gt 0) {
             $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddSeconds($When) -RepetitionDuration ([timespan]::FromDays(1)) -RepetitionInterval (New-TimeSpan -Seconds $RepeatInterval)
         }
-        $Principal = New-ScheduledTaskPrincipal -UserId "$User" -RunLevel Highest -LogonType Interactive
+        $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -RunLevel Highest -LogonType Interactive
 
         Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Principal $Principal -Force
 
-        Write-Host "✅ Task '$TaskName' scheduled for user $User in $When seconds." -ForegroundColor Green
+        Write-Host "✅ Task '$TaskName' scheduled for user $selectedUser in $When seconds." -ForegroundColor Green
     }
     catch {
         Write-Error "❌ Error creating scheduled task: $_"
