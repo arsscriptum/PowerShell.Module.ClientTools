@@ -172,6 +172,15 @@ objShell.Run "pwsh.exe $ar", 0, False
     }
 }
 
+
+function Read-QueuedCommandLogs {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+    $LogFile = "$ENV:Temp\QueuedCommands.log"
+    get-content "$LogFile" | Select -Last 10
+
+}
+
 function Open-QueuedCommandLogs {
     [CmdletBinding(SupportsShouldProcess)]
     param()
@@ -225,27 +234,39 @@ function Invoke-ProcessQueuedCommands {
         [Parameter(Mandatory = `$false)]
         [switch]`$DryRun
     )
-    `$ExecuteCommand = `$True
-    if (`$DryRun) {
-        Write-Host `"[Invoke-ProcessQueuedCommands] DryRun: Simulating Executing queued commands`" -f DarkYellow
-        `$ExecuteCommand = `$False
-    } else {
-        Write-Host `"[Invoke-ProcessQueuedCommands] Executing queued commands`" -f DarkRed
+
+    if(-not(`$ENV:ProcessQueuedCommandsStartedTime)){
+       `$ENV:ProcessQueuedCommandsStartedTime = (get-date -UFormat `"%s`") -as [decimal]
     }
+
+
+
 
     `$LogFile = `"`$ENV:Temp\QueuedCommands.log`"
     `$LogDate = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
     if (!(Test-Path `$LogFile)) {
         `"============ LOG STARTED on `$LogDate ============`" | Out-File -FilePath `$LogFile -Encoding UTF8
     }
+    
 
     function Write-Log {
         [CmdletBinding(SupportsShouldProcess)]
         param([string]`$Message)
+
+        [decimal]`$DeltaTime = ((get-date -UFormat `"%s`") -as [decimal]) -`$ENV:ProcessQueuedCommandsStartedTime
         `$ts = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
-        `"`$ts - `$Message`" | Out-File -FilePath `$LogFile -Append -Encoding UTF8
-        Write-Verbose `"`$ts - `$Message`"
+        `"[ProcessQueuedCommands] [`$DeltaTime] `$ts - `$Message`" | Out-File -FilePath `$LogFile -Append -Encoding UTF8
+        Write-Host `"[ProcessQueuedCommands] `$ts - `$Message`"
     }
+
+    `$ExecuteCommand = `$True
+    if (`$DryRun) {
+        Write-Log `"[Invoke-ProcessQueuedCommands] DryRun: Simulating Executing queued commands`" -f DarkYellow
+        `$ExecuteCommand = `$False
+    } else {
+        Write-Log `"[Invoke-ProcessQueuedCommands] Executing queued commands`" -f DarkRed
+    }
+
 
     `$RegKeyRoot = `"HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\QueuedCommands`"
     if (-not (Test-Path `$RegKeyRoot)) {
@@ -263,7 +284,7 @@ function Invoke-ProcessQueuedCommands {
             `$exeName = `$command.GetValue('exename')
             `$argList = `$command.GetValue('argumentlist')
             `$Diff = `$Now - `$whenval
-            Write-Verbose `"Now `$Now whenval `$whenval. Diff `$Diff`"
+            Write-Log `"Now `$Now whenval `$whenval. Diff `$Diff`"
             if (`$Diff -gt 0) {
                 if (`$ExecuteCommand) {
                     Write-Log `"Executing queued command '`$exeName `$argList' scheduled for `$Diff seconds ago`"

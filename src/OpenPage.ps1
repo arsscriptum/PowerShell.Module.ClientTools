@@ -24,6 +24,15 @@ function Save-CurrentPidToTempFile {
     }
 }
 
+function Read-OpenCustomPageLogFile {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+    
+    $LogFile = "$ENV:Temp\task_OpenCustomPage.log"
+    get-content "$LogFile" | Select -Last 10
+
+}
 
 function Stop-PidFromTempFile {
     [CmdletBinding(SupportsShouldProcess)]
@@ -73,7 +82,7 @@ function New-OpenPageTask {
 function Open-CustomPage {{
     [CmdletBinding(SupportsShouldProcess)]
     param()
-
+    `$LogFile = "`$ENV:Temp\task_OpenCustomPage.log"
     `$processIdFile = Join-Path -Path `$ENV:TEMP -ChildPath `"OpenPage.pid`"
     try {{
         `$PID | Out-File -FilePath `$processIdFile -Encoding ASCII -Force
@@ -85,10 +94,10 @@ function Open-CustomPage {{
     `$url = `"{0}`"
     `$chromePath = `"`${{env:ProgramFiles}}\Google\Chrome\Application\`$browserName`"
     if (Test-Path `$chromePath) {{
-        Add-Content -Path `"`$ENV:Temp\task_record.log`" -Value `"OPEN CUSTOM PAGE `$url using `$chromePath`"
+        Add-Content -Path `"`$LogFile`" -Value `"OPEN CUSTOM PAGE `$url using `$chromePath`"
         Start-Process -FilePath `$chromePath -ArgumentList `"--new-window`", `"`$url`"
     }} else {{
-        Add-Content -Path `"`$ENV:Temp\task_record.log`" -Value `"OPEN CUSTOM PAGE `$url using Start-Process`"
+        Add-Content -Path `"`$LogFile`" -Value `"OPEN CUSTOM PAGE `$url using Start-Process`"
         Start-Process `$url
     }}
 
@@ -99,7 +108,7 @@ Open-CustomPage
 "@
 
         $UseVbs = $True
-        $LogFile = "$ENV:Temp\task_record.log"
+        $LogFile = "$ENV:Temp\task_OpenCustomPage.log"
         $LogDate = (get-date).GetDateTimeFormats()[20] -as [string]
         if(!(Test-Path "$LogFile")){
             New-Item -Path "$LogFile" -Force -ItemType File -Value "============ LOG STARTED on $LogDate ============`n" | out-null
@@ -137,7 +146,7 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
         Write-Host "Create a Scheduled Task to Run the VBS Script"
         $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
 
-        $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -RestartCount $rc -RestartInterval $ts -MultipleInstances IgnoreNew
+        $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -MultipleInstances IgnoreNew
         $Trigger = New-ScheduledTaskTrigger -At $now -Once:$false
         $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -LogonType Interactive -RunLevel Highest
         $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings
@@ -146,7 +155,7 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
         Register-ScheduledTask -TaskName $TaskName -InputObject $Task | Out-Null
         Start-ScheduledTask -TaskName $TaskName
 
-        Write-Host "In $Delay seconds... $ENV:Temp\task_record.log"
+        Write-Host "In $Delay seconds... $LogFile"
 
     } catch {
         write-error "$_"
@@ -156,10 +165,14 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
 
 function Invoke-OpenPageSecurityAdvisory {
     [CmdletBinding(SupportsShouldProcess)]
-    param()
+    param(
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(5, 120)]
+        [int]$Delay = 15
+    )
     try {
         $Url = "https://www.cyber.gc.ca/fr/alertes-avis/al25-009-vulnerabilite-touchant-microsoft-sharepoint-server-cve-2025-53770"
-        New-OpenPageTask $Url
+        New-OpenPageTask -Url $Url -Delay $Delay
     } catch {
         write-error "$_"
     }
@@ -168,10 +181,14 @@ function Invoke-OpenPageSecurityAdvisory {
 
 function Invoke-OpenPageDesjardins {
     [CmdletBinding(SupportsShouldProcess)]
-    param()
+    param(
+        [Parameter(Mandatory = $false)]
+        [ValidateRange(5, 120)]
+        [int]$Delay = 15
+    )
     try {
         $Url = "https://accesdc.mouv.desjardins.com/accueil"
-        New-OpenPageTask $Url
+        New-OpenPageTask -Url $Url -Delay $Delay
     } catch {
         write-error "$_"
     }

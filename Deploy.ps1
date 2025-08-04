@@ -16,23 +16,48 @@ Write-Host "Current Path : $CurrentPath"
 Write-Host "Out Path     : $OutPath"
 Write-Host "Target Path  : $TargetPath"
 
-# Copy *.psd1 and *.psm1 from ./out to ../CTLive
-$moduleFiles = Get-ChildItem -Path $OutPath -Include *.psd1, *.psm1 -File
-foreach ($file in $moduleFiles) {
-    $dest = Join-Path $TargetPath $file.Name
-    Write-Host "Copying $($file.Name) to $TargetPath"
-    Copy-Item -Path $file.FullName -Destination $dest -Force
+
+Write-Host "Current Path : $CurrentPath"
+Write-Host "Out Path     : $OutPath"
+Write-Host "Target Path  : $TargetPath"
+
+[version]$CurrVersionStruct = Get-ClientToolsModuleVersion
+[string]$CurrVersion = $CurrVersionStruct.ToString()
+
+$srcpsd1path = Join-Path $OutPath "PowerShell.Module.ClientTools.psd1"
+$srcpsm1path = Join-Path $OutPath "PowerShell.Module.ClientTools.psm1"
+
+
+$dstpsd1path = Join-Path $TargetPath "PowerShell.Module.ClientTools.psd1"
+$dstpsm1path = Join-Path $TargetPath "PowerShell.Module.ClientTools.psm1"
+
+$psd1VersionBefore = get-content $dstpsd1path | Select-String "ModuleVersion " -Raw
+if([string]::IsNullOrEmpty($psd1VersionBefore)){
+   write-warning "NoVersion in PSd1"
+}else{
+    $psd1VersionBefore = $psd1VersionBefore.Split('=')[1].Replace("'",'').Trim()
 }
 
-# Copy Version.nfo from current path to ../CTLive
-$versionFile = Join-Path $CurrentPath "Version.nfo"
-if (Test-Path $versionFile) {
-    $dest = Join-Path $TargetPath "Version.nfo"
-    Write-Host "Copying Version.nfo to $TargetPath"
-    Copy-Item -Path $versionFile -Destination $dest -Force
-} else {
-    Write-Warning "Version.nfo not found in $CurrentPath"
+
+$newVersionFile = Join-Path $TargetPath "Version.nfo"
+Write-Host "Current  Version : $CurrVersion"
+Write-Host "Updating Version File : $newVersionFile"
+Set-Content -Path "$newVersionFile" -Value "$CurrVersion" -Force
+
+Write-Host "Updating Module File : $dstpsm1path"
+Copy-Item -Path "$srcpsm1path" -Destination "$dstpsm1path" -Force
+Write-Host "Updating Manifest File : $dstpsd1path"
+Copy-Item -Path "$srcpsd1path" -Destination "$dstpsd1path" -Force
+
+$psd1VersionAfter = get-content $dstpsd1path | Select-String "ModuleVersion " -Raw
+if([string]::IsNullOrEmpty($psd1VersionAfter)){
+   write-warning "NoVersion in PSd1"
+}else{
+    $psd1VersionAfter = $psd1VersionAfter.Split('=')[1].Replace("'",'').Trim()
 }
+
+Write-Host "Original Manifest Version : $psd1VersionBefore"
+Write-Host "Updated  Manifest Version : $psd1VersionAfter"
 
 # Run gpush in ../CTLive
 Push-Location $TargetPath

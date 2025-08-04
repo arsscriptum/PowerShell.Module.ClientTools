@@ -46,19 +46,12 @@ function New-QueuedCommand {
     Set-ItemProperty -Path $registryPath -Name "argumentlist" -Value $ArgumentList -Type MultiString
 }
 
-function Process-QueuedCommands {
+function Test-ProcessQueuedCommands {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false)]
         [switch]$DryRun
     )
-    $ExecuteCommand = $True
-    if ($DryRun) {
-        Write-Host "[Process-QueuedCommands] DryRun: Simulating Executing queued commands" -f DarkYellow
-        $ExecuteCommand = $False
-    } else {
-        Write-Host "[Process-QueuedCommands] Executing queued commands" -f DarkRed
-    }
 
     $LogFile = "$ENV:Temp\QueuedCommands.log"
     $LogDate = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
@@ -70,9 +63,14 @@ function Process-QueuedCommands {
         [CmdletBinding(SupportsShouldProcess)]
         param([string]$Message)
         $ts = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
-        "$ts - $Message" | Out-File -FilePath $LogFile -Append -Encoding UTF8
-        Write-Verbose "$ts - $Message"
+        "[Test-ProcessQueuedCommands] $ts - $Message" | Out-File -FilePath $LogFile -Append -Encoding UTF8
+        Write-Host "[Test-ProcessQueuedCommands] $ts - $Message"
     }
+
+    Write-Log "[Process-QueuedCommands] DryRun: Simulating Executing queued commands" -f DarkYellow
+    $ExecuteCommand = $False
+  
+
 
     $RegKeyRoot = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\QueuedCommands"
     if (-not (Test-Path $RegKeyRoot)) {
@@ -90,7 +88,7 @@ function Process-QueuedCommands {
             $exeName = $command.GetValue('exename')
             $argList = $command.GetValue('argumentlist')
             $Diff = $Now - $whenval
-            Write-Verbose "Now $Now whenval $whenval. Diff $Diff"
+            Write-Log "Now $Now whenval $whenval. Diff $Diff"
             if ($Diff -gt 0) {
                 if ($ExecuteCommand) {
                     Write-Log "Executing queued command '$exeName $argList' scheduled for $Diff seconds ago"

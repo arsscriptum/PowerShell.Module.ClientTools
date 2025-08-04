@@ -196,7 +196,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
 
 
         # VBScript to launch PowerShell hidden
-        [string]$VBSFile = "$env:TEMP\hidden_powershell.vbs"
+        [string]$VBSFile = "$env:TEMP\hidden_WinUpdateUIMessage.vbs"
         [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64", 0, False
@@ -399,7 +399,7 @@ function Invoke-WinUpdateTask {
 
 
         # VBScript to launch PowerShell hidden
-        [string]$VBSFile = "$env:TEMP\hidden_powershell.vbs"
+        [string]$VBSFile = "$env:TEMP\hidden_RestartWithMessage.vbs"
         [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64", 0, False
@@ -424,9 +424,10 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
             $Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -EncodedComma
 nd $ScriptBase64"
         }
-        $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddSeconds(5)
+        $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -MultipleInstances IgnoreNew
+        $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddSeconds(10)
         $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -LogonType Interactive -RunLevel Highest
-        $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Principal $Principal
+        $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings
 
 
         if ($True) {

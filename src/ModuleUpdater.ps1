@@ -60,12 +60,64 @@ function New-ClientToolsModuleVersionFile {
 
 }
 
+
+function Set-ClientToolsAutoUpdateOverride {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Position=0,Mandatory = $true)]
+        [bool]$Enable
+    )
+
+
+    $RegKeyRoot = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\ClientToolsAutoUpdate"
+
+    # Ensure the registry path exists
+    if (-not (Test-Path $RegKeyRoot)) {
+        New-Item -Path $RegKeyRoot -Force | Out-Null
+    }
+    $Val = if($Enable){1}else{0}
+
+    # Set the registry key as REG_MULTI_SZ (array of strings)
+    Set-ItemProperty -Path $RegKeyRoot -Name "override" -Value $Val -Type DWORD
+}
+
+
+function Get-ClientToolsAutoUpdateOverride {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+    $RegKeyRoot = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\ClientToolsAutoUpdate"
+
+    # Ensure the registry path exists
+    if (-not (Test-Path $RegKeyRoot)) {
+        return $False
+    }
+
+    # Set the registry key as REG_MULTI_SZ (array of strings)
+    $RegVal = Get-ItemProperty -Path $RegKeyRoot -Name "override" -ErrorAction Ignore
+    if (-not ($RegVal)) {
+        return $False
+    }
+    if($RegVal.override){
+        return $True
+    }
+    return $False
+}
+
 function Invoke-ClientToolsAutoUpdate {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false)]
-        [switch]$Force
+        [switch]$Force,
+        [Parameter(Mandatory = $false)]
+        [switch]$Import
     )
+
+    $ShouldBypass = Get-ClientToolsAutoUpdateOverride
+    if($ShouldBypass){
+        Write-Host "[Invoke-ClientToolsAutoUpdate] Bypass OVerride" -f DarkRed
+        return
+    }
 
     $ClientToolsVersionPath = Get-ClientToolsModuleVersionPath
     $JsonPath = Join-Path $ClientToolsVersionPath "clienttools.json"
@@ -123,6 +175,9 @@ function Invoke-ClientToolsAutoUpdate {
             $Data | ConvertTo-Json -Depth 4 | Set-Content -Path $JsonPath -Encoding UTF8
 
             Write-ClientToolsHost "✅ Module successfully updated to version $LatestVersion"
+            if($Import){
+             import-module "PowerShell.Module.ClientTools" -MinimumVersion "$LatestVersion" -Force
+            }
         }
         else {
             Write-Verbose "Should Update -> No"

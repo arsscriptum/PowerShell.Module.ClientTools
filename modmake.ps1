@@ -105,17 +105,21 @@ $OutputFilePath = Update-ModuleVersionFile
 
 $ModuleVersion = Get-ClientToolsModuleVersion
 
+Set-ClientToolsAutoUpdateOverride -Enable $True
+
 if($Type -eq 'min'){
-  make    
+  make -NoUpdateVersion    
 }elseif($Type -eq 'all'){
-  makeall
+  makeall -NoUpdateVersion
 }elseif($Type -eq 'doc'){
-    make -Documentation
+    make -Documentation -NoUpdateVersion
 }elseif($Type -eq 'deploy'){
-    make -Publish -PowerShellGallery -Deploy
+    make -Publish -PowerShellGallery -Deploy -NoUpdateVersion
 }else{
     Write-Host "Error" -f DarkRed
 }
+
+Set-ClientToolsAutoUpdateOverride -Enable $False
 
 
 

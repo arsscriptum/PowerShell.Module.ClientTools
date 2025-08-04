@@ -18,15 +18,12 @@ function Initialize-ClientToolsModule {
     [CmdletBinding(SupportsShouldProcess)]
     param() 
 
-    New-ClientToolsModuleVersionFile -AutoUpdateFlag $True -Force
-    Invoke-ClientToolsAutoUpdate
+    
 }
 
 function AutoInitialize-ClientToolsModule {
     [CmdletBinding(SupportsShouldProcess)]
     param() 
 
-    Initialize-ClientToolsModule
-
-
+    New-ClientToolsModuleVersionFile -AutoUpdateFlag $True -Force
 }
