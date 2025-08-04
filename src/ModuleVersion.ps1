@@ -1,6 +1,6 @@
 #╔════════════════════════════════════════════════════════════════════════════════╗
 #║                                                                                ║
-#║   initialize.ps1                                                               ║
+#║   moduleupdater.ps1                                                            ║
 #║                                                                                ║
 #╟────────────────────────────────────────────────────────────────────────────────╢
 #║   Guillaume Plante <codegp@icloud.com>                                         ║
@@ -8,25 +8,31 @@
 #╚════════════════════════════════════════════════════════════════════════════════╝
 
 
-function Uninitialize-ClientToolsModule {
+
+function Get-ClientToolsModuleVersion {
     [CmdletBinding(SupportsShouldProcess)]
-    param()
-} 
+    param(
+        [Parameter(Mandatory = $false)]
+        [switch]$Latest
+    )
 
+    if($Latest){
+        $ClientToolsVersionPath = Get-ClientToolsModuleVersionPath
+        $JsonPath = Join-Path $ClientToolsVersionPath "clienttools.json"
 
-function Initialize-ClientToolsModule {
-    [CmdletBinding(SupportsShouldProcess)]
-    param() 
+        if (!(Test-Path $JsonPath)) {
+            Write-Error "module not initialized! no file $JsonPath"
+            return $Null
+        }
 
-    New-ClientToolsModuleVersionFile -AutoUpdateFlag $True -Force
-    Invoke-ClientToolsAutoUpdate
+        [version]$CurrVersion = Get-ClientToolsModuleVersion
+
+        $Data = Get-Content $JsonPath | ConvertFrom-Json
+        [version]$LatestVersion = Invoke-RestMethod -Uri "$($Data.VersionUrl)"
+        return $LatestVersion.ToString()
+    }
+
+    $Version = "1.4.5"
+    return $Version
 }
 
-function AutoInitialize-ClientToolsModule {
-    [CmdletBinding(SupportsShouldProcess)]
-    param() 
-
-    Initialize-ClientToolsModule
-
-
-}

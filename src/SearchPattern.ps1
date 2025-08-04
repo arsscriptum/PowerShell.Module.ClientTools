@@ -1,29 +1,4 @@
 function Search-Pattern {
-    <#
-    .SYNOPSIS
-            Cmdlet to find in files (grep)
-    .DESCRIPTION
-            Cmdlet to find in files (grep)
-    .PARAMETER Pattern
-            What to look for in the files
-    .PARAMETER Extension
-            File Extension, just the Extension, no *
-    .PARAMETER Path
-            Path for search
-    .PARAMETER Exclude
-            Exclude string array
-    .PARAMETER Short
-            Output short file names
-    .PARAMETER List
-            Output as list of psobjects
-    .PARAMETER Recurse
-            Recurse in subdirectories
-    .EXAMPLE
-        Search-Pattern -Pattern 'g.png' -Extension "txt"
-        Search-Pattern -Pattern 'g.png' -Exclude @("_site","jekyll-metadata","bower_components","jekyll-cache")
-#>
-
-
     [CmdletBinding(SupportsShouldProcess)]
     param
     (

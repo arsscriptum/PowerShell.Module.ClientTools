@@ -29,7 +29,8 @@ function Get-GitExecutablePath {
 }
 
 function Save-Profile {
-
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
     $ProfileFileName = (Get-Item "$Profile").Name
     $ProfileFileFullPath = (Get-Item "$Profile").FullName
     $ProfilePath = (Get-Item -Path "$Profile").DirectoryName
@@ -81,6 +82,8 @@ function Edit-Profile {
 
 
 function Reload-Profile {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
     $Path = (Get-Item $Profile).DirectoryName
     $aliases = (Get-AliasList $Path).Name
     foreach ($a in $aliases) {
@@ -90,6 +93,8 @@ function Reload-Profile {
 }
 
 function Sync-Profile {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
     $PwshCoreProfile = $Profile
     $WindPwshProfile = Get-Variable -Name WindowsPwshProfile -ValueOnly -Scope Global -ErrorAction Ignore
     if ($WindPwshProfile -eq $null) {

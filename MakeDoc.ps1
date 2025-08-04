@@ -43,6 +43,7 @@ $FunctionsNamedPipe = Get-FunctionList .\src\ | Where Base -match "\b(?:NamedPip
 $FunctionsProcessData = Get-FunctionList .\src\ | Where Base -match "\b(?:ProcessData)\b" | Select -ExpandProperty Name
 $Functionsprocesslist = Get-FunctionList .\src\ | Where Base -match "\b(?:processlist)\b" | Select -ExpandProperty Name
 $FunctionsPrompt = Get-FunctionList .\src\ | Where Base -match "\b(?:Prompt)\b" | Select -ExpandProperty Name
+$FunctionsPowerTools = Get-FunctionList .\src\ | Where Base -match "\b(?:PowerTools)\b" | Select -ExpandProperty Name
 $FunctionsRecord = Get-FunctionList .\src\ | Where Base -match "\b(?:Record)\b" | Select -ExpandProperty Name
 $FunctionsRegistry = Get-FunctionList .\src\ | Where Base -match "\b(?:Registry)\b" | Select -ExpandProperty Name
 $FunctionsRemoteDesktop = Get-FunctionList .\src\ | Where Base -match "\b(?:RemoteDesktop)\b" | Select -ExpandProperty Name
@@ -172,6 +173,10 @@ $FunctionsprocesslistText = ForEach($fn in $Functionsprocesslist){
     $DocUrl
 }
 $FunctionsPromptText = ForEach($fn in $FunctionsPrompt){
+    $DocUrl= Get-FunctionDocUrl $fn
+    $DocUrl
+}
+$FunctionsPowerToolsText = ForEach($fn in $FunctionsPowerTools){
     $DocUrl= Get-FunctionDocUrl $fn
     $DocUrl
 }
@@ -359,6 +364,8 @@ $FunctionsprocesslistText
 ## Functions - Prompt
 $FunctionsPromptText
 
+## Functions - PowerTools
+$FunctionsPowerToolsText
 
 ## Functions - Record
 $FunctionsRecordText

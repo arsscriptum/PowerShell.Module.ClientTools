@@ -10,6 +10,9 @@
 
 
 function Show-PromptNoPath {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
     $currentpath = (Get-Location).Path
     $IsAdmin = Invoke-IsAdministrator
     if ($PSVersionTable.PSVersion.Major -eq 5) {
@@ -27,22 +30,32 @@ function Show-PromptNoPath {
 
 
 function Invoke-IsAdministrator {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
     $user = [Security.Principal.WindowsIdentity]::GetCurrent();
     (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
 
 function Show-SystemInfo {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
     ProfileInfo
 }
 
 function Invoke-IsAdministrator {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
     $user = [Security.Principal.WindowsIdentity]::GetCurrent();
     (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
 function Show-Header {
-
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
     $m = $PSVersionTable.PSVersion.Major
     try {
         if ($m -gt 5) {
@@ -62,6 +75,9 @@ function Show-Header {
 
 
 function Show-Prompt {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+    
     $currentpath = (Get-Location).Path
     $IsAdmin = Invoke-IsAdministrator
     if ($PSVersionTable.PSVersion.Major -eq 5) {
@@ -115,5 +131,3 @@ function Start-Explorer {
     $localpath = (Get-Location).Path
     & $xplorer $localpath
 }
-
-New-Alias -Name x -Value Start-Explorer -Force -ErrorAction Ignore | Out-Null

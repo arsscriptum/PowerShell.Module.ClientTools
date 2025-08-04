@@ -29,7 +29,7 @@ function Write-ClientToolsHost{
         [Parameter(Mandatory=$true,Position=0)][Alias('m')]
         [String]$Message
     ) 
-    Write-Host "[ClientTools Module] " -f DarkRed -n
+    Write-Host "[PowerShell.Module.ClientTools] " -f DarkRed -n
     Write-Host "$Message" -f DarkYellow
 }
 

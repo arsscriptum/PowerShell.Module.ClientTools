@@ -12,7 +12,6 @@
 
 
 function Invoke-GetVersionString {
-
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true, position = 0)]
@@ -141,7 +140,6 @@ function Invoke-GetVersionString {
 }
 
 function Get-LocalCurrentVersionString {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -164,7 +162,6 @@ function Get-LocalCurrentVersionString {
 
 
 function Test-LatestVersion {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -192,7 +189,6 @@ function Test-LatestVersion {
 
 
 function Get-OnlineVersionIRestM {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -209,7 +205,6 @@ function Get-OnlineVersionIRestM {
     }
 }
 function Get-OnlineVersionCurl {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -227,7 +222,6 @@ function Get-OnlineVersionCurl {
 }
 
 function Get-OnlineVersionWGet {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -245,7 +239,6 @@ function Get-OnlineVersionWGet {
 }
 
 function Get-OnlineVersionIWebR {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -270,7 +263,6 @@ function Get-OnlineVersionIWebR {
 }
 
 function Update-LocalVersionValue {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -290,7 +282,6 @@ function Update-LocalVersionValue {
 }
 
 function Get-LatestScriptsVersion {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -338,7 +329,6 @@ function Get-LatestScriptsVersion {
 
 
 function Get-LatestVersionString {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -363,7 +353,6 @@ function Get-LatestVersionString {
 
 
 function Update-LocalVersionValue {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -383,7 +372,6 @@ function Update-LocalVersionValue {
 }
 
 function Invoke-ValidateScriptsVersion {
-
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
@@ -414,5 +402,3 @@ function Invoke-ValidateScriptsVersion {
         }
     }
 }
-
-set-alias -Name DoScriptsCheck -Value 'Invoke-ValidateScriptsVersion' -Option AllScope -Force -ErrorAction Ignore

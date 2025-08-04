@@ -10,6 +10,8 @@
 #╚════════════════════════════════════════════════════════════════════════════════╝
 
 function Out-SplitMatchLine {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
     param(
         [Parameter(Position = 0, Mandatory = $True, ValueFromPipeline = $True)]
         [Microsoft.PowerShell.Commands.MatchInfo]$MatchInfo,
@@ -65,6 +67,7 @@ function Out-SplitMatchLine {
 
 
 function Search-StringInFile {
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Position = 0, Mandatory = $True, ValueFromPipeline = $True)]
         [string]$InputString,
@@ -194,4 +197,4 @@ function Search-PsHistory {
 }
 
 
-new-alias -Name hist_search -Value Search-PsHistory -Force -ErrorAction Ignore | Out-Null
+

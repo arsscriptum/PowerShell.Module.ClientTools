@@ -32,10 +32,11 @@ function New-ClientToolsModuleVersionFile {
     $psd1path = $psm1path.Replace('.psm1', '.psd1')
     $UpdateUrl = "https://arsscriptum.github.io/{0}" -f $ModuleName
     $VersionUrl = "https://arsscriptum.github.io/{0}/{1}" -f $ModuleName, "Version.nfo"
+    $CurrVersion = Get-ClientToolsModuleVersion
     if ((!(Test-Path "$JsonPath")) -or ($Force)) {
         [pscustomobject]$o = [pscustomobject]@{
-            CurrentVersion = "1.0.0"
-            LastUpdate = "CurrDate"
+            CurrentVersion = "$CurrVersion"
+            LastUpdate = "$CurrDate"
             UpdateUrl = "$UpdateUrl"
             VersionUrl = "$VersionUrl"
             ModuleName = "$ModuleName"
@@ -50,13 +51,14 @@ function New-ClientToolsModuleVersionFile {
 }
 
 
+
 function Invoke-ClientToolsAutoUpdate {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false)]
-        [switch]$NoUpdate
+        [switch]$Force
     )
-    $ClientToolsVersionPath = Get-ClientToolsVersionPath
+    $ClientToolsVersionPath = Get-ClientToolsModuleVersionPath
     $JsonPath = Join-Path $ClientToolsVersionPath "clienttools.json"
 
     if (!(Test-Path $JsonPath)) {
@@ -64,9 +66,10 @@ function Invoke-ClientToolsAutoUpdate {
         New-ClientToolsModuleVersionFile
     }
 
+    [version]$CurrVersion = Get-ClientToolsModuleVersion
+
     $Data = Get-Content $JsonPath | ConvertFrom-Json
     if ($Data.AutoUpdate) {
-        [version]$CurrVersion = $Data.CurrentVersion
         try {
             [version]$LatestVersion = Invoke-RestMethod -Uri "$($Data.VersionUrl)"
         } catch {
@@ -75,13 +78,9 @@ function Invoke-ClientToolsAutoUpdate {
         }
         Write-Verbose "CurrVersion    $CurrVersion"
         Write-Verbose "LatestVersion  $LatestVersion"
-
-        if ($LatestVersion -gt $CurrVersion) {
+        $UpdateRequired = (($LatestVersion -gt $CurrVersion) -Or ($Force))
+        if($UpdateRequired) {
             Write-Verbose "Should Update -> Yes"
-
-            if ($NoUpdate) {
-                return $true
-            }
 
             $psm1path = $Data.LocalPSM1
             $psd1path = $Data.LocalPSD1
@@ -103,7 +102,7 @@ function Invoke-ClientToolsAutoUpdate {
         }
         else {
             Write-Verbose "Should Update -> No"
-            Write-ClientToolsHost "No Update Required"
+            Write-ClientToolsHost "No Update Required. Current Version is $CurrVersion"
             if ($NoUpdate) {
                 return $false
             }
