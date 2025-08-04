@@ -81,7 +81,7 @@ function Update-ModuleVersionFile {
 
     # Read version
     [Version]$Version = Get-Content -Path $VersionFilePath -ErrorAction Stop | Select-Object -First 1
-    if (-not $Version -or $Version.Trim() -eq '') {
+    if (-not ($Version)) {
         throw "Version file is empty or invalid: $VersionFilePath"
     }
 
