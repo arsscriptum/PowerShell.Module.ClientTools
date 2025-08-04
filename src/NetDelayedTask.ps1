@@ -140,3 +140,24 @@ function New-EncodedScheduledTask {
 
 
 #New-EncodedScheduledTask -ScriptPath "d:\VideoMessage.ps1" -Seconds 30
+<#
+[string]$VBSFile = "$env:TEMP\hidden_powershell.vbs"
+        [string]$VBSContent = @"
+Set objShell = CreateObject("WScript.Shell")
+objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64", 0, False
+"@
+
+        if ($UseVbs) {
+            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+
+            Write-Host "Create a Scheduled Task to Run the VBS Script"
+            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+        } else {
+
+            [string]$ArgumentString = "-ExecutionPolicy Bypass -EncodedCommand {0}" -f $ScriptBase64
+            Write-host "Create Scheduled Task with Base64 Encoded Command"
+            $Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -EncodedComma
+nd $ScriptBase64"
+        }
+
+        #>
