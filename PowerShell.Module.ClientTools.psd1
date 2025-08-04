@@ -1,8 +1,8 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 04:08:40 GMT
-#̷\  Current Git Revision 72fd02adf2120ee8a7e2f8a2636dcc02f4972e39
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 04:45:16 GMT
+#̷\  Current Git Revision ae37ccf97e9ccbc358b4bd0ec2f041973209786a
 #̷\  ===================================================================
 
 
@@ -11,9 +11,9 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.36'
+    ModuleVersion     = '1.7.43'
 
-    GUID              = '69433766-c6d0-4852-8e53-7e8634525095'
+    GUID              = 'ae3bcc1a-3377-41d7-af49-fe6510332b68'
 
     CompanyName       = 'Unknown'
 
@@ -212,13 +212,14 @@
 		# --- Exported Functions from Helpers.ps1 ---
 		"Get-DateString",
 		"Get-UnixTime",
-		"Get-DateForFileName",
 		"ConvertTo-UnixTime",
+		"Get-DateForFileName",
 		"ConvertFrom-UnixTime",
 		"Write-ClientToolsHost",
 		"ConvertFrom-Ctime",
 		"Write-ProgressHelper",
 		"Show-ModuleInstallPaths",
+		"Wait-ClientToolsModuleUpdate",
 		"ConvertTo-CTime",
 
 		# --- Exported Functions from History.ps1 ---
@@ -257,6 +258,7 @@
 		"Test-SimpleMsgBox",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
+		"Push-Modter2K",
 		"Push-ModWorkflowTools",
 		"Push-ModWindowsHost",
 		"Push-ModTorrentsManager",
@@ -268,11 +270,11 @@
 		"Push-ModReddit",
 		"Push-ModProfileUtils",
 		"Push-ModOpenAI",
-		"Push-ModNtRights",
+		"Push-ModMiniPc",
 		"Push-ModManageMini",
 		"Push-ModGithub",
 		"Push-ModExpressVPN",
-		"Push-Modter2K",
+		"Push-ModDownloader",
 		"Push-ModDocker",
 		"Push-ModCryptography",
 		"Push-ModCore",
@@ -280,10 +282,11 @@
 		"Push-ModAssert",
 		"Push-Mod1190",
 		"Push-Mod1138",
-		"Push-ModMiniPc",
-		"Push-ModDownloader",
+		"Push-ModNtRights",
 
 		# --- Exported Functions from ModuleUpdater.ps1 ---
+		"Get-ClientToolsAutoUpdateOverride",
+		"Set-ClientToolsAutoUpdateOverride",
 		"Invoke-ClientToolsAutoUpdate",
 		"Get-ClientToolsModuleVersionPath",
 		"New-ClientToolsModuleVersionFile",
@@ -299,41 +302,41 @@
 		"Send-NamedPipeData",
 
 		# --- Exported Functions from NetDelayedTask.ps1 ---
-		"Invoke-ProcessQueuedCommands",
-		"Start-QueuedCommandProcessor",
-		"Stop-QueuedCommandProcessor",
-		"New-EncodedScheduledTask",
 		"New-DelayedScheduledTask",
+		"New-EncodedScheduledTask",
 		"Open-QueuedCommandLogs",
+		"Stop-QueuedCommandProcessor",
+		"Start-QueuedCommandProcessor",
+		"Invoke-ProcessQueuedCommands",
 
 		# --- Exported Functions from OpenPage.ps1 ---
-		"Invoke-OpenPageDesjardins",
 		"Stop-PowerShellProcesses",
 		"Stop-OpenPageTask",
+		"Invoke-OpenPageDesjardins",
 		"Invoke-OpenPageSecurityAdvisory",
+		"Open-CustomPage",
 		"New-OpenPageTask",
 		"Stop-PidFromTempFile",
 		"Save-CurrentPidToTempFile",
-		"Open-CustomPage",
 
 		# --- Exported Functions from PowerTools.ps1 ---
-		"Get-PowerCfgLanguage",
-		"Get-PowerTimeouts",
-		"Set-PowerTimeouts",
-		"Disable-SleepAndDisplayOff",
-		"Disable-Hibernate",
-		"Disable-LockScreenTimeout",
-		"Disable-InactivityLock",
 		"Disable-AllPowerValues",
+		"Disable-InactivityLock",
+		"Disable-LockScreenTimeout",
+		"Disable-Hibernate",
+		"Set-PowerTimeouts",
+		"Get-PowerTimeouts",
+		"Get-PowerCfgLanguage",
+		"Disable-SleepAndDisplayOff",
 
 		# --- Exported Functions from ProcessData.ps1 ---
-		"Invoke-EncodeFiles",
-		"Start-EncodeFiles",
-		"Invoke-EncodeAllNewScripts",
+		"Invoke-DecodeFiles",
 		"Update-VersionNumber",
 		"Start-DecodeFiles",
+		"Start-EncodeFiles",
+		"Invoke-EncodeFiles",
+		"Invoke-EncodeAllNewScripts",
 		"Export-DataFiles",
-		"Invoke-DecodeFiles",
 		"Merge-DataFile",
 		"Invoke-CombineSplitFiles",
 		"Split-DataFile",
