@@ -13,7 +13,7 @@ function New-QueuedCommand {
     param(
         [Parameter(Mandatory = $true, Position = 0)]
         [string]$ExeName,
-        [Parameter(Mandatory = $false, Position = 1)]
+        [Parameter(Mandatory = $false)]
         [string[]]$ArgumentList,
         [Parameter(Mandatory = $false)]
         [uint32]$Delay = 30,
