@@ -80,7 +80,8 @@ function Invoke-ClientToolsAutoUpdate {
     $Data = Get-Content $JsonPath | ConvertFrom-Json
     if ($Data.AutoUpdate) {
         try {
-            [version]$LatestVersion = Invoke-RestMethod -Uri "$($Data.VersionUrl)"
+            [version]$LatestVersionStruct = Invoke-RestMethod -Uri "$($Data.VersionUrl)"
+            [string]$LatestVersion = $LatestVersionStruct.ToString()
         } catch {
             Write-Warning "Cannot Update -> No Version found at $($Data.VersionUrl)"
             return
@@ -93,7 +94,11 @@ function Invoke-ClientToolsAutoUpdate {
         if ($UpdateRequired) {
             Write-Host "[Invoke-ClientToolsAutoUpdate] UpdateRequired" -f DarkRed
 
-            $VersionFolder = Join-Path -Path (Split-Path -Parent $Data.LocalPSD1) -ChildPath $LatestVersion
+            $ModuleInstallPath = (Get-ClientToolsModuleInformation).ModuleInstallPath
+            $ModuleInstallPathRoot = (Split-Path -Parent $ModuleInstallPath) 
+            Write-Host "[Invoke-ClientToolsAutoUpdate] ModuleInstallPath     $ModuleInstallPath" -f DarkRed
+            Write-Host "[Invoke-ClientToolsAutoUpdate] ModuleInstallPathRoot $ModuleInstallPathRoot" -f DarkRed
+            $VersionFolder = Join-Path -Path "$ModuleInstallPathRoot" -ChildPath "$LatestVersion"
             if (!(Test-Path $VersionFolder)) {
                 Write-Host "[Invoke-ClientToolsAutoUpdate] New Version Folder $VersionFolder" -f DarkRed
                 New-Item -ItemType Directory -Path $VersionFolder -Force | Out-Null

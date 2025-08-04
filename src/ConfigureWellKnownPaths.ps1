@@ -130,7 +130,9 @@ function Publish-SettingsUpdated {
 function Update-ModulesShortcuts {
     [CmdletBinding(SupportsShouldProcess)]
     param(
-        [Parameter(Mandatory = $false, ValueFromPipeline = $true, HelpMessage = "Overwrite if present", Position = 0)]
+        [Parameter(Mandatory = $false)]
+        [string]$Filter,
+        [Parameter(Mandatory = $false)]
         [switch]$Test
     )
     $TestOnly = $False
@@ -142,16 +144,24 @@ function Update-ModulesShortcuts {
 
     $FnDefinitions = [System.Collections.Generic.List[string]]::new()
     $AliasDefinitions = [System.Collections.Generic.List[string]]::new()
-    pushd "C:\Users\$ENV:USERNAME\Documents\PowerShell\Module-Development"
-    $mods = (gci . -Directory)
+    $ModuleDevelopmentPath = "C:\Users\$ENV:USERNAME\Documents\PowerShell\Module-Development"
+    pushd "$ModuleDevelopmentPath"
+    $mods = (gci -PATH "$ModuleDevelopmentPath" -Directory)
+    $modsCount = $mods.Count
+    Write-Host -n -f DarkRed "Found $modsCount modules."
+    if ($PSBoundParameters.ContainsKey('Filter')) {
+        $mods = $mods | Where Name -Match "$Filter"
+        $modsCount = $mods.Count
+        Write-Host -n -f DarkRed "Filtered with $Filter -> $modsCount modules."
+    }
     foreach ($m in $mods) {
-        $name = $m.Name; $shortname = $name.substring(18);
-        $shortname; $fullpath = $m.FullName;
-        $fullpath;
+        $name = $m.Name; 
+        $shortname = $name.substring(18);
+        $fullpath = $m.FullName;
         $envval = "Mod$shortname";
-        $log = 'Set-EnvironmentVariable -Name $envval -Value $fullpath -Scope "User"';
+        $log = "Processing Module $name ($fullpath)";
         if (-not $TestOnly) {
-            Set-EnvironmentVariable -Name $envval -Value $fullpath -Scope User
+            Set-EnvironmentVariable -Name $envval -Value $fullpath -Scope UserSession
             Write-Host -n -f DarkRed '[SetEnv] '
         } else {
             Write-Host -n -f Blue '[TEST] '
