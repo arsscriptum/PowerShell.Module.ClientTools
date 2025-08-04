@@ -1,4 +1,4 @@
-#╔════════════════════════════════════════════════════════════════════════════════╗
+﻿#╔════════════════════════════════════════════════════════════════════════════════╗
 #║                                                                                ║
 #║   OpenPage.ps1                                                                 ║
 #║                                                                                ║
@@ -13,7 +13,7 @@
 
 function Save-CurrentPidToTempFile {
     [CmdletBinding()]
-    param ()
+    param()
 
     $processIdFile = Join-Path -Path $ENV:TEMP -ChildPath "OpenPage.pid"
     try {
@@ -28,7 +28,7 @@ function Read-OpenCustomPageLogFile {
     [CmdletBinding(SupportsShouldProcess)]
     param()
 
-    
+
     $LogFile = "$ENV:Temp\task_OpenCustomPage.log"
     get-content "$LogFile" | Select -Last 10
 
@@ -36,7 +36,7 @@ function Read-OpenCustomPageLogFile {
 
 function Stop-PidFromTempFile {
     [CmdletBinding(SupportsShouldProcess)]
-    param ()
+    param()
 
     $processIdFile = Join-Path -Path $ENV:TEMP -ChildPath "OpenPage.pid"
     if (!(Test-Path $processIdFile)) {
@@ -69,7 +69,7 @@ function Stop-PidFromTempFile {
 function New-OpenPageTask {
     [CmdletBinding(SupportsShouldProcess)]
     param(
-        [Parameter(position=0,Mandatory = $true)]
+        [Parameter(position = 0, Mandatory = $true)]
         [string]$Url,
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]
@@ -111,7 +111,7 @@ Open-CustomPage
 
         $LogFile = "$ENV:Temp\task_OpenCustomPage.log"
         $LogDate = (get-date).GetDateTimeFormats()[20] -as [string]
-        if(!(Test-Path "$LogFile")){
+        if (!(Test-Path "$LogFile")) {
             New-Item -Path "$LogFile" -Force -ItemType File -Value "============ LOG STARTED on $LogDate ============`n" | out-null
         }
         [string]$ScriptString = $Script -f $Url
@@ -144,14 +144,16 @@ Open-CustomPage
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
 "@
-            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+            New-Item -Path "$VBSFile" -ItemType File -Value "$VBSContent" -Force | Out-Null
             Write-Host "Create a Scheduled Task to Run the VBS Script"
-            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+            $WScriptCmd = Get-Command -Name "wscript.exe" -CommandType Application -ErrorAction Stop
+            $WScriptBin = $WScriptCmd.Source
+            $Action = New-ScheduledTaskAction -Execute "$WScriptBin" -Argument "$VBSFile"
         }
         else {
             $Action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument $ar
         }
-        
+
 
         $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -MultipleInstances IgnoreNew
         $Trigger = New-ScheduledTaskTrigger -At $now -Once:$false

@@ -163,10 +163,12 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
         Write-host "Create Scheduled Task with Base64 Encoded Command"
 
         if ($UseVbs) {
-            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
-            
+            New-Item -Path "$VBSFile" -ItemType File -Value "$VBSContent" -Force | Out-Null
+
             Write-Host "Create a Scheduled Task to Run the VBS Script"
-            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+            $WScriptCmd = Get-Command -Name "wscript.exe" -CommandType Application -ErrorAction Stop
+            $WScriptBin = $WScriptCmd.Source
+            $Action = New-ScheduledTaskAction -Execute "$WScriptBin" -Argument "$VBSFile"
 
         } else {
             $Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64"

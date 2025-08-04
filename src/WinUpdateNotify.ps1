@@ -204,10 +204,12 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
 "@
 
         if ($UseVbs) {
-            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+            New-Item -Path "$VBSFile" -ItemType File -Value "$VBSContent" -Force | Out-Null
 
             Write-Host "Create a Scheduled Task to Run the VBS Script"
-            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+            $WScriptCmd = Get-Command -Name "wscript.exe" -CommandType Application -ErrorAction Stop
+            $WScriptBin = $WScriptCmd.Source
+            $Action = New-ScheduledTaskAction -Execute "$WScriptBin" -Argument "$VBSFile"
         } else {
 
             [string]$ArgumentString = "-ExecutionPolicy Bypass -EncodedCommand {0}" -f $ScriptBase64
@@ -416,10 +418,12 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
             Start-Sleep $WaitFor
         }
         if ($UseVbs) {
-            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+            New-Item -Path "$VBSFile" -ItemType File -Value "$VBSContent" -Force | Out-Null
 
             Write-Host "Create a Scheduled Task to Run the VBS Script"
-            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+            $WScriptCmd = Get-Command -Name "wscript.exe" -CommandType Application -ErrorAction Stop
+            $WScriptBin = $WScriptCmd.Source
+            $Action = New-ScheduledTaskAction -Execute "$WScriptBin" -Argument "$VBSFile"
         } else {
 
             [string]$ArgumentString = "-ExecutionPolicy Bypass -EncodedCommand {0}" -f $ScriptBase64

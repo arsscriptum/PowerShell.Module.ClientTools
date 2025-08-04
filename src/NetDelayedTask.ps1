@@ -46,12 +46,12 @@ function New-DelayedScheduledTask {
         }
 
         if (-not $User) {
-        $selectedUser = Select-LoggedInUser
-        Write-Host "You selected: $selectedUser"
+            $selectedUser = Select-LoggedInUser
+            Write-Host "You selected: $selectedUser"
             if (-not $User) {
                 throw "No logged-in users found and no user specified."
             }
-        }else{
+        } else {
             $selectedUser = $User
         }
 
@@ -74,16 +74,19 @@ function New-DelayedScheduledTask {
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
 "@
-            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+            New-Item -Path "$VBSFile" -ItemType File -Value "$VBSContent" -Force | Out-Null
             Write-Host "Create a Scheduled Task to Run the VBS Script"
-            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+
+            $WScriptCmd = Get-Command -Name "wscript.exe" -CommandType Application -ErrorAction Stop
+            $WScriptBin = $WScriptCmd.Source
+            $Action = New-ScheduledTaskAction -Execute "$WScriptBin" -Argument "$VBSFile"
         }
         else {
             $Action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument $ar
         }
         $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddSeconds($Seconds)
         $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -RunLevel Highest -LogonType Interactive
- 
+
         Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Principal $Principal -Force
         Add-SchedTasks -TaskName $TaskName
         Write-Host "✅ Task '$TaskName' scheduled to run in $Seconds seconds." -ForegroundColor Green
@@ -135,12 +138,12 @@ function New-EncodedScheduledTask {
 
 
         if (-not $User) {
-        $selectedUser = Select-LoggedInUser
-        Write-Host "You selected: $selectedUser"
+            $selectedUser = Select-LoggedInUser
+            Write-Host "You selected: $selectedUser"
             if (-not $User) {
                 throw "No logged-in users found and no user specified."
             }
-        }else{
+        } else {
             $selectedUser = $User
         }
 
@@ -158,14 +161,16 @@ function New-EncodedScheduledTask {
 
         if ($UseVbs) {
             [string]$folder = Invoke-EnsureSharedScriptFolder
-             [string]$VBSFile = Join-Path "$folder" "EncodedScheduledTask.vbs"
+            [string]$VBSFile = Join-Path "$folder" "EncodedScheduledTask.vbs"
             [string]$VBSContent = @"
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
 "@
-            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+            New-Item -Path "$VBSFile" -ItemType File -Value "$VBSContent" -Force | Out-Null
             Write-Host "Create a Scheduled Task to Run the VBS Script"
-            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+            $WScriptCmd = Get-Command -Name "wscript.exe" -CommandType Application -ErrorAction Stop
+            $WScriptBin = $WScriptCmd.Source
+            $Action = New-ScheduledTaskAction -Execute "$WScriptBin" -Argument "$VBSFile"
         }
         else {
             $Action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument $ar
@@ -376,7 +381,7 @@ Invoke-ProcessQueuedCommands
             $ar = "-ExecutionPolicy Bypass -WindowStyle Hidden -NoProfile -EncodedCommand $EncodedCommand"
         }
 
-      
+
 
         if ($UseVbs) {
             [string]$folder = Invoke-EnsureSharedScriptFolder
@@ -385,9 +390,11 @@ Invoke-ProcessQueuedCommands
 Set objShell = CreateObject("WScript.Shell")
 objShell.Run "pwsh.exe $ar", 0, False
 "@
-            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+            New-Item -Path "$VBSFile" -ItemType File -Value "$VBSContent" -Force | Out-Null
             Write-Host "Create a Scheduled Task to Run the VBS Script"
-            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
+            $WScriptCmd = Get-Command -Name "wscript.exe" -CommandType Application -ErrorAction Stop
+            $WScriptBin = $WScriptCmd.Source
+            $Action = New-ScheduledTaskAction -Execute "$WScriptBin" -Argument "$VBSFile"
         }
         else {
             $Action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument $ar
