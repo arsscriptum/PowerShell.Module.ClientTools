@@ -1,8 +1,8 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 05:55:36 GMT
-#̷\  Current Git Revision ae37ccf97e9ccbc358b4bd0ec2f041973209786a
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 06:27:17 GMT
+#̷\  Current Git Revision 63880db789b2e5e5cc85f8ca20c8aaaafd962269
 #̷\  ===================================================================
 
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.59
+    ModuleVersion     = '1.7.61
 '
 
-    GUID              = 'bfdffbe7-4609-4f14-a14f-3aeda8f73f5f'
+    GUID              = 'cb2737a0-4c5e-4596-b71e-508b5b764bb0'
 
     CompanyName       = 'Unknown'
 
@@ -139,56 +139,56 @@
 		"Push-moddev",
 
 		# --- Exported Functions from Decode.ps1 ---
-		"Invoke-DecodeFiles",
-		"Start-DecodeFiles",
 		"Export-DataFiles",
-		"Invoke-CombineSplitFiles",
-		"Get-ScriptEncodeAppCredentials",
-		"Invoke-AutoUpdateProgress",
+		"Invoke-DecodeFiles",
 		"Merge-DataFile",
+		"Start-DecodeFiles",
+		"Get-ScriptEncodeAppCredentials",
+		"Invoke-CombineSplitFiles",
+		"Invoke-AutoUpdateProgress",
 
 		# --- Exported Functions from Encode.ps1 ---
 		"Invoke-EncodeAllNewScripts",
-		"Get-ScriptEncodeAppCredentials",
-		"Update-VersionNumber",
-		"Invoke-AutoUpdateProgress",
-		"Invoke-SplitDataFile",
-		"Split-DataFile",
-		"Import-DataFiles",
 		"Invoke-EncodeFiles",
+		"Import-DataFiles",
+		"Split-DataFile",
 		"Start-EncodeFiles",
+		"Invoke-AutoUpdateProgress",
+		"Update-VersionNumber",
+		"Get-ScriptEncodeAppCredentials",
+		"Invoke-SplitDataFile",
 
 		# --- Exported Functions from Exception.ps1 ---
 		"Show-ExceptionDetails",
-		"Test-ExceptionDetailsTextBox",
-		"Get-ExceptionDetailsTextBox",
-		"Enable-ExceptionDetailsTextBox",
 		"New-ErrorRecord",
+		"Enable-ExceptionDetailsTextBox",
 		"Disable-ExceptionDetailsTextBox",
+		"Get-ExceptionDetailsTextBox",
+		"Test-ExceptionDetailsTextBox",
 
 		# --- Exported Functions from ExportConnectionsData.ps1 ---
-		"Get-HomePath",
-		"Get-LogsPath",
 		"Export-NetConnections",
+		"Get-LogsPath",
+		"Get-HomePath",
 
 		# --- Exported Functions from ExportSystemInfo.ps1 ---
 		"Export-SystemInfo",
 
 		# --- Exported Functions from GetConns.ps1 ---
-		"Get-V6ConnectionsOnly",
-		"Get-ActiveConnectionsListening",
 		"Get-ConnectionDoc",
-		"Get-ActiveConnectionsWithLocalPort",
 		"Get-ActiveConnectionsEstablished",
-		"Get-ActiveConnectionsNetstat",
+		"Get-ActiveConnectionsListening",
 		"Get-ActiveConnectionsOnly",
+		"Get-V6ConnectionsOnly",
+		"Get-ActiveConnectionsWithLocalPort",
+		"Get-ActiveConnectionsNetstat",
 		"Test-ExternalPort",
 		"Get-ExternalPortStateReport",
 		"Get-ExternalPortState",
-		"Invoke-TcpConView",
 		"Get-LocalOpenPorts",
 		"Invoke-FilterRemoteAddresses",
 		"Get-NetStatExe",
+		"Invoke-TcpConView",
 
 		# --- Exported Functions from GetCurrentContext.ps1 ---
 		"Get-CurrentContext",
@@ -200,9 +200,9 @@
 		"Get-FunctionSource",
 
 		# --- Exported Functions from GetHistory.ps1 ---
+		"Show-PsHistory",
 		"Get-HomePath",
 		"Clear-PsHistory",
-		"Show-PsHistory",
 
 		# --- Exported Functions from GetLoggedInUsers.ps1 ---
 		"Get-LoggedInUsers",
@@ -211,32 +211,43 @@
 		"Get-TerminalStartingDirectory",
 
 		# --- Exported Functions from Helpers.ps1 ---
+		"Get-DateForFileName",
 		"Get-DateString",
 		"Get-UnixTime",
 		"ConvertTo-UnixTime",
-		"Get-DateForFileName",
+		"ConvertTo-CTime",
 		"ConvertFrom-UnixTime",
 		"Write-ClientToolsHost",
-		"ConvertFrom-Ctime",
 		"Write-ProgressHelper",
 		"Show-ModuleInstallPaths",
 		"Wait-ClientToolsModuleUpdate",
-		"ConvertTo-CTime",
+		"ConvertFrom-Ctime",
 
 		# --- Exported Functions from History.ps1 ---
-		"Out-SplitMatchLine",
-		"Search-StringInFile",
-		"Get-FileInfoWithTimeSpan",
 		"Search-PsHistory",
+		"Out-SplitMatchLine",
+		"Get-FileInfoWithTimeSpan",
+		"Search-StringInFile",
 
 		# --- Exported Functions from Initialize.ps1 ---
+		"AutoInitialize-ClientToolsModule",
 		"Uninitialize-ClientToolsModule",
 		"Initialize-ClientToolsModule",
-		"AutoInitialize-ClientToolsModule",
+
+		# --- Exported Functions from ManageScreenshots.ps1 ---
+		"Invoke-ManageScreenshotArchive",
+
+		# --- Exported Functions from Memory.ps1 ---
+		"Get-ProcessMemoryUsage",
+		"Get-MemoryUsageForAllProcesses",
+		"Get-TopMemoryUsers",
+		"Get-ProcessMemoryUsageDetails",
+		"Get-ProcessCmdLineById",
+		"Get-ProcessCmdLine",
 
 		# --- Exported Functions from MessageBox.ps1 ---
 		"Show-MessageBoxVideoUrl",
-		"Show-MessageBoxInfo",
+		"Show-MessageBoxStandby",
 		"Show-MessageBoxRestart",
 		"Show-MessageBoxVideoSydney",
 		"Show-BeAdvisedSydney",
@@ -245,37 +256,37 @@
 		"Show-MessageBoxAsyncPing",
 		"Show-MessageBoxVideoUrlExtended",
 		"Show-MessageBoxError",
-		"Show-MessageBoxStandby",
+		"Show-MessageBoxInfo",
 		"Show-MessageBoxException",
-		"Register-ScriptAssemblies",
-		"Show-UserInfo",
-		"Get-MessageBoxResult",
-		"Show-Popup",
-		"Show-SimpleMessageBox",
+		"Test-Popupcolors",
 		"Show-MessageBoxVoice",
+		"Show-MessageBox",
 		"Test-SimpleMsgBox2",
 		"Test-SimpleMsgBox",
-		"Show-MessageBox",
-		"Test-Popupcolors",
+		"Show-SimpleMessageBox",
+		"Show-Popup",
+		"Get-MessageBoxResult",
+		"Show-UserInfo",
+		"Register-ScriptAssemblies",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
-		"Push-Modter2K",
-		"Push-ModWorkflowTools",
-		"Push-ModWindowsHost",
-		"Push-ModTorrentsManager",
-		"Push-ModTools",
-		"Push-ModTerminal",
-		"Push-ModTakeOwnership",
-		"Push-ModShim",
-		"Push-ModShellGPT",
 		"Push-ModReddit",
+		"Push-ModShellGPT",
+		"Push-ModShim",
+		"Push-ModTakeOwnership",
+		"Push-ModTerminal",
+		"Push-Modter2K",
+		"Push-ModTorrentsManager",
+		"Push-ModWindowsHost",
+		"Push-ModWorkflowTools",
 		"Push-ModProfileUtils",
+		"Push-ModTools",
 		"Push-ModOpenAI",
+		"Push-ModDownloader",
 		"Push-ModMiniPc",
 		"Push-ModManageMini",
 		"Push-ModGithub",
 		"Push-ModExpressVPN",
-		"Push-ModDownloader",
 		"Push-ModDocker",
 		"Push-ModCryptography",
 		"Push-ModCore",
@@ -286,11 +297,11 @@
 		"Push-ModNtRights",
 
 		# --- Exported Functions from ModuleUpdater.ps1 ---
-		"Invoke-ClientToolsAutoUpdate",
 		"Get-ClientToolsAutoUpdateOverride",
-		"New-ClientToolsModuleVersionFile",
 		"Set-ClientToolsAutoUpdateOverride",
+		"Invoke-ClientToolsAutoUpdate",
 		"Get-ClientToolsModuleVersionPath",
+		"New-ClientToolsModuleVersionFile",
 
 		# --- Exported Functions from ModuleVersion.ps1 ---
 		"Get-ClientToolsModuleVersion",
@@ -303,23 +314,30 @@
 		"Send-NamedPipeData",
 
 		# --- Exported Functions from NetDelayedTask.ps1 ---
-		"New-EncodedScheduledTask",
-		"Open-QueuedCommandLogs",
-		"Stop-QueuedCommandProcessor",
-		"Start-QueuedCommandProcessor",
 		"Invoke-ProcessQueuedCommands",
+		"Start-QueuedCommandProcessor",
+		"Stop-QueuedCommandProcessor",
+		"Open-QueuedCommandLogs",
+		"Read-QueuedCommandLogs",
+		"New-EncodedScheduledTask",
 		"New-DelayedScheduledTask",
 
+		# --- Exported Functions from NetworkCacheReset.ps1 ---
+		"Clear-ChromeCache",
+		"Invoke-FlushDNS",
+		"Reset-Netstack",
+		"Invoke-NetworkCacheReset",
+
 		# --- Exported Functions from OpenPage.ps1 ---
-		"Invoke-OpenPageSecurityAdvisory",
 		"Stop-OpenPageTask",
-		"Invoke-OpenPageDesjardins",
 		"Stop-PowerShellProcesses",
-		"Open-CustomPage",
-		"Stop-PidFromTempFile",
+		"Invoke-OpenPageDesjardins",
+		"Invoke-OpenPageSecurityAdvisory",
 		"Read-OpenCustomPageLogFile",
-		"Save-CurrentPidToTempFile",
 		"New-OpenPageTask",
+		"Stop-PidFromTempFile",
+		"Save-CurrentPidToTempFile",
+		"Open-CustomPage",
 
 		# --- Exported Functions from PowerTools.ps1 ---
 		"Disable-AllPowerValues",
@@ -338,13 +356,13 @@
 		"Start-EncodeFiles",
 		"Invoke-EncodeFiles",
 		"Invoke-DecodeFiles",
-		"Export-DataFiles",
 		"Merge-DataFile",
+		"Import-DataFiles",
 		"Invoke-CombineSplitFiles",
 		"Split-DataFile",
 		"Invoke-SplitDataFile",
 		"Invoke-AutoUpdateProgress",
-		"Import-DataFiles",
+		"Export-DataFiles",
 
 		# --- Exported Functions from processlist.ps1 ---
 		"Get-ProcessList",
@@ -361,7 +379,7 @@
 		"Invoke-IsAdministrator",
 
 		# --- Exported Functions from QueuedCommands.ps1 ---
-		"Process-QueuedCommands",
+		"Test-ProcessQueuedCommands",
 		"Clear-QueuedCommands",
 		"New-QueuedCommand",
 
@@ -401,6 +419,9 @@
 		"Reload-Profile",
 		"Sync-Profile",
 
+		# --- Exported Functions from ScheduledTaskDetails.ps1 ---
+		"Get-ScheduledTaskDetails",
+
 		# --- Exported Functions from SearchPattern.ps1 ---
 		"Search-Pattern",
 
@@ -409,17 +430,17 @@
 
 		# --- Exported Functions from SetFirewallConfig.ps1 ---
 		"isIE",
-		"alertLoc",
 		"Set-FirewallConfiguration",
+		"alertLoc",
 
 		# --- Exported Functions from SetMappedDrives.ps1 ---
+		"Invoke-RemapDrives",
 		"Test-AreNetworkDrivesMapped",
 		"Register-NetworkDrive",
 		"Unregister-NetworkDrive",
 		"Test-TemporaryDriveExist",
 		"Register-NetworkDrivesMapping",
 		"Unregister-NetworkDrivesMapping",
-		"Invoke-RemapDrives",
 
 		# --- Exported Functions from ShowSydneyMsgBox.ps1 ---
 		"Show-Sydney",
