@@ -1,8 +1,8 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 06:27:17 GMT
-#̷\  Current Git Revision 63880db789b2e5e5cc85f8ca20c8aaaafd962269
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 07:05:02 GMT
+#̷\  Current Git Revision 9afc7a80bd43200193aed89aa5cae6c698151501
 #̷\  ===================================================================
 
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.61
+    ModuleVersion     = '1.7.62
 '
 
-    GUID              = 'cb2737a0-4c5e-4596-b71e-508b5b764bb0'
+    GUID              = '1fc154b3-ab1e-4690-a232-eaa4083f1f01'
 
     CompanyName       = 'Unknown'
 
@@ -247,7 +247,7 @@
 
 		# --- Exported Functions from MessageBox.ps1 ---
 		"Show-MessageBoxVideoUrl",
-		"Show-MessageBoxStandby",
+		"Show-MessageBoxInfo",
 		"Show-MessageBoxRestart",
 		"Show-MessageBoxVideoSydney",
 		"Show-BeAdvisedSydney",
@@ -256,37 +256,37 @@
 		"Show-MessageBoxAsyncPing",
 		"Show-MessageBoxVideoUrlExtended",
 		"Show-MessageBoxError",
-		"Show-MessageBoxInfo",
+		"Show-MessageBoxStandby",
 		"Show-MessageBoxException",
-		"Test-Popupcolors",
+		"Register-ScriptAssemblies",
+		"Show-UserInfo",
+		"Get-MessageBoxResult",
+		"Show-Popup",
+		"Show-SimpleMessageBox",
 		"Show-MessageBoxVoice",
-		"Show-MessageBox",
 		"Test-SimpleMsgBox2",
 		"Test-SimpleMsgBox",
-		"Show-SimpleMessageBox",
-		"Show-Popup",
-		"Get-MessageBoxResult",
-		"Show-UserInfo",
-		"Register-ScriptAssemblies",
+		"Show-MessageBox",
+		"Test-Popupcolors",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
-		"Push-ModReddit",
-		"Push-ModShellGPT",
-		"Push-ModShim",
-		"Push-ModTakeOwnership",
-		"Push-ModTerminal",
 		"Push-Modter2K",
-		"Push-ModTorrentsManager",
-		"Push-ModWindowsHost",
 		"Push-ModWorkflowTools",
-		"Push-ModProfileUtils",
+		"Push-ModWindowsHost",
+		"Push-ModTorrentsManager",
 		"Push-ModTools",
+		"Push-ModTerminal",
+		"Push-ModTakeOwnership",
+		"Push-ModShim",
+		"Push-ModShellGPT",
+		"Push-ModReddit",
+		"Push-ModProfileUtils",
 		"Push-ModOpenAI",
-		"Push-ModDownloader",
 		"Push-ModMiniPc",
 		"Push-ModManageMini",
 		"Push-ModGithub",
 		"Push-ModExpressVPN",
+		"Push-ModDownloader",
 		"Push-ModDocker",
 		"Push-ModCryptography",
 		"Push-ModCore",
@@ -307,20 +307,20 @@
 		"Get-ClientToolsModuleVersion",
 
 		# --- Exported Functions from NamedPipe.ps1 ---
-		"New-NamedPipeServer",
+		"Send-NamedPipeData",
+		"New-NamedPipeClient",
 		"New-NamedPipeServerAsync",
 		"Start-NamedPipeServerJob",
-		"New-NamedPipeClient",
-		"Send-NamedPipeData",
+		"New-NamedPipeServer",
 
 		# --- Exported Functions from NetDelayedTask.ps1 ---
-		"Invoke-ProcessQueuedCommands",
 		"Start-QueuedCommandProcessor",
 		"Stop-QueuedCommandProcessor",
 		"Open-QueuedCommandLogs",
-		"Read-QueuedCommandLogs",
+		"Invoke-ProcessQueuedCommands",
 		"New-EncodedScheduledTask",
 		"New-DelayedScheduledTask",
+		"Read-QueuedCommandLogs",
 
 		# --- Exported Functions from NetworkCacheReset.ps1 ---
 		"Clear-ChromeCache",
@@ -329,35 +329,35 @@
 		"Invoke-NetworkCacheReset",
 
 		# --- Exported Functions from OpenPage.ps1 ---
-		"Stop-OpenPageTask",
-		"Stop-PowerShellProcesses",
-		"Invoke-OpenPageDesjardins",
 		"Invoke-OpenPageSecurityAdvisory",
+		"Stop-PowerShellProcesses",
+		"Stop-OpenPageTask",
+		"Invoke-OpenPageDesjardins",
+		"Open-CustomPage",
 		"Read-OpenCustomPageLogFile",
-		"New-OpenPageTask",
 		"Stop-PidFromTempFile",
 		"Save-CurrentPidToTempFile",
-		"Open-CustomPage",
+		"New-OpenPageTask",
 
 		# --- Exported Functions from PowerTools.ps1 ---
 		"Disable-AllPowerValues",
 		"Disable-InactivityLock",
-		"Disable-LockScreenTimeout",
 		"Disable-Hibernate",
+		"Disable-LockScreenTimeout",
 		"Set-PowerTimeouts",
 		"Get-PowerTimeouts",
 		"Get-PowerCfgLanguage",
 		"Disable-SleepAndDisplayOff",
 
 		# --- Exported Functions from ProcessData.ps1 ---
-		"Invoke-EncodeAllNewScripts",
+		"Invoke-DecodeFiles",
 		"Update-VersionNumber",
 		"Start-DecodeFiles",
 		"Start-EncodeFiles",
 		"Invoke-EncodeFiles",
-		"Invoke-DecodeFiles",
-		"Merge-DataFile",
+		"Invoke-EncodeAllNewScripts",
 		"Import-DataFiles",
+		"Merge-DataFile",
 		"Invoke-CombineSplitFiles",
 		"Split-DataFile",
 		"Invoke-SplitDataFile",
@@ -382,6 +382,7 @@
 		"Test-ProcessQueuedCommands",
 		"Clear-QueuedCommands",
 		"New-QueuedCommand",
+		"Read-QueuedCommandsLogFile",
 
 		# --- Exported Functions from Record.ps1 ---
 		"Invoke-MapRemoteDrive",
@@ -394,7 +395,6 @@
 		"Invoke-StopRecord",
 
 		# --- Exported Functions from Registry.ps1 ---
-		"Set-RegistryValue2",
 		"Get-UserConfirmationRegDel",
 		"Delete-RegistryKeyTree",
 		"New-RegistryValue",
@@ -403,6 +403,7 @@
 		"Get-RegistryValue",
 		"Get-RegistryValue",
 		"Test-RegistryValue",
+		"Set-RegistryValue2",
 		"Remove-RegistryValue",
 		"Set-RegistryValue",
 
