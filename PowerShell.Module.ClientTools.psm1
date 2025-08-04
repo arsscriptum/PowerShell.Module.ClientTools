@@ -1,8 +1,8 @@
 <#
   ã--------------------------------------------------------------------------------------
   ¦   PowerShell PowerShell.Module.ClientTools Module
-  ¦   Version 1.7.55
- , Generated on Mon, 04 Aug 2025 05:22:27 GMT 
+  ¦   Version 1.7.56
+ , Generated on Mon, 04 Aug 2025 05:26:42 GMT 
   ¦   Description: 
   ¦   Current Git Revision ae37ccf97e9ccbc358b4bd0ec2f041973209786a
   L--------------------------------------------------------------------------------------
@@ -157,12 +157,12 @@ $ScriptBlockModulesPathFunctions = "H4sIAAAAAAAACo3UUU/CMBSG4XsT/8NCvCUBvRGJJkQN
 # ------------------------------------
 # Script file - ModuleUpdater - 
 # ------------------------------------
-$ScriptBlockModuleUpdater = "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"
+$ScriptBlockModuleUpdater = "H4sIAAAAAAAACs0Y227bNvS9QP+BFTLExiqlBfYwFOiwJK7btE1i2HHzkORBkShbrSRqJNUgaPO4v9jX7Ut2eJNIWq4TtxumAIlCnfv9MGuqhOekQq8xDw+LHFf8jJCCHZO0KfAHTBl8nMR8ib48foTg2YEv8v+XaNCLc1RlhJaxIDqMzBHjcVEINE3EJvwSvSV5Fcr3lvruZwWxqxAo5g2tHLzHj+4ePxI/mVHhBN+sVWGcF9iocHFYpgXmB3mV5tViMGvqmlDOZkvSFOmEkgQzNrxSsHVM43Kg3iXuRBxgjungOK7SmBN6CxrsZHHBsEGSgNcgw9XOfsPJvAY4PC7ixdNtCLGbnCfLq50xoQlW50NtRktb16KbvKnx37IWY2A5YQ3ZIJHnXJxHHwE1aOVoKB2BjpqzfA3nYxkHKPiJBV3sgBwnoPdDwkfAR+KXQ8UKqu+LRXX+UDqKgCZRs/J5vWLHYFXSoD0U+gRD9DPajQT2bkspNZS2I5UKUibL4iJPReQzIdjgDDNuyBmJAS/cr1LkfVRCBEPt4DwbPLGoDXUiieec5hyHryglFAXHOWOQUkjJhQSwdr3OVSmWyoc5LUCqYMl5zV7s7cWUsYTmNW/KaJHzZXMd5WTvy7O7AIWZHTluBbkvlb0vz1coPUWBphKBfwMrlvXxhkQytgHTPnHsZ9IK7IdCsMtA5S78ZxnuomZJwzgpyfVHnPCrHQLs/MPfLQTxCOFAlk6+wJZXq2Ce9zHjytYtoMhMD8rxRucbD8o1t2V9D87JcCdAXbiuLoqi51ZJTwuSxMVkdvxcEmzjthdoZIBSHwjiz7zuQJ8QkSm8BPaIhQAEfUWHpIKmA34OxZcOXrSVI45LtOJeJM/PbmsV6iiUbkbhq30046RGIaRMg1cZfkWnDQ9PmqKwksPvZjM38joTnYKUNE9/dDubEJYLxi+fPXUaEqdNX2N7VcXXRdeO2uSe4sU7fDslhAtXvHl3OH9xOSMZv4kpvrTS83JCbjCdLXFR6IoaWdpe9moeGC5d5oUVMLKSz+LvppvnRVtO7bYer0iNwImgCpRArfMQSgmGJg1VxZVHeEywAJvXEEi3faxkZgREuzBoQ0QwCWUkjc5Pp6PVcHj974XD8H/vPDP+jcVwZOVMR06gKke93sYLsn/tK0sfLSpCsS+lZnAfuRSiwYgMm2EP4hkkl4PnUbxzYuCo+kw+4f4w+G+HW2cm/a6p9qgU8ll1RHpTiXtwW8dMzC4bg78zuo25Oqe8IQwG0otvGfIKabanH9rwyNAopp+mOPU96MXijxzIt5nHjRwibO2RpKXrhq+yCZC8Jgzy4YQg1iRLlIle1qJEUYQSimH4hcEuxVncFBzp7UyCRlab3bSCefa60HSuHjR1aVvp3i1hScUB2LJf287HlJRWQxeWkZhR53HHJhwC1hu6OinfAzQz09cMOmMiCqWOpil8OsZ8SVLYfWgOg4Lm1A1LQ29suWCcglk9wiJhejhFZwReRFLrqVyaEiUx5JEvsvLseUwr4bXgMK5EEdOVIvwNgasNs4w0MP/DnrZZXDvmHT/6CabH1JaHTI3eOdXGUjojB8uxg4WnB9Up/qPJKU7lfuNZMVxwh6uaxfUobksuY8Kl54TEA8uHS8mtHi7RH7zJrierO/pgVhe5LgnwW7poFXiItlZ9VZ9+efpL6vcyk1r2K7+eoVllxqRIMXXq7trVW1M8XObQUhXMujjtrcYOS7ckb2EHqLltymgtXA7rlXcH43aZGUHgJrJ19wm8bl7urQr+pYbV1VyibbXsVsahvM7wjGnftTyUWCmIeeQmwMJstRqp3YGHe/cVagK0H0qlRxrb6xJfXqbEVZ6JwphBK0Pz6ftOaKjk3bIrvHwcLyBEYpeqDp9zfC2KkqAk+1NHBfwo99fOUeGc4YOY5QlUCXmj40zIYrm9n+jqHsgWvLQELzvBD2ALuq/U5YrU5bZSe26UXlq5Y3GTu7cNd9j2TURrz28AynuNVoUewJWbCRSOcA3a/gJfZtbw4416oHyVELEEoPnZ+Nd+f1klRbnu77/+NF6DWVAsCxkk+C1qZDSniJN29ttQ8wZ6tLeHcPVJHoel4hJ8c5WE2DjOq7xsSuMOv9TqarRSgnpexdLe39fbEVhtD86g5Cm2xm4wUGkk0/gjc1nXFuecrZuClMVgCjnpG0nNY3ZDuUxtUhj+3P0DczzRed0ZAAA="
 
 # ------------------------------------
 # Script file - ModuleVersion - 
 # ------------------------------------
-$ScriptBlockModuleVersion = "H4sIAAAAAAAACn1STU/DMAy9I+0/ZFUO7aGVOEycuDA+xMTQxDY4TDtEbUoDaTw57hAf+++kH9k6CeaT9ez3/Owkr0xKCgy7kxSPtZKGFgDaTiGrtHyWaOvi9+CMuViNy0xLulImU+Y1nFebDSDZeQGVzmYIqbQ2Wre9G4GiDNu84c5qQJLEcCpMJgjwk10yngttpSc1jfZDUVqs+YMgaaktRIOzNlF52BWizlQdvOe88zwTVDj9U2vVLT2Nid2zJqBM3OT/KQdpg1ONJ2+OGXiHrUsWDsOFc9mpeO0o8rf08YKKZHyDCMiCsrHHDBBTRpESWn3JbOgAlitX2OsExyIoqULD+GOl9aGy61tabVv3az6uEP3Dnj5Qn8+vBQnfD4YcoXeyH+YwN4FuEcq4hv+a3D7cYfa92cK7jJ8cOJVUQMbiJSoW8LCZlnSdS9RRb2G/7JFasoA5Yf0r3Vc5Wp4f5gXnyUUyGnVaXme/7O4XIexWfw0DAAA="
+$ScriptBlockModuleVersion = "H4sIAAAAAAAACn1STU/DMAy9I+0/ZFUO7aGVOAAnLowPMTE0sQ0O0w5Rm9JAGk+OO8TH/jvpR7ZOgvlkPfs9PzvJK5OSAsPuJMUjraShOYC2E8gqLZ8l2rr4PThhLpajMtOSrpTJlHkNZ9V6DUh2VkClsylCKq2NVm3vWqAowzZvuNMakCQxnAiTCQL8ZJeM50Jb6UlNo/1QlBYr/iBIWmoL0eCkTVQedoWoM1UH7znvPE8FFU7/2Fp1S09jbHesMSgTN/l/ykHa4FTjyZtjBt5h65KFw3DuXHYqXjuK/C19vKAiGd8gArKgbOwxA8SUUaSEVl8yGzqA5coVdjrBoQhKqtAw/lhpva9s+5aWm9b9io8qRP+wxw/U5/NrQcL3gyFH6J3shznMTaBbhDKu4b8mtw+3n31vNvAu4ycHTiQVkLF4gYoFPGymJV3nAnXUW9gve6CWzGFGWP9K91UOluf7ecFpcpGcnXdaXme37PYX2QEBjQ0DAAA="
 
 # ------------------------------------
 # Script file - NamedPipe - 
@@ -416,7 +416,7 @@ $AutoUpdateCmd = Get-Command -Name "$AutoUpdateCommandName" -ErrorAction Ignore
 if($AutoUpdateCmd -ne $Null){
     Write-Host "$StrLog1" -f DarkRed -n
     Write-Host "Detected function"Invoke-ClientToolsAutoUpdate" -> attempting automatic module update" -f DarkYellow
-    &$AutoUpdateCmd.Name
+    &$AutoUpdateCmd.Name -Import
 }
 
 $ModuleVersionCommandName = "Get-ClientToolsModuleVersion"
