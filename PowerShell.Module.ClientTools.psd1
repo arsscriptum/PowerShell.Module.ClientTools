@@ -1,7 +1,7 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 05:26:42 GMT
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 05:28:58 GMT
 #̷\  Current Git Revision ae37ccf97e9ccbc358b4bd0ec2f041973209786a
 #̷\  ===================================================================
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.56
+    ModuleVersion     = '1.7.57
 '
 
-    GUID              = 'c7af4fa4-7523-4b5b-8ffa-086fefa4290f'
+    GUID              = '4c5ce92d-5266-4e7f-b3ae-c7981007063d'
 
     CompanyName       = 'Unknown'
 
