@@ -32,7 +32,7 @@ function Get-ClientToolsModuleVersion {
         return $LatestVersion.ToString()
     }
 
-    $Version = "1.6.26"
+    $Version = "1.7.34"
     return $Version
 }
 
