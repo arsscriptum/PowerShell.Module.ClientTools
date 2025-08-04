@@ -60,14 +60,13 @@ function New-ClientToolsModuleVersionFile {
 
 }
 
-
-
 function Invoke-ClientToolsAutoUpdate {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false)]
         [switch]$Force
     )
+
     $ClientToolsVersionPath = Get-ClientToolsModuleVersionPath
     $JsonPath = Join-Path $ClientToolsVersionPath "clienttools.json"
 
@@ -83,31 +82,42 @@ function Invoke-ClientToolsAutoUpdate {
         try {
             [version]$LatestVersion = Invoke-RestMethod -Uri "$($Data.VersionUrl)"
         } catch {
-            Write-Warning "Cannot Update -> No Version at $LatestVersion"
+            Write-Warning "Cannot Update -> No Version found at $($Data.VersionUrl)"
             return
         }
-        Write-Verbose "CurrVersion    $CurrVersion"
-        Write-Verbose "LatestVersion  $LatestVersion"
-        $UpdateRequired = (($LatestVersion -gt $CurrVersion) -Or ($Force))
-        if($UpdateRequired) {
-            Write-Verbose "Should Update -> Yes"
 
-            $psm1path = $Data.LocalPSM1
-            $psd1path = $Data.LocalPSD1
-            $Psd1Url = "{0}/{1}.psd1" -f $Data.UpdateUrl, $Data.ModuleName
-            $Psm1Url = "{0}/{1}.psm1" -f $Data.UpdateUrl, $Data.ModuleName
+        Write-Host "Current Version    $CurrVersion"
+        Write-Host "Latest  Version    $LatestVersion"
+        $UpdateRequired = (($LatestVersion -gt $CurrVersion) -or $Force)
 
-            Write-Verbose "Downloading $Psd1Url -> $psd1path"
+        if ($UpdateRequired) {
+            Write-Host "[Invoke-ClientToolsAutoUpdate] UpdateRequired" -f DarkRed
+
+            $VersionFolder = Join-Path -Path (Split-Path -Parent $Data.LocalPSD1) -ChildPath $LatestVersion
+            if (!(Test-Path $VersionFolder)) {
+                Write-Host "[Invoke-ClientToolsAutoUpdate] New Version Folder $VersionFolder" -f DarkRed
+                New-Item -ItemType Directory -Path $VersionFolder -Force | Out-Null
+            }
+
+            $psd1path = Join-Path $VersionFolder "$($Data.ModuleName).psd1"
+            $psm1path = Join-Path $VersionFolder "$($Data.ModuleName).psm1"
+
+            $Psd1Url = "$($Data.UpdateUrl)/$($Data.ModuleName).psd1"
+            $Psm1Url = "$($Data.UpdateUrl)/$($Data.ModuleName).psm1"
+
+            Write-Host "Updating Manifest from URL $Psd1Url -> $psd1path" -f Magenta
             Invoke-WebRequest -Uri $Psd1Url -OutFile $psd1path -UseBasicParsing -ErrorAction Stop
 
-            Write-Verbose "Downloading $Psm1Url -> $psm1path"
+            Write-Host "Updating Module from URL $Psm1Url -> $psm1path" -f Blue
             Invoke-WebRequest -Uri $Psm1Url -OutFile $psm1path -UseBasicParsing -ErrorAction Stop
 
-            # Update the version in the local json
+            # Update the json
             $Data.CurrentVersion = $LatestVersion.ToString()
+            $Data.LocalPSD1 = $psd1path
+            $Data.LocalPSM1 = $psm1path
             $Data | ConvertTo-Json -Depth 4 | Set-Content -Path $JsonPath -Encoding UTF8
 
-            Write-ClientToolsHost "Module successfully updated to version $LatestVersion"
+            Write-ClientToolsHost "✅ Module successfully updated to version $LatestVersion"
         }
         else {
             Write-Verbose "Should Update -> No"

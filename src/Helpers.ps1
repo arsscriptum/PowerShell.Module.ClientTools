@@ -7,6 +7,34 @@
 #║   Code licensed under the GNU GPL v3.0. See the LICENSE file for details.      ║
 #╚════════════════════════════════════════════════════════════════════════════════╝
 
+function Show-ModuleInstallPaths {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ModuleName
+    )
+
+    $paths = $env:PSModulePath -split ';'
+    $found = @()
+
+    foreach ($base in $paths) {
+        if (-not (Test-Path $base)) { continue }
+
+        $matches = Get-ChildItem -Path $base -Directory -Recurse -Force -ErrorAction SilentlyContinue |
+                   Where-Object { $_.Name -ieq $ModuleName }
+
+        foreach ($match in $matches) {
+            Write-Host "Found: $($match.FullName)" -ForegroundColor Green
+            Start-Process "explorer.exe" -ArgumentList "`"$($match.FullName)`""
+            $found += $match.FullName
+        }
+    }
+
+    if (-not $found) {
+        Write-Warning "No directories found for module '$ModuleName' in PSModulePath."
+    }
+}
+
 
 function Write-ProgressHelper{
     [CmdletBinding()]
