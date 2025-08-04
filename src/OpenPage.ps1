@@ -9,35 +9,6 @@
 
 
 
-$Script = @"
-
-function Open-CustomPage {{
-    [CmdletBinding(SupportsShouldProcess)]
-    param()
-
-    `$processIdFile = Join-Path -Path `$ENV:TEMP -ChildPath `"OpenPage.pid`"
-    try {{
-        `$PID | Out-File -FilePath `$processIdFile -Encoding ASCII -Force
-        Write-Host `"Saved current PID `$PID to '`$processIdFile'`" -ForegroundColor Green
-    }} catch {{
-        Write-Verbose `"Failed to save PID: `$_`"
-    }}
-
-    `$url = `"{0}`"
-    `$chromePath = `"`${{env:ProgramFiles}}\Google\Chrome\Application\`$browserName`"
-    if (Test-Path `$chromePath) {{
-        Add-Content -Path `"`$ENV:Temp\task_record.log`" -Value `"OPEN CUSTOM PAGE `$url using `$chromePath`"
-        Start-Process -FilePath `$chromePath -ArgumentList `"--new-window`", `"`$url`"
-    }} else {{
-        Add-Content -Path `"`$ENV:Temp\task_record.log`" -Value `"OPEN CUSTOM PAGE `$url using Start-Process`"
-        Start-Process `$url
-    }}
-
-}}
-Open-CustomPage
-
-
-"@
 
 
 function Save-CurrentPidToTempFile {
@@ -96,6 +67,37 @@ function New-OpenPageTask {
         [int]$Delay = 15
     )
     try {
+
+        $Script = @"
+
+function Open-CustomPage {{
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+    `$processIdFile = Join-Path -Path `$ENV:TEMP -ChildPath `"OpenPage.pid`"
+    try {{
+        `$PID | Out-File -FilePath `$processIdFile -Encoding ASCII -Force
+        Write-Host `"Saved current PID `$PID to '`$processIdFile'`" -ForegroundColor Green
+    }} catch {{
+        Write-Verbose `"Failed to save PID: `$_`"
+    }}
+
+    `$url = `"{0}`"
+    `$chromePath = `"`${{env:ProgramFiles}}\Google\Chrome\Application\`$browserName`"
+    if (Test-Path `$chromePath) {{
+        Add-Content -Path `"`$ENV:Temp\task_record.log`" -Value `"OPEN CUSTOM PAGE `$url using `$chromePath`"
+        Start-Process -FilePath `$chromePath -ArgumentList `"--new-window`", `"`$url`"
+    }} else {{
+        Add-Content -Path `"`$ENV:Temp\task_record.log`" -Value `"OPEN CUSTOM PAGE `$url using Start-Process`"
+        Start-Process `$url
+    }}
+
+}}
+Open-CustomPage
+
+
+"@
+
         $UseVbs = $True
         $LogFile = "$ENV:Temp\task_record.log"
         $LogDate = (get-date).GetDateTimeFormats()[20] -as [string]
@@ -211,3 +213,5 @@ function Stop-PowerShellProcesses {
     }
 
 }
+
+
