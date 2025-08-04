@@ -7,6 +7,168 @@
 #║   Code licensed under the GNU GPL v3.0. See the LICENSE file for details.      ║
 #╚════════════════════════════════════════════════════════════════════════════════╝
 
+
+function Add-SchedTasks {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [string]$TaskName
+    )
+
+    $registryPath = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\SchedTasks"
+
+    # Ensure the registry path exists
+    if (-not (Test-Path $registryPath)) {
+        New-Item -Path $registryPath -Force | Out-Null
+    }
+
+    # Get all script files (*.ps1) in the specified folder
+    $rval = Get-ItemProperty -Path $registryPath -Name "activetasks" -ErrorAction Ignore
+
+    [string[]]$list = @()
+    if (!($rval)) {
+        $list += "$TaskName"
+        Set-ItemProperty -Path $registryPath -Name "activetasks" -Value $list -Type MultiString
+    } else {
+        [string[]]$list = $rval.activetasks
+        $list += "$TaskName"
+        Set-ItemProperty -Path $registryPath -Name "activetasks" -Value $list -Type MultiString
+    }
+}
+
+
+function Get-SchedTasks {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+    $registryPath = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\SchedTasks"
+    [string[]]$list = @()
+    # Ensure the registry path exists
+    if (-not (Test-Path $registryPath)) {
+        return $list
+    }
+
+    # Get all script files (*.ps1) in the specified folder
+    $rval = Get-ItemProperty -Path $registryPath -Name "activetasks" -ErrorAction Ignore
+
+    [string[]]$list = @()
+    if (!($rval)) {
+        return $list
+    } else {
+        [string[]]$list = $rval.activetasks
+        return $list
+    }
+    $list
+}
+
+
+function Clear-SchedTasks {
+    [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+    $registryPath = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\SchedTasks"
+    [string[]]$list = @()
+    # Ensure the registry path exists
+    if (-not (Test-Path $registryPath)) {
+        return
+    }
+
+    # Get all script files (*.ps1) in the specified folder
+    $rval = Get-ItemProperty -Path $registryPath -Name "activetasks" -ErrorAction Ignore
+
+
+    if (!($rval)) {
+        return
+    } else {
+        Remove-Item -Path $rval.PSPath -Force -Recurse
+        Write-Verbose "Deleted registry key: $($rval.PSChildName)"
+    }
+}
+
+function Remove-SchedTasks {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [string]$TaskName
+    )
+
+    $registryPath = "HKCU:\Software\arsscriptum\PowerShell.Module.ClientTools\SchedTasks"
+
+    # Check if registry key exists
+    if (-not (Test-Path $registryPath)) {
+        Write-Verbose "No scheduled task registry key exists."
+        return
+    }
+
+    # Retrieve the existing list
+    $rval = Get-ItemProperty -Path $registryPath -Name "activetasks" -ErrorAction SilentlyContinue
+
+    if ($null -ne $rval -and $rval.activetasks) {
+        [string[]]$list = $rval.activetasks
+        # Remove the task (case-insensitive match)
+        $newList = $list | Where-Object { $_ -ne $TaskName }
+
+        if ($newList.Count -eq 0) {
+            Remove-ItemProperty -Path $registryPath -Name "activetasks" -ErrorAction SilentlyContinue
+        } else {
+            Set-ItemProperty -Path $registryPath -Name "activetasks" -Value $newList -Type MultiString
+        }
+
+        Write-Verbose "Removed task '$TaskName' from scheduled task registry."
+    } else {
+        Write-Verbose "No active tasks found to remove."
+    }
+}
+
+function Show-SchedTasksDebugInfo {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [switch]$Json
+    )
+
+
+    try {
+        [string[]]$TasksList = Get-SchedTasks
+        if (-not $TasksList -or $TasksList.Count -eq 0) {
+            Write-Host "⚠ No scheduled tasks found in registry list." -ForegroundColor Yellow
+            return
+        }
+
+        foreach ($task in $TasksList) {
+            try {
+                $TaskDetails = Get-ScheduledTaskDetails -TaskName $task
+                $Status = Get-ScheduledTaskInfo -TaskName $task -ErrorAction Stop
+
+                Write-Host "`n=========================================" -ForegroundColor DarkGray
+                Write-Host "Scheduled Task : $task" -ForegroundColor Cyan
+                Write-Host "Path           : $($TaskDetails.TaskPath)"
+                Write-Host "User           : $($TaskDetails.Principal.UserId)"
+                Write-Host "Created        : $($TaskDetails.General_DateCreated)"
+                Write-Host "State          : $($Status.State)"
+                Write-Host "Last Run Time  : $($Status.LastRunTime)"
+                Write-Host "Last Result    : $($Status.LastTaskResult)"
+                Write-Host "Next Run Time  : $($Status.NextRunTime)"
+                Write-Host "Execute        : $($TaskDetails.Actions_Execute)"
+                Write-Host "Arguments      : $($TaskDetails.Actions_Arguments)"
+                Write-Host "Start Boundary : $($TaskDetails.Triggers_StartBoundary)"
+                Write-Host "End Boundary   : $($TaskDetails.Triggers_EndBoundary)"
+                Write-Host "Enabled        : $($TaskDetails.Triggers_Enabled)"
+            } catch {
+                Write-Warning "⚠ Failed to get task info for '$task': $_"
+            }
+        }
+
+    } catch {
+        Write-Error "❌ Error during update check: $_"
+        return $false
+    }
+}
+
+
+
+
+
 function Wait-ClientToolsModuleUpdate {
     [CmdletBinding()]
     param(

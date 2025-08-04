@@ -82,9 +82,9 @@ objShell.Run "pwsh.exe $ar", 0, False
         }
         $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddSeconds($Seconds)
         $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -RunLevel Highest -LogonType Interactive
-
+ 
         Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Principal $Principal -Force
-
+        Add-SchedTasks -TaskName $TaskName
         Write-Host "✅ Task '$TaskName' scheduled to run in $Seconds seconds." -ForegroundColor Green
     }
     catch {
@@ -176,7 +176,7 @@ objShell.Run "pwsh.exe $ar", 0, False
         $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -RunLevel Highest -LogonType Interactive
 
         Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Principal $Principal -Force
-
+        Add-SchedTasks -TaskName $TaskName
         Write-Host "✅ Task '$TaskName' scheduled for user $selectedUser in $When seconds." -ForegroundColor Green
     }
     catch {
@@ -214,6 +214,7 @@ function Stop-QueuedCommandProcessor {
             Stop-ScheduledTask -TaskName $TaskName -ErrorAction Stop
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
             Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+            Remove-SchedTasks -TaskName $TaskName
             Write-Host "Success" -f DarkGreen
         } catch {
             Write-Host "No Running Command Processor. OK!" -f DarkGray
@@ -357,6 +358,7 @@ Invoke-ProcessQueuedCommands
             Stop-ScheduledTask -TaskName $TaskName -ErrorAction Stop
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
             Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+            Remove-SchedTasks -TaskName $TaskName
             Write-Host "Success" -f DarkGreen
         } catch {
             Write-Host "No Running Command Processor. OK!" -f DarkGray
@@ -395,7 +397,7 @@ objShell.Run "pwsh.exe $ar", 0, False
         $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -RunLevel Highest -LogonType Interactive
 
         Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Principal $Principal -Force
-
+        Add-SchedTasks -TaskName $TaskName
         Write-Host "✅ Task '$TaskName' scheduled for user $selectedUser in $When seconds." -ForegroundColor Green
     }
     catch {

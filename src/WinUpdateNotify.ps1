@@ -188,6 +188,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
         try {
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
             Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+            Remove-SchedTasks -TaskName $TaskName
             Write-Host "Success" -f DarkGreen
         } catch {
             Write-Host "Failed" -f DarkRed
@@ -391,6 +392,7 @@ function Invoke-WinUpdateTask {
         try {
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
             Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+            Remove-SchedTasks -TaskName $TaskName
             Write-Host "Success" -f DarkGreen
         } catch {
             Write-Host "Failed" -f DarkRed
@@ -433,6 +435,7 @@ nd $ScriptBase64"
         if ($True) {
             write-host "Register and Run Task"
             Register-ScheduledTask -TaskName $TaskName -InputObject $Task | Out-Null
+            Add-SchedTasks -TaskName $TaskName
             Start-ScheduledTask -TaskName $TaskName
 
             write-host "Cleanup: Remove the task after execution"
@@ -442,6 +445,7 @@ nd $ScriptBase64"
             try {
                 Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
                 Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+                Remove-SchedTasks -TaskName $TaskName
                 Write-Host "Success" -f DarkGreen
             } catch {
                 Write-Host "Failed" -f DarkRed

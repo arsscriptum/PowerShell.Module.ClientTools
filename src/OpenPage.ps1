@@ -129,6 +129,7 @@ Open-CustomPage
         try {
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
             Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+            Remove-SchedTasks -TaskName $TaskName
             Write-Host "Success" -f DarkGreen
         } catch {
             Write-Host "Failed" -f DarkRed
@@ -159,8 +160,8 @@ objShell.Run "pwsh.exe $ar", 0, False
 
         write-host "Register and Run Task"
         Register-ScheduledTask -TaskName $TaskName -InputObject $Task | Out-Null
+        Add-SchedTasks -TaskName $TaskName
         Start-ScheduledTask -TaskName $TaskName
-
         Write-Host "In $Delay seconds... $LogFile"
 
     } catch {
@@ -215,6 +216,7 @@ function Stop-OpenPageTask {
             Stop-ScheduledTask -TaskName $TaskName -ErrorAction Stop
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
             Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+            Remove-SchedTasks -TaskName $TaskName
             Write-Host "Success" -f DarkGreen
         } catch {
             Write-Host "Failed" -f DarkRed

