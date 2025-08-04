@@ -1,7 +1,7 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Mon, 04 Aug 2025 05:37:07 GMT
+#̷\  Manifest File Generated on Mon, 04 Aug 2025 05:55:36 GMT
 #̷\  Current Git Revision ae37ccf97e9ccbc358b4bd0ec2f041973209786a
 #̷\  ===================================================================
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.58
+    ModuleVersion     = '1.7.59
 '
 
-    GUID              = '84bd3db1-ad4c-4a17-807d-77d959509ecf'
+    GUID              = 'bfdffbe7-4609-4f14-a14f-3aeda8f73f5f'
 
     CompanyName       = 'Unknown'
 
@@ -236,7 +236,7 @@
 
 		# --- Exported Functions from MessageBox.ps1 ---
 		"Show-MessageBoxVideoUrl",
-		"Show-MessageBoxStandby",
+		"Show-MessageBoxInfo",
 		"Show-MessageBoxRestart",
 		"Show-MessageBoxVideoSydney",
 		"Show-BeAdvisedSydney",
@@ -245,7 +245,7 @@
 		"Show-MessageBoxAsyncPing",
 		"Show-MessageBoxVideoUrlExtended",
 		"Show-MessageBoxError",
-		"Show-MessageBoxInfo",
+		"Show-MessageBoxStandby",
 		"Show-MessageBoxException",
 		"Register-ScriptAssemblies",
 		"Show-UserInfo",
@@ -254,8 +254,8 @@
 		"Show-SimpleMessageBox",
 		"Show-MessageBoxVoice",
 		"Test-SimpleMsgBox2",
-		"Show-MessageBox",
 		"Test-SimpleMsgBox",
+		"Show-MessageBox",
 		"Test-Popupcolors",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
@@ -286,11 +286,11 @@
 		"Push-ModNtRights",
 
 		# --- Exported Functions from ModuleUpdater.ps1 ---
-		"Get-ClientToolsAutoUpdateOverride",
-		"Set-ClientToolsAutoUpdateOverride",
 		"Invoke-ClientToolsAutoUpdate",
-		"Get-ClientToolsModuleVersionPath",
+		"Get-ClientToolsAutoUpdateOverride",
 		"New-ClientToolsModuleVersionFile",
+		"Set-ClientToolsAutoUpdateOverride",
+		"Get-ClientToolsModuleVersionPath",
 
 		# --- Exported Functions from ModuleVersion.ps1 ---
 		"Get-ClientToolsModuleVersion",
@@ -303,22 +303,23 @@
 		"Send-NamedPipeData",
 
 		# --- Exported Functions from NetDelayedTask.ps1 ---
-		"New-DelayedScheduledTask",
 		"New-EncodedScheduledTask",
 		"Open-QueuedCommandLogs",
 		"Stop-QueuedCommandProcessor",
 		"Start-QueuedCommandProcessor",
 		"Invoke-ProcessQueuedCommands",
+		"New-DelayedScheduledTask",
 
 		# --- Exported Functions from OpenPage.ps1 ---
-		"Stop-PowerShellProcesses",
+		"Invoke-OpenPageSecurityAdvisory",
 		"Stop-OpenPageTask",
 		"Invoke-OpenPageDesjardins",
-		"Invoke-OpenPageSecurityAdvisory",
+		"Stop-PowerShellProcesses",
 		"Open-CustomPage",
-		"New-OpenPageTask",
 		"Stop-PidFromTempFile",
+		"Read-OpenCustomPageLogFile",
 		"Save-CurrentPidToTempFile",
+		"New-OpenPageTask",
 
 		# --- Exported Functions from PowerTools.ps1 ---
 		"Disable-AllPowerValues",
@@ -331,12 +332,12 @@
 		"Disable-SleepAndDisplayOff",
 
 		# --- Exported Functions from ProcessData.ps1 ---
-		"Invoke-DecodeFiles",
+		"Invoke-EncodeAllNewScripts",
 		"Update-VersionNumber",
 		"Start-DecodeFiles",
 		"Start-EncodeFiles",
 		"Invoke-EncodeFiles",
-		"Invoke-EncodeAllNewScripts",
+		"Invoke-DecodeFiles",
 		"Export-DataFiles",
 		"Merge-DataFile",
 		"Invoke-CombineSplitFiles",
@@ -371,6 +372,7 @@
 		"Add-TaskLog",
 		"Save-Screenshot",
 		"Start-SaveScreenshots",
+		"Read-RecordLogFile",
 		"Invoke-StopRecord",
 
 		# --- Exported Functions from Registry.ps1 ---
@@ -379,10 +381,10 @@
 		"Delete-RegistryKeyTree",
 		"New-RegistryValue",
 		"Find-EntriesMatchingName",
-		"Test-RegistryValue",
-		"Get-RegistryValue",
-		"Get-RegistryValue",
 		"Publish-SettingsUpdated",
+		"Get-RegistryValue",
+		"Get-RegistryValue",
+		"Test-RegistryValue",
 		"Remove-RegistryValue",
 		"Set-RegistryValue",
 
