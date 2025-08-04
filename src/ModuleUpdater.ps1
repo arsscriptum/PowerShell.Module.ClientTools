@@ -27,9 +27,19 @@ function New-ClientToolsModuleVersionFile {
     $ClientToolsVersionPath = Get-ClientToolsModuleVersionPath
     $JsonPath = (Join-Path $ClientToolsVersionPath "clienttools.json")
     $CurrDate = Get-Date -UFormat "%s"
-    $ModuleName = (Get-ClientToolsModuleInformation).ModuleName
-    $psm1path = (Get-ClientToolsModuleInformation).ModulePath
-    $psd1path = $psm1path.Replace('.psm1', '.psd1')
+    $ModuleName = (Get-ClientToolsModuleInformation).ModuleName.Name
+    $ModuleInstallPath = (Get-ClientToolsModuleInformation).ModuleInstallPath
+    $ModulePath = (Get-ClientToolsModuleInformation).ModulePath
+
+    $psm1path = (Join-Path "$ModuleInstallPath" "$ModuleName") + '.psm1'
+    $psd1path =  (Join-Path "$ModuleInstallPath" "$ModuleName") + '.psd1'
+
+    $ValidFiles = ((Test-Path "$psm1path") -And (Test-Path "$psd1path"))
+    if(!$ValidFiles){
+        Write-Error "Missing Module File"
+    }
+
+
     $UpdateUrl = "https://arsscriptum.github.io/{0}" -f $ModuleName
     $VersionUrl = "https://arsscriptum.github.io/{0}/{1}" -f $ModuleName, "Version.nfo"
     $CurrVersion = Get-ClientToolsModuleVersion
@@ -98,7 +108,6 @@ function Invoke-ClientToolsAutoUpdate {
             $Data | ConvertTo-Json -Depth 4 | Set-Content -Path $JsonPath -Encoding UTF8
 
             Write-ClientToolsHost "Module successfully updated to version $LatestVersion"
-            Import-Module "$($Data.ModuleName)" -Force
         }
         else {
             Write-Verbose "Should Update -> No"

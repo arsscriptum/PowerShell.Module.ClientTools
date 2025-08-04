@@ -11,10 +11,8 @@
 
 function Get-LoggedInUsers {
     [CmdletBinding(SupportsShouldProcess)]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)]
-        [string]$scriptFolder = "C:\Programs\Scripts\Login"
-    )
+    param()
+    
     try {
         $PsLoggedonCmd = Get-Command "PsLoggedon64.exe" -ErrorAction Ignore
         if ($Null -eq $PsLoggedonCmd) {

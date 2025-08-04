@@ -6,10 +6,12 @@
 #║   Guillaume Plante <codegp@icloud.com>                                         ║
 #║   Code licensed under the GNU GPL v3.0. See the LICENSE file for details.      ║
 #╚════════════════════════════════════════════════════════════════════════════════╝
+
+
 [CmdletBinding(SupportsShouldProcess)]
 param(
     [Parameter(Mandatory = $False,position=0)]
-    [ValidateSet('min', 'all', 'doc')]
+    [ValidateSet('min', 'all', 'doc','deploy')]
     [string]$Type='min'
 )
 
@@ -109,9 +111,13 @@ if($Type -eq 'min'){
   makeall
 }elseif($Type -eq 'doc'){
     make -Documentation
+}elseif($Type -eq 'deploy'){
+    make -Publish -PowerShellGallery -Deploy
 }else{
     Write-Host "Error" -f DarkRed
 }
+
+
 
 Write-Host "Updated module version $newVersion" -ForegroundColor Green
 
