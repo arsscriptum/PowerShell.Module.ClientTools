@@ -1,8 +1,8 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Tue, 05 Aug 2025 06:28:40 GMT
-#̷\  Current Git Revision 16625086ae46b657372ad034e19f6088772f8c82
+#̷\  Manifest File Generated on Tue, 05 Aug 2025 19:57:09 GMT
+#̷\  Current Git Revision 00d1d0b1bcd35336bb2cfee05a1c49a2c7381bee
 #̷\  ===================================================================
 
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.73
+    ModuleVersion     = '1.7.74
 '
 
-    GUID              = 'dd99d79e-1ab7-4074-aaa2-52469b150fd6'
+    GUID              = '570b6b42-3cb9-46b6-bf4f-c6ff40cde4b5'
 
     CompanyName       = 'Unknown'
 
@@ -75,84 +75,92 @@
 		"Test-ClientToolsModuleConfig",
 		"Get-ClientToolsServer",
 		"Get-ClientToolsDefaultUsername",
-		"Get-ClientToolsDevAccountOverride",
+		"Set-ClientToolsDefaultUsername",
 		"Get-ClientToolsModuleUserAgent",
 		"Set-ClientToolsDevAccountOverride",
+		"Get-ClientToolsDevAccountOverride",
 		"Get-ClientToolsAppCredentialID",
 		"Get-ClientToolsUserCredentialID",
-		"Set-ClientToolsDefaultUsername",
 
 		# --- Exported Functions from ConfigureWellKnownPaths.ps1 ---
 		"Update-WellKnownPaths",
-		"Set-EnvironmentVariable",
-		"Publish-RegistryChanges",
-		"Publish-SettingsUpdated",
+		"Get-CustomPathValues",
 		"Update-ModulesShortcuts",
 		"Get-DocumentsPath",
-		"Get-CustomPathValues",
+		"Publish-RegistryChanges",
+		"Set-EnvironmentVariable",
+		"Publish-SettingsUpdated",
 
 		# --- Exported Functions from ConfigureWindowsTerminal.ps1 ---
-		"Edit-TerminalConfig",
-		"Save-TerminalConfig",
 		"Get-WindowsTerminalConfigPath",
 		"Get-WindowsTerminalProfilePath",
+		"Edit-TerminalConfig",
+		"Save-TerminalConfig",
 
 		# --- Exported Functions from ControlMouse.ps1 ---
-		"Get-RegistryInstanceId",
-		"Set-RegistryInstanceId",
-		"Get-PSControlsRegistryRoot",
-		"Disable-LocalMouse",
 		"Get-LocalMouseStatus",
 		"Enable-LocalMouse",
+		"Disable-LocalMouse",
+		"Set-RegistryInstanceId",
+		"Get-RegistryInstanceId",
+		"Get-PSControlsRegistryRoot",
 
 		# --- Exported Functions from ConvertScriptVar.ps1 ---
 		"ConvertTo-ScriptVariable",
 
 		# --- Exported Functions from Credential.ps1 ---
 		"Get-ElevatedCredential",
-		"Get-AppCredentials",
-		"Register-AppCredentials",
-		"Remove-AppCredentials",
-		"Show-RegisteredCredentials",
-		"Get-CredentialsRegistryPath",
 		"Get-CoreModuleRegistryPath",
+		"Get-CredentialsRegistryPath",
+		"Show-RegisteredCredentials",
+		"Remove-AppCredentials",
+		"Register-AppCredentials",
+		"Get-AppCredentials",
 
 		# --- Exported Functions from CustomPathFunctions.ps1 ---
-		"Push-CodeTemplates",
-		"Push-WinSandbox",
-		"Push-Templates",
-		"Push-CodeSandbox",
-		"Push-ScriptsSandbox",
-		"Push-PowerShellSandbox",
 		"Push-Sandbox",
-		"Push-ProfilePath",
-		"Push-MyCode",
-		"Push-DevelopmentRoot",
-		"Push-RedditSupport",
+		"Push-PowerShellSandbox",
+		"Push-ScriptsSandbox",
 		"Push-siteroot",
-		"Push-wwwroot2",
+		"Push-WinSandbox",
+		"Push-CodeTemplates",
+		"Push-Templates",
+		"Push-ProfilePath",
+		"Push-CodeSandbox",
+		"Push-MyCode",
 		"Push-wwwroot",
+		"Push-RedditSupport",
+		"Push-wwwroot2",
 		"Push-ToolsRoot",
 		"Push-ScriptsRoot",
+		"Push-DevelopmentRoot",
 		"Push-DejaToolsRootDirectory",
 		"Push-MyDocuments",
 		"Push-moddev",
 
 		# --- Exported Functions from Decode.ps1 ---
 		"Export-DataFiles",
-		"Invoke-DecodeFiles",
 		"Merge-DataFile",
-		"Start-DecodeFiles",
+		"Invoke-DecodeFiles",
 		"Get-ScriptEncodeAppCredentials",
-		"Invoke-CombineSplitFiles",
 		"Invoke-AutoUpdateProgress",
+		"Invoke-CombineSplitFiles",
+		"Start-DecodeFiles",
+
+		# --- Exported Functions from DirectoryClone.ps1 ---
+		"Invoke-UserHomeClone",
+		"Copy-FilteredUserProfile",
+
+		# --- Exported Functions from DirectorySize.ps1 ---
+		"Get-FolderSize",
+		"Get-FirstLevelFolderSizes",
 
 		# --- Exported Functions from Encode.ps1 ---
 		"Invoke-EncodeAllNewScripts",
-		"Invoke-EncodeFiles",
+		"Start-EncodeFiles",
 		"Import-DataFiles",
 		"Split-DataFile",
-		"Start-EncodeFiles",
+		"Invoke-EncodeFiles",
 		"Invoke-AutoUpdateProgress",
 		"Update-VersionNumber",
 		"Get-ScriptEncodeAppCredentials",
@@ -211,53 +219,53 @@
 		"Get-TerminalStartingDirectory",
 
 		# --- Exported Functions from Helpers.ps1 ---
-		"Get-DateForFileName",
 		"Get-DateString",
 		"Get-UnixTime",
 		"ConvertTo-UnixTime",
 		"ConvertFrom-UnixTime",
 		"ConvertTo-CTime",
+		"ConvertFrom-Ctime",
 		"Write-ClientToolsHost",
 		"Write-ProgressHelper",
 		"Show-ModuleInstallPaths",
 		"Wait-ClientToolsModuleUpdate",
 		"Invoke-EnsureSharedScriptFolder",
-		"ConvertFrom-Ctime",
+		"Get-DateForFileName",
 
 		# --- Exported Functions from History.ps1 ---
 		"Search-PsHistory",
-		"Out-SplitMatchLine",
 		"Get-FileInfoWithTimeSpan",
 		"Search-StringInFile",
+		"Out-SplitMatchLine",
 
 		# --- Exported Functions from Initialize.ps1 ---
-		"AutoInitialize-ClientToolsModule",
 		"Uninitialize-ClientToolsModule",
 		"Initialize-ClientToolsModule",
+		"AutoInitialize-ClientToolsModule",
 
 		# --- Exported Functions from ManageScreenshots.ps1 ---
 		"Invoke-ManageScreenshotArchive",
 
 		# --- Exported Functions from Memory.ps1 ---
+		"Get-ProcessCmdLine",
 		"Get-ProcessMemoryUsage",
 		"Get-MemoryUsageForAllProcesses",
 		"Get-TopMemoryUsers",
 		"Get-ProcessMemoryUsageDetails",
 		"Get-ProcessCmdLineById",
-		"Get-ProcessCmdLine",
 
 		# --- Exported Functions from MessageBox.ps1 ---
+		"Show-MessageBoxStandby",
 		"Show-MessageBoxRestart",
 		"Show-MessageBoxInfo",
-		"Show-MessageBoxStandby",
 		"Show-MessageBoxVideoUrl",
 		"Show-BeAdvisedSydney",
+		"Show-MessageBoxVideoUrlExtended",
 		"Show-MessageBoxScriptError",
-		"Show-MessageBoxServices",
 		"Show-MessageBoxAsyncPing",
 		"Show-MessageBoxVideoSydney",
 		"Show-MessageBoxError",
-		"Show-MessageBoxVideoUrlExtended",
+		"Show-MessageBoxServices",
 		"Show-MessageBoxException",
 		"Test-Popupcolors",
 		"Show-MessageBox",
@@ -265,9 +273,9 @@
 		"Test-SimpleMsgBox",
 		"Show-SimpleMessageBox",
 		"Show-Popup",
-		"Show-MessageBoxVoice",
 		"Get-MessageBoxResult",
 		"Show-UserInfo",
+		"Show-MessageBoxVoice",
 		"Register-ScriptAssemblies",
 
 		# --- Exported Functions from ModulesPathFunctions.ps1 ---
@@ -283,45 +291,45 @@
 		"Push-ModProfileUtils",
 		"Push-ModTools",
 		"Push-ModOpenAI",
-		"Push-ModDownloader",
-		"Push-ModMiniPc",
 		"Push-ModManageMini",
-		"Push-ModGithub",
-		"Push-ModExpressVPN",
-		"Push-ModDocker",
-		"Push-ModCryptography",
-		"Push-ModCore",
-		"Push-ModCompiler",
-		"Push-ModAssert",
-		"Push-Mod1190",
+		"Push-ModMiniPc",
 		"Push-Mod1138",
+		"Push-Mod1190",
 		"Push-ModNtRights",
+		"Push-ModCompiler",
+		"Push-ModCore",
+		"Push-ModAssert",
+		"Push-ModDocker",
+		"Push-ModDownloader",
+		"Push-ModExpressVPN",
+		"Push-ModGithub",
+		"Push-ModCryptography",
 
 		# --- Exported Functions from ModuleUpdater.ps1 ---
-		"Get-ClientToolsAutoUpdateOverride",
-		"Set-ClientToolsAutoUpdateOverride",
-		"Invoke-ClientToolsAutoUpdate",
 		"Get-ClientToolsModuleVersionPath",
 		"New-ClientToolsModuleVersionFile",
+		"Set-ClientToolsAutoUpdateOverride",
+		"Get-ClientToolsAutoUpdateOverride",
+		"Invoke-ClientToolsAutoUpdate",
 
 		# --- Exported Functions from ModuleVersion.ps1 ---
 		"Get-ClientToolsModuleVersion",
 
 		# --- Exported Functions from NamedPipe.ps1 ---
-		"New-NamedPipeServer",
-		"New-NamedPipeServerAsync",
-		"Start-NamedPipeServerJob",
-		"New-NamedPipeClient",
 		"Send-NamedPipeData",
+		"New-NamedPipeClient",
+		"New-NamedPipeServerAsync",
+		"New-NamedPipeServer",
+		"Start-NamedPipeServerJob",
 
 		# --- Exported Functions from NetDelayedTask.ps1 ---
 		"Invoke-ProcessQueuedCommands",
-		"Start-QueuedCommandProcessor",
-		"Stop-QueuedCommandProcessor",
-		"Open-QueuedCommandLogs",
-		"Read-QueuedCommandLogs",
-		"New-EncodedScheduledTask",
 		"New-DelayedScheduledTask",
+		"New-EncodedScheduledTask",
+		"Read-QueuedCommandLogs",
+		"Open-QueuedCommandLogs",
+		"Stop-QueuedCommandProcessor",
+		"Start-QueuedCommandProcessor",
 
 		# --- Exported Functions from NetworkCacheReset.ps1 ---
 		"Clear-ChromeCache",
@@ -334,11 +342,11 @@
 		"Stop-PowerShellProcesses",
 		"Invoke-OpenPageDesjardins",
 		"Invoke-OpenPageSecurityAdvisory",
-		"Read-OpenCustomPageLogFile",
+		"Open-CustomPage",
 		"New-OpenPageTask",
 		"Stop-PidFromTempFile",
+		"Read-OpenCustomPageLogFile",
 		"Save-CurrentPidToTempFile",
-		"Open-CustomPage",
 
 		# --- Exported Functions from PowerTools.ps1 ---
 		"Disable-AllPowerValues",
@@ -352,66 +360,75 @@
 
 		# --- Exported Functions from ProcessData.ps1 ---
 		"Invoke-DecodeFiles",
-		"Update-VersionNumber",
-		"Invoke-EncodeAllNewScripts",
+		"Start-DecodeFiles",
 		"Start-EncodeFiles",
 		"Invoke-EncodeFiles",
 		"Export-DataFiles",
-		"Start-DecodeFiles",
+		"Update-VersionNumber",
 		"Merge-DataFile",
 		"Invoke-CombineSplitFiles",
 		"Split-DataFile",
 		"Invoke-SplitDataFile",
 		"Invoke-AutoUpdateProgress",
 		"Import-DataFiles",
+		"Invoke-EncodeAllNewScripts",
 
 		# --- Exported Functions from processlist.ps1 ---
 		"Get-ProcessList",
 
 		# --- Exported Functions from Prompt.ps1 ---
-		"Start-Explorer",
-		"Reset-Prompt",
-		"Set-SmallPrompt",
-		"Show-Prompt",
-		"Show-Header",
+		"Show-PromptNoPath",
 		"Invoke-IsAdministrator",
 		"Show-SystemInfo",
 		"Invoke-IsAdministrator",
-		"Show-PromptNoPath",
+		"Show-Header",
+		"Show-Prompt",
+		"Set-SmallPrompt",
+		"Reset-Prompt",
+		"Start-Explorer",
 
 		# --- Exported Functions from QueuedCommands.ps1 ---
-		"New-QueuedCommand",
-		"Read-QueuedCommandsLogFile",
 		"Test-ProcessQueuedCommands",
 		"Clear-QueuedCommands",
+		"New-QueuedCommand",
+		"Read-QueuedCommandsLogFile",
 
 		# --- Exported Functions from Record.ps1 ---
-		"Invoke-StopRecord",
-		"Start-SaveScreenshots",
-		"Save-Screenshot",
 		"Invoke-MapRemoteDrive",
-		"Invoke-StartRecord",
 		"Read-RecordLogFile",
+		"Invoke-StartRecord",
 		"Add-TaskLog",
+		"Save-Screenshot",
+		"Start-SaveScreenshots",
+		"Invoke-StopRecord",
 
 		# --- Exported Functions from Registry.ps1 ---
+		"Delete-RegistryKeyTree",
 		"Set-RegistryValue",
 		"Set-RegistryValue2",
 		"Get-UserConfirmationRegDel",
-		"Delete-RegistryKeyTree",
 		"New-RegistryValue",
-		"Find-EntriesMatchingName",
+		"Publish-SettingsUpdated",
+		"Remove-RegistryValue",
 		"Get-RegistryValue",
 		"Get-RegistryValue",
 		"Test-RegistryValue",
-		"Publish-SettingsUpdated",
-		"Remove-RegistryValue",
+		"Find-EntriesMatchingName",
 
 		# --- Exported Functions from RemoteDesktop.ps1 ---
 		"Enable-RemoteDesktop",
 
 		# --- Exported Functions from RestartScript.ps1 ---
 		"Invoke-RestartWithMessage",
+
+		# --- Exported Functions from Robocopy.ps1 ---
+		"Write-RoboLog",
+		"Add-RobocopyPrivileges",
+		"Remove-RobocopyPrivileges",
+		"Invoke-Robocopy",
+		"Invoke-UserHomeClone",
+		"ConvertFrom-AclDirectorySec",
+		"Grant-DirectoryPermission",
 
 		# --- Exported Functions from SaveEditProfile.ps1 ---
 		"Reload-Profile",
