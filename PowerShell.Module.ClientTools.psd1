@@ -1,7 +1,7 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Tue, 05 Aug 2025 02:29:50 GMT
+#̷\  Manifest File Generated on Tue, 05 Aug 2025 06:16:45 GMT
 #̷\  Current Git Revision 16625086ae46b657372ad034e19f6088772f8c82
 #̷\  ===================================================================
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.71
+    ModuleVersion     = '1.7.72
 '
 
-    GUID              = 'cc40e081-aaf8-4261-adbb-8798349ff429'
+    GUID              = '215b68be-13ee-432c-8f5c-8740f1eb6946'
 
     CompanyName       = 'Unknown'
 
@@ -353,11 +353,11 @@
 		# --- Exported Functions from ProcessData.ps1 ---
 		"Invoke-DecodeFiles",
 		"Update-VersionNumber",
-		"Start-DecodeFiles",
 		"Invoke-EncodeAllNewScripts",
+		"Start-EncodeFiles",
 		"Invoke-EncodeFiles",
 		"Export-DataFiles",
-		"Start-EncodeFiles",
+		"Start-DecodeFiles",
 		"Merge-DataFile",
 		"Invoke-CombineSplitFiles",
 		"Split-DataFile",
@@ -414,9 +414,9 @@
 		"Invoke-RestartWithMessage",
 
 		# --- Exported Functions from SaveEditProfile.ps1 ---
-		"Sync-Profile",
-		"Edit-Profile",
 		"Reload-Profile",
+		"Edit-Profile",
+		"Sync-Profile",
 		"Get-GitExecutablePath",
 		"Save-Profile",
 
@@ -427,14 +427,15 @@
 		"Unregister-AllSchedTasks",
 		"ConvertFrom-CimType",
 		"Show-SchedTasksDebugInfo",
+		"Remove-SchedTasks",
 		"Convert-SchedTaskStateValueToString",
-		"Clear-SchedTasks",
 		"Get-SchedTasks",
 		"Add-SchedTasks",
 		"Read-SchedTaskProperties",
 		"Write-SchedTaskProperties",
 		"Remove-SchedTaskProperties",
-		"Remove-SchedTasks",
+		"Set-EventChannelEnable",
+		"Clear-SchedTasks",
 
 		# --- Exported Functions from SearchPattern.ps1 ---
 		"Search-Pattern",
@@ -448,12 +449,12 @@
 		"isIE",
 
 		# --- Exported Functions from SetMappedDrives.ps1 ---
-		"Invoke-RemapDrives",
 		"Unregister-NetworkDrivesMapping",
+		"Invoke-RemapDrives",
 		"Register-NetworkDrivesMapping",
-		"Register-NetworkDrive",
-		"Unregister-NetworkDrive",
 		"Test-AreNetworkDrivesMapped",
+		"Unregister-NetworkDrive",
+		"Register-NetworkDrive",
 		"Test-TemporaryDriveExist",
 
 		# --- Exported Functions from ShowSydneyMsgBox.ps1 ---
