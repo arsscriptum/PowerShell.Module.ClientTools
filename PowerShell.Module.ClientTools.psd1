@@ -1,7 +1,7 @@
 #̷\  ===================================================================
 #̷\  PowerShell Module -- PowerShell.Module.ClientTools
 #̷\  
-#̷\  Manifest File Generated on Tue, 05 Aug 2025 06:16:45 GMT
+#̷\  Manifest File Generated on Tue, 05 Aug 2025 06:28:40 GMT
 #̷\  Current Git Revision 16625086ae46b657372ad034e19f6088772f8c82
 #̷\  ===================================================================
 
@@ -11,10 +11,10 @@
 
     RootModule        =  'PowerShell.Module.ClientTools.psm1'
 
-    ModuleVersion     = '1.7.72
+    ModuleVersion     = '1.7.73
 '
 
-    GUID              = '215b68be-13ee-432c-8f5c-8740f1eb6946'
+    GUID              = 'dd99d79e-1ab7-4074-aaa2-52469b150fd6'
 
     CompanyName       = 'Unknown'
 
@@ -425,16 +425,17 @@
 		"Get-ScheduledTaskDetails",
 		"Test-SerializableProperty",
 		"Unregister-AllSchedTasks",
+		"Convert-SchedTaskStateValueToString",
 		"ConvertFrom-CimType",
 		"Show-SchedTasksDebugInfo",
 		"Remove-SchedTasks",
-		"Convert-SchedTaskStateValueToString",
 		"Get-SchedTasks",
 		"Add-SchedTasks",
 		"Read-SchedTaskProperties",
 		"Write-SchedTaskProperties",
 		"Remove-SchedTaskProperties",
 		"Set-EventChannelEnable",
+		"Get-ScheduledTaskRunHistory",
 		"Clear-SchedTasks",
 
 		# --- Exported Functions from SearchPattern.ps1 ---
@@ -444,23 +445,23 @@
 		"Select-LoggedInUser",
 
 		# --- Exported Functions from SetFirewallConfig.ps1 ---
-		"Set-FirewallConfiguration",
 		"alertLoc",
 		"isIE",
+		"Set-FirewallConfiguration",
 
 		# --- Exported Functions from SetMappedDrives.ps1 ---
+		"Test-AreNetworkDrivesMapped",
+		"Register-NetworkDrive",
+		"Unregister-NetworkDrive",
+		"Test-TemporaryDriveExist",
+		"Register-NetworkDrivesMapping",
 		"Unregister-NetworkDrivesMapping",
 		"Invoke-RemapDrives",
-		"Register-NetworkDrivesMapping",
-		"Test-AreNetworkDrivesMapped",
-		"Unregister-NetworkDrive",
-		"Register-NetworkDrive",
-		"Test-TemporaryDriveExist",
 
 		# --- Exported Functions from ShowSydneyMsgBox.ps1 ---
+		"Show-Sydney",
 		"ConvertFrom-Base64CompressedScriptBlock",
 		"Show-MessageBoxVideoSydney",
-		"Show-Sydney",
 
 		# --- Exported Functions from Subl.ps1 ---
 		"Invoke-SublimeText",
@@ -483,8 +484,7 @@
 		# --- Exported Functions from WinUpdateNotify.ps1 ---
 		"Get-XamlUiContent",
 		"Invoke-WinUpdateTask",
-		"Show-WinUpdateNotification",
-		"Invoke-WinUpdateTask",
+		"Show-LocalWinUpdateNotification",
 
 		# --- Exported Functions from WriteUtils.ps1 ---
 		"Write-ConsoleExtended",
