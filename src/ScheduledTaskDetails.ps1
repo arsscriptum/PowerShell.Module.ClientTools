@@ -8,6 +8,81 @@
 #║   Code licensed under the GNU GPL v3.0. See the LICENSE file for details.      ║
 #╚════════════════════════════════════════════════════════════════════════════════╝
 
+function Get-ScheduledTaskRunHistory {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TaskName
+    )
+
+    $logName = 'Microsoft-Windows-TaskScheduler/Operational'
+
+    # Make sure logging is enabled
+    if (-not (Get-WinEvent -ListLog $logName -ErrorAction SilentlyContinue).IsEnabled) {
+        Write-Warning "Task Scheduler log is not enabled: $logName"
+        return
+    }
+
+    # Query for Task Start (Event ID 100) and Task Completed (Event ID 102)
+    $events = Get-WinEvent -LogName $logName -FilterXPath "*[System[EventID=100 or EventID=102]]" -ErrorAction SilentlyContinue |
+        Where-Object { $_.Properties[0].Value -like "*$TaskName*" } |
+        Sort-Object TimeCreated
+
+    $history = @()
+    $currentRun = $null
+
+    foreach ($event in $events) {
+        $eventID = $event.Id
+        $taskNameInEvent = $event.Properties[0].Value
+        $timestamp = $event.TimeCreated
+
+        switch ($eventID) {
+            100 {
+                $currentRun = [PSCustomObject]@{
+                    TaskName     = $taskNameInEvent
+                    StartTime    = $timestamp
+                    EndTime      = $null
+                    ResultCode   = $null
+                }
+            }
+            102 {
+                if ($currentRun -ne $null -and $currentRun.TaskName -eq $taskNameInEvent) {
+                    $currentRun.EndTime    = $timestamp
+                    $currentRun.ResultCode = $event.Properties[1].Value
+                    $history += $currentRun
+                    $currentRun = $null
+                }
+            }
+        }
+    }
+
+    return $history
+}
+
+
+
+function Set-EventChannelEnable {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [Parameter(Mandatory = $false, Position = 0, HelpMessage = "Name of the scheduled task")]
+        [string]$Channel="Microsoft-Windows-TaskScheduler/Operational",
+        [Parameter(Mandatory = $false)]
+        [bool]$Enable = $True
+    )
+    $wevtutilexe = (get-command -Name "wevtutil.exe" -CommandType Application).Source
+    $SetValue = if($Enable){"/enabled:true"}else{"/enabled:false"}
+
+    Write-Host "Setting Value for $val -> $Value --> " -f DarkBlue -n
+    $cmdres = Start-Process -FilePath "$wevtutilexe" -ArgumentList "set-log","$Channel","$SetValue","/maxSize:41943040" -NoNewWindow -Wait -Passthru
+    $ecode = $cmdres.ExitCode
+    $pcpu = $cmdres.CPU -as [string]
+    if ($ecode -eq 0) {
+        Write-Host "SUCCESS after $pcpu" -f DarkGreen
+    } else {
+            Write-Host "FAILED. Returned `"$errmsg`"" -f DarkRed
+    }
+    
+}
 
 function Remove-SchedTaskProperties {
     [CmdletBinding(SupportsShouldProcess)]
