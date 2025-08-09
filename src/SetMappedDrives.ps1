@@ -16,7 +16,7 @@
     "P" = "\\10.0.0.111\mini-backup";
     "U" = "\\10.0.0.111\mini-datassd";
     "S" = "\\10.0.0.111\mini-external";
-    "T" = "\\10.0.0.111\mini-ffox";
+    "T" = "\\10.0.0.111\psrepo";
     "Q" = "\\10.0.0.111\mini-qbittorrentvpn";
     "Z" = "\\10.0.0.111\mini-services";
 }
@@ -289,7 +289,7 @@ function Invoke-RemapDrives {
             @{ Letter = "P:"; Path = "\\10.0.0.111\mini-backup" },
             @{ Letter = "U:"; Path = "\\10.0.0.111\mini-datassd" },
             @{ Letter = "S:"; Path = "\\10.0.0.111\mini-external" },
-            @{ Letter = "T:"; Path = "\\10.0.0.111\mini-ffox" },
+            @{ Letter = "T:"; Path = "\\10.0.0.111\psrepo" },
             @{ Letter = "Q:"; Path = "\\10.0.0.111\mini-qbittorrentvpn" }
             @{ Letter = "Z:"; Path = "\\10.0.0.111\mini-services" }
         )

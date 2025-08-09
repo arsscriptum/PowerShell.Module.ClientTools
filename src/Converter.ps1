@@ -1,6 +1,7 @@
+
 #╔════════════════════════════════════════════════════════════════════════════════╗
 #║                                                                                ║
-#║   moduleupdater.ps1                                                            ║
+#║   convverter.ps1                                                               ║
 #║                                                                                ║
 #╟────────────────────────────────────────────────────────────────────────────────╢
 #║   Guillaume Plante <codegp@icloud.com>                                         ║
@@ -9,30 +10,28 @@
 
 
 
-function Get-ClientToolsModuleVersion {
-    [CmdletBinding(SupportsShouldProcess)]
+
+
+function Convert-ToPrettyName {
+    [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $false)]
-        [switch]$Latest
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0, HelpMessage = "FILE PATH")]
+        [string]$InputName
     )
 
-    if($Latest){
-        $ClientToolsVersionPath = Get-ClientToolsModuleVersionPath
-        $JsonPath = Join-Path $ClientToolsVersionPath "clienttools.json"
+    process {
 
-        if (!(Test-Path $JsonPath)) {
-            Write-Error "module not initialized! no file $JsonPath"
-            return $Null
-        }
+        # Remove file extension if present
+        $BaseName = [System.IO.Path]::GetFileNameWithoutExtension($InputName)
 
-        [version]$CurrVersion = Get-ClientToolsModuleVersion
+        # Split on any non-alphanumeric character
+        $Parts = $BaseName -split '[^a-zA-Z0-9]+'
 
-        $Data = Get-Content $JsonPath | ConvertFrom-Json
-        [version]$LatestVersion = Invoke-RestMethod -Uri "$($Data.VersionUrl)"
-        return $LatestVersion.ToString()
+        # Capitalize each word and join them
+        $PrettyName = ($Parts | Where-Object { $_ -ne "" } | ForEach-Object {
+                $_.Substring(0, 1).ToUpper() + $_.Substring(1).ToLower()
+            }) -join ""
+
+        return $PrettyName
     }
-
-    $Version = "1.7.74"
-    return $Version
 }
-
